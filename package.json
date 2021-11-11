@@ -1,5 +1,5 @@
 {
-  "name": "a4gserver",
+  "name": "alerts-dashboard",
   "version": "1.0.0",
   "description": "Alerts for Good Server",
   "main": "server.js",
@@ -9,7 +9,7 @@
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mary",
+  "author": "Mary Clark",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.0.1",
