@@ -3,8 +3,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const apiSlice = createApi({
   reducerPath: 'apiSlice',  //all data will be in Redux store at store.apiSlice
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api" }),
-  tagTypes: ['User', 'Locations', 'Friends'],
+  //baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api" }),
+  
+  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),tagTypes: ['User', 'Locations', 'Friends'],
   keepUnusedDataFor: 5,
   //endpoints are calls to the Postgres server
   endpoints: builder => ({
