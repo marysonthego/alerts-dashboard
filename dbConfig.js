@@ -7,7 +7,11 @@ const isProduction = process.env.NODE_ENV === "production";
 const connectionString = `postgresql://${process.env.PGuser}:${process.env.PGpassword}@${process.env.PGhost}:${process.env.PGport}/${process.env.PGdatabase}`;
 
 const pool = new Pool({
-    connectionString: isProduction ? process.env.PGhost : connectionString
-});
+      connectionString: isProduction ? process.env.DATABASE_URL : connectionString
+  });
+
+// const pool = new Pool({
+//     connectionString: isProduction ? process.env.PGhost : connectionString
+// });
 
 module.exports = { pool };
