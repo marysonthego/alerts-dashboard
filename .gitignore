@@ -1,7 +1,10 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 .env
+.env amazon
 .dotenv
+.dotenv old
 .zip
+dashboard/.env
 # dependencies
 /~
 /node_modules
@@ -13,6 +16,8 @@
 
 # testing
 /coverage
+/build
+dashboard/build
 
 # redactor
 /.idea

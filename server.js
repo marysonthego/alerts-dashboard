@@ -38,6 +38,8 @@ server.set("view engine", "ejs");
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
 
+
+
 //TODO store secret in .env
 
 server.use(
