@@ -861,5 +861,5 @@ server.get('/*', (req, res) => {
 
 server.listen(PORT, () => {
   //console.error(`CORS enabled Server with whitelist is running on port ${PORT}\n`);
-  console.error(`CORS disabled for http://localhost testing on port ${PORT}\n`);
+  console.error(`CORS disabled for testing on port ${PORT}\n`);
 });

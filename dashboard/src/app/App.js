@@ -11,7 +11,7 @@ import { Collapse } from '@material-ui/core';
 
 const DebugRouter = ({ children }) => {
   let { location } = useHistory();
-  if (process.env.NODE_ENV === 'development')
+  //if (process.env.NODE_ENV === 'development')
   {
     console.log(
       `DEBUG ROUTER: location.pathname:`,
