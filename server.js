@@ -85,7 +85,8 @@ router.use(expressWinston.logger({
 // now tell the app to use the router:
 server.use(router);
 
-router.use(express.static(path.join(__dirname, 'build')));
+//router.use(express.static(path.join(__dirname, 'build')));
+router.use(express.static(path.join(__dirname, 'dashboard/build')));
 
 // express-winston errorLogger goes AFTER the router.
 server.use(expressWinston.errorLogger({
