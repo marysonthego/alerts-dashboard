@@ -28,7 +28,7 @@ export const CHECKCELL_URL = `${baseUrl}/api/checkcell`;
 export const CHANGEPASSWORD_URL = `${baseUrl}/api/changepassword`;
 
 //const Origin = 'http://localhost:3002';
-//const Origin = 'http://localhost:4000';
+const Origin = 'http://localhost:4000';
 // POST /login
 // loginObj = email, pwd
 export async function DoLogin(loginObj) {
@@ -44,7 +44,7 @@ export async function PostLogin(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -70,7 +70,7 @@ export async function isAuthenticated() {
       headers: {
         'Content-type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
     });
     if (response.status === 200) {
@@ -103,7 +103,7 @@ export async function checkEmail(email) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(email),
     });
@@ -125,7 +125,7 @@ export async function checkCell(cell) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(cell),
     });
@@ -146,8 +146,8 @@ export async function logout() {
       headers: {
         'Content-type': 'application/json',
         Accept: 'application/json',
-        //credentials: 'same-origin',
-        //Origin: Origin,
+        credentials: 'same-origin',
+        Origin: Origin,
       },
     });
     //console.log(`AuthCrud logout returning res: `, res);
@@ -166,7 +166,7 @@ export async function changePassword(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -194,7 +194,7 @@ export async function addUser(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -222,7 +222,7 @@ export async function updateUser(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
 
       },
       body: JSON.stringify(inObj),
@@ -248,7 +248,7 @@ export async function deleteUser(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -274,7 +274,7 @@ export async function listCustomers() {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       }
     });
     let data = await res.json();
@@ -295,7 +295,7 @@ export async function listSubscriptions(custid) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(custid),
     });
@@ -316,7 +316,7 @@ export async function findZip(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -358,7 +358,7 @@ export async function addSubscription(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -388,7 +388,7 @@ export async function updateSubscription(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -413,7 +413,7 @@ export async function deleteSubscription(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -441,7 +441,7 @@ export async function listFriends(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       
       body: JSON.stringify(inObj),
@@ -468,7 +468,7 @@ export async function addFriend(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -498,7 +498,7 @@ export async function updateFriend(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
@@ -526,7 +526,7 @@ export async function deleteFriend(inObj) {
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        //Origin: Origin,
+        Origin: Origin,
       },
       body: JSON.stringify(inObj),
     });
