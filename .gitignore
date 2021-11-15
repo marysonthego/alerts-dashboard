@@ -16,7 +16,7 @@ dashboard/.env
 
 # testing
 /coverage
-dashboard/build
+/build
 
 # redactor
 /.idea

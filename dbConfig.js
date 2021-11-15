@@ -17,14 +17,14 @@ const pool = new Pool({
 //     connectionString: isProduction ? process.env.PGhost : connectionString
 // });
 
-pool.connect();
+// pool.connect();
 
-pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
-  if (err) throw err;
-  for (let row of res.rows) {
-    console.log(JSON.stringify(row));
-  }
-  pool.end();
-});
+// pool.query('SELECT table_schema,table_name FROM information_schema.tables;', (err, res) => {
+//   if (err) throw err;
+//   for (let row of res.rows) {
+//     console.log(JSON.stringify(row));
+//   }
+//   pool.end();
+// });
 
 module.exports = { pool };
