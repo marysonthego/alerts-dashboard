@@ -13,7 +13,7 @@ export function Logout() {
     await logout();
     sessionStorage.clear();
     //window.location.assign('http://localhost:3002/auth/login');
-    window.location.assign('http://localhost:4000/auth/login');
+    window.location.assign('https://alerts-dashboard.herokuapp.com/auth/login');
   }
   doLogout();
 
