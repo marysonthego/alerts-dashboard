@@ -33,7 +33,7 @@ export const CHANGEPASSWORD_URL = `${baseUrl}/api/changepassword`;
 // loginObj = email, pwd
 export async function DoLogin(loginObj) {
   let data = await PostLogin(loginObj);
-  //console.log(`AuthCrud DoLogin returning data: `, data);
+  console.log(`AuthCrud DoLogin returning data: `, data);
   return data;
 }
 

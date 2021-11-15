@@ -130,7 +130,7 @@ export function Login() {
           <div
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
             style={{
-              backgroundPosition: 'bottom right',
+              
               backgroundImage: `url('/media/a4g/taieri.svg')`,
             }}>
             {/*begin: Aside Container*/}
