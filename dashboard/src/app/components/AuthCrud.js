@@ -2,6 +2,7 @@
 import { baseUrl } from 'app/baseUrl';
 
 export const LOGIN_URL = `${baseUrl}/api/login`;
+export const LOGIN_URL = `$/api/login`;
 export const ISAUTHENTICATED_URL = `${baseUrl}/api/isAuthenticated`;
 export const LOGOUT_URL = `${baseUrl}/api/logout`;
 
