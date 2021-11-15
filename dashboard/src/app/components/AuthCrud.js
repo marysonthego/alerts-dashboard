@@ -4,7 +4,7 @@ import { baseUrl } from 'app/baseUrl';
 //export const LOGIN_URL = `${baseUrl}/api/login`;
 export const LOGIN_URL = `/api/login`;
 export const ISAUTHENTICATED_URL = `${baseUrl}/api/isAuthenticated`;
-export const LOGOUT_URL = `${baseUrl}/api/logout`;
+export const LOGOUT_URL = `/api/logout`;
 
 export const ADDCUSTOMER_URL = `${baseUrl}/api/addcustomer`;
 export const UPDATECUSTOMER_URL = `${baseUrl}/api/updatecustomer`;
@@ -151,9 +151,9 @@ export async function logout() {
         //Origin: Origin,
       },
     });
-    //console.log(`AuthCrud logout returning res: `, res);
+    console.log(`AuthCrud logout`);
   } catch (error) {
-    //console.log(`Error: `, error.message);
+    console.log(`Error: `, error.message);
   }
   return;
 }
