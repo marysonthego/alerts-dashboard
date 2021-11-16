@@ -38,7 +38,7 @@ function App ({ basename }) {
 
     <MaterialThemeProvider>
       <I18nProvider>
-        <SnackbarProvider dense maxSnack={ 3 } anchorOrigin={{horizontal: 'right'},{vertical: 'bottom'}} TransitionComponent={Collapse} preventDuplicate>
+        <SnackbarProvider dense maxSnack={ 3 } TransitionComponent={Collapse} preventDuplicate>
           <AuthInit>
             <Route
               render={ () => {
