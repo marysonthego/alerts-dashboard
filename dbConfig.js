@@ -8,9 +8,9 @@ const connectionString = `postgresql://${process.env.PGuser}:${process.env.PGpas
 
 const pool = new Pool({
       connectionString: isProduction ? process.env.DATABASE_URL : connectionString,
-      // ssl: {
-      //   rejectUnauthorized: false
-      // }
+      ssl: {
+        rejectUnauthorized: false
+      }
   });
 
 // const pool = new Pool({
