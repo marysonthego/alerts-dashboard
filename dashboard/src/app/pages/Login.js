@@ -122,7 +122,7 @@ export function Login() {
   }
 
   return (
-    <>
+    <body id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed asie-minimize-hoverable brand-dark">
       <div className="d-flex flex-column flex-root">
         {/*begin::Login*/}
         <div
@@ -133,7 +133,9 @@ export function Login() {
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
             style={{
               
-              backgroundImage: `url('/media/a4g/taieri.svg')`,
+              backgroundImage: `url('/media/a4g/a4g-splash300-20.png')`,
+              
+            
             }}>
             {/*begin: Aside Container*/}
             <div className="d-flex flex-row-fluid flex-column justify-content-between">
@@ -150,7 +152,7 @@ export function Login() {
               {/* start:: Aside content */}
               <div
                 className="flex-column-fluid d-flex flex-column justify-content-center"
-                style={{ color: '#000000' }}>
+                style={{ color: '#65696e' }}>
                 <h3 className="font-size-h1 mb-5 mt-10">
                   Welcome to Alerts for Good!
                 </h3>
@@ -163,7 +165,7 @@ export function Login() {
 
               {/* start:: Aside footer for desktop */}
               <div className="d-none flex-column-auto d-lg-flex justify-content-between mt-10">
-                <div className="opacity-95 font-weight-bold">
+                <div className="opacity-95 font-weight-bold" style={{ color: '#abb2ba'}}>
                   &copy; 2021 Alerts for Good
                 </div>
                 <div className="d-flex">
@@ -192,7 +194,7 @@ export function Login() {
                 {/* begin::Head */}
                 <div className="text-center mb-10 mb-lg-20">
                   <h3 className="font-size-h1">
-                    <FormattedMessage id="AUTH.LOGIN.TITLE" />
+                    Login
                   </h3>
                   <p className="text-muted font-weight-bold">
                     Login with your email address and password
@@ -298,7 +300,7 @@ export function Login() {
           </div>
         </div>
       </div>
-    </>
+    </body>
   );
 }
 export default Login;
