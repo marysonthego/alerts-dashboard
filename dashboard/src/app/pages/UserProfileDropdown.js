@@ -45,9 +45,6 @@ export function UserProfileDropdown () {
           className={
             'btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2'
           }>
-            <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
-            Hi,{ ' ' }{ user.firstname }
-          </span>
           <span className="symbol symbol-35 symbol-light-success">
             <span className="symbol-label font-size-h5 font-weight-bold">
             <div className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
