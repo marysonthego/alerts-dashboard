@@ -134,7 +134,6 @@ export function Login() {
             style={{
               
               backgroundImage: `url('/media/a4g/a4g-splash300-20.png')`,
-              
             
             }}>
             {/*begin: Aside Container*/}
