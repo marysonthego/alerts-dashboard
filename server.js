@@ -643,7 +643,7 @@ router.delete("/api/deletefriend/:id", async function (req, res) {
   {
     let id = req.params.id;
     const response = await pool.query(
-      `DELETE from friends WHERE AND friends.id = $1 RETURNING *`, [id]);
+      `DELETE from friends WHERE friends.id = $1 RETURNING *`, [id]);
     if (response)
     {
       console.log(`\n\ndeletefriend response: `, response.rows);
