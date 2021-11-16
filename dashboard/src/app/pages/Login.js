@@ -74,9 +74,10 @@ export function Login() {
   const formik = useFormik({
     initialValues,
     validationSchema: LoginSchema,
-    onSubmit: (values, { setStatus, setSubmitting }) => {
+    onSubmit: (values, { resetForm }) => {
       enableLoading();
       GetData(values);
+      
     },
   });
 
@@ -96,6 +97,7 @@ export function Login() {
            dispatch(addUserState(data));
            dispatch(updateUserState(user));
            setIsLoggedIn(1);
+           formik.resetForm();
         } 
         else {
           enqueueSnackbar('Login failed...', { 

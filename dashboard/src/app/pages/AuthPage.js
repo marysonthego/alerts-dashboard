@@ -33,7 +33,7 @@ function Routing() {
           <ContentRoute path="/dashboard" component={DashboardPage} />
           <ContentRoute exact path="/user-profile" component={EditProfilePage} />
           <ContentRoute exact path="/logout" component={Logout} />
-          <Redirect to="/dashboard" />
+          {/* <Redirect to="/dashboard" /> */}
         </Switch>
       ) : (
         <Switch>

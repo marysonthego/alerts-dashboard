@@ -4,7 +4,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SVG from 'react-inlinesvg';
 import { Dropdown } from 'react-bootstrap';
-import { toAbsoluteUrl } from 'app/helpers/AssetHelpers';
 //import { useHtmlClassService } from 'app/components/layout/MetronicLayout';
 import { DropdownMenu2 } from 'app/components/DropdownMenu2';
 import { UserProfileDropdown } from 'app/pages/UserProfileDropdown';
@@ -50,9 +49,8 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={toAbsoluteUrl(
-                        '/media/svg/icons/Code/Settings4.svg'
-                      )}></SVG>
+                      src={('/media/svg/icons/Code/Settings4.svg')}>
+                    </SVG>
                   </span>
                   Account
                 </div>
@@ -65,9 +63,8 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={toAbsoluteUrl(
-                        '/media/svg/icons/Communication/Group.svg'
-                      )}></SVG>
+                      src={('/media/svg/icons/Communication/Group.svg')}>
+                    </SVG>
                   </span>
                   Friends
                 </div>
@@ -82,7 +79,7 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={toAbsoluteUrl(
+                      src={(
                         '/media/svg/icons/Communication/Flag.svg'
                       )}></SVG>
                   </span>
@@ -97,7 +94,7 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={toAbsoluteUrl(
+                      src={(
                         '/media/svg/icons/Electric/Highvoltage.svg'
                       )}></SVG>
                   </span>

@@ -155,16 +155,19 @@ router.get("/api/isAuthenticated", checkAuthenticated, (req, res) => {
 router.get('/api/logout', function (req, res) {
   console.log(`\n logout: `, req);
   req.logout();
+  res.status(200).clearCookie('connect.sid', { path: '/' }).json({ status: "Success" });
   req.session.destroy(function (err) {
-    if (!err)
-    {
-      res.status(200).clearCookie('connect.sid', { path: '/' }).json({ status: "Success" });
-    } else
-    {
-      // handle error case...
-      console.log(`err: `, err);
-    }
+    // if (!err)
+    // {
+      // res.status(200).clearCookie('connect.sid', { path: '/' }).json({ status: "Success" });
+      //res.redirect('/');
+    // } else
+    // {
+    //   // handle error case...
+    //   console.log(`err: `, err);
+    // }
   });
+  return;
 });
 
 // add new customer
@@ -863,5 +866,6 @@ server.get('/*', (req, res) => {
 
 server.listen(PORT, () => {
   //console.error(`CORS enabled Server with whitelist is running on port ${PORT}\n`);
-  console.error(`CORS disabled for testing on port ${PORT}\n`);
+  console.error(`CORS disabled for testing on port ${PORT} local
+  \n`);
 });
