@@ -5,7 +5,7 @@
 .dotenv old
 .zip
 dashboard/.env
-/utils
+# /utils used by heroku
 # dependencies
 /~
 /node_modules
