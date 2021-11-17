@@ -20,7 +20,7 @@ export function Logout() {
     await logout();
     
   }
-  //sessionStorage.clear();
+  sessionStorage.clear();
   dispatch(resetUserState(payload));
   dispatch(resetLocations(payload));
   dispatch(resetFriends(payload));
