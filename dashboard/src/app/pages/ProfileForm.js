@@ -5,7 +5,6 @@ import clsx from 'clsx';
 import {
   makeStyles,
   TextField,
-  Box
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
 import { CellNumberFormat } from 'app/helpers/Formatters';
@@ -19,11 +18,16 @@ import {
 import {
   updateErrorState
 } from 'app/redux/errorsSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  useDispatch,
+  useSelector
+} from 'react-redux';
 import {
   updateUserState,
   selectCurrentUser,
 } from 'app/redux/userSlice';
+import { useUpdateCustomerMutation } from 'app/redux/apiSlice';
+
 
 const useStyles = makeStyles(theme => ({
   input: {
@@ -33,9 +37,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
-
+  const [updateCustomer] = useUpdateCustomerMutation();
   const userState = useSelector(selectCurrentUser);
-
+  const [isValid, setIsValid] = useState(true);
   const dispatch = useDispatch();
   const history = useHistory();
   const [pwds, setPwds] = useState({});
@@ -133,6 +137,13 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
       {
         handlePassword(value);
       }
+      if (error !== '')
+      {
+        setIsValid(false);
+      } else
+      {
+        setIsValid(true);
+      }
     }
     dispatch(updateUserState(newUser));
     dispatch(updateErrorState(newUserErrors));
@@ -146,6 +157,30 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
       pathname: '/password',
     });
   };
+
+  const goToDashboard = () => {
+    history.push({
+      pathname: '/dashboard',
+    });
+  };
+
+  const SaveChanges = () => {
+    updateCustomer(newUser).unwrap()
+      .then((payload) => {
+        //console.log(`updateCustomer fulfilled payload: `, payload)
+        dispatch(updateUserState(payload));
+        goToDashboard();
+      })
+      .catch((error) => {
+        console.error('updateCustomer rejected error: ', error);
+        dispatch(updateErrorState({ cell: 'Duplicate cell' }));
+        dispatch(updateErrorState({ email: 'Duplicate email' }));
+
+        enqueueSnackbar(`email-cell combination is in use`, {
+          variant: 'error',
+        });
+      });
+  }
 
   return (
     <div className="card-body pt-0">
@@ -398,7 +433,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
                 <TextField
                   className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
-                  
+
                   required
                   type="password"
                   name="pwd"
@@ -424,7 +459,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
                 <TextField
                   className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
-                  
+
                   required
                   name="pwd2"
                   type="password"
@@ -441,13 +476,27 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
           </div>
         </>
         :
-        <button
-          type="button"
-          onClick={ ChangePassword }
-          id="kt-profile"
-          className={ `btn btn-info font-weight-bold px-9 py-4 my-3` }>
-          <span>Change Password</span>
-        </button>
+        <div>
+          <div className={ clsx(classes.row, classes.navButtons) }>
+            <button
+              type="button"
+              onClick={ ChangePassword }
+              id="kt-profile"
+              className={ `btn btn-info font-weight-bold px-9 py-4 my-3` }>
+              <span>Change Password</span>
+            </button>
+          </div>
+          <div className={ clsx(classes.row, classes.navButtons) }>
+            <button
+              type="button"
+              onClick={ SaveChanges }
+              disabled={ !isValid }
+              id="kt-profile"
+              className={ `btn btn-warning font-weight-bold px-9 py-4 my-3` }>
+              <span>Save Changes</span>
+            </button>
+          </div>
+        </div>
       }
     </div>
   );

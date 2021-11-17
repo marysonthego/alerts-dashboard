@@ -3,8 +3,8 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { resetUser } from 'app/redux/userSlice';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser, resetUserState } from 'app/redux/userSlice';
 import { resetLocations } from 'app/redux/locationsSlice';
 import { resetFriends } from 'app/redux/friendsSlice';
 import { ContentRoute } from 'app/components/layout/ContentRoute';
@@ -13,14 +13,17 @@ import { Login } from 'app/pages/Login';
 
 export function Logout() {
   const dispatch = useDispatch();
-  const payload = '';
+  const payload = useSelector(selectCurrentUser);
+
   async function doLogout() {
-    await logout();
     sessionStorage.clear();
-    dispatch(resetUser(payload));
-    dispatch(resetLocations(payload));
-    dispatch(resetFriends(payload));
+    await logout();
+    
   }
+  //sessionStorage.clear();
+  dispatch(resetUserState(payload));
+  dispatch(resetLocations(payload));
+  dispatch(resetFriends(payload));
 
   doLogout();
 

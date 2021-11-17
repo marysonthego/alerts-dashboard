@@ -1,31 +1,18 @@
 /* eslint-disable no-restricted-imports */
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React, { useMemo, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Dropdown from 'react-bootstrap/Dropdown';
 import objectPath from 'object-path';
 import { useHtmlClassService } from 'app/components/layout/MetronicLayout';
 import { DropdownTopbarItemToggler } from 'app/components/DropdownTopbarItemToggler';
 import SVG from 'react-inlinesvg';
-import { initUser } from 'app/helpers/Initializers';
-import { Logout } from 'app/pages/Logout';
 import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'app/redux/userSlice';
 
 export function UserProfileDropdown () {
   const userState = useSelector(selectCurrentUser);
-  const [user, setUser] = useState(userState);
-
-  const logoutClick = () => {
-    const toggle = document.getElementById('kt_quick_user_toggle');
-    if (toggle)
-    {
-      toggle.click();
-    }
-    return (
-      { Logout }
-    );
-  };
+  const [user] = useState(userState);
 
   const uiService = useHtmlClassService();
   const layoutProps = useMemo(() => {
@@ -67,12 +54,12 @@ export function UserProfileDropdown () {
               <div className="d-flex align-items-center p-8 rounded-top">
                 <div className="symbol symbol-md bg-light-primary mr-3 flex-shrink-0">
                   <img
-                    src='/media/a4g/avatars/023-girl-13.svg'
+                    src='/media/a4g/User.svg'
                     alt=""
                   />
                 </div>
                 <div className="text-dark m-0 flex-grow-1 mr-3 font-size-h5">
-                  { user.firstname }{" "} { user.lastname }
+                  { user.firstname } {" "} { user.lastname }
                 </div>
                 <span className="label label-light-success label-lg font-weight-bold label-inline">
                   3 messages
@@ -86,18 +73,18 @@ export function UserProfileDropdown () {
             <div
               className="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top"
               style={ {
-                backgroundImage: `url('/media/bg/bg-10.jpg')`,
+                backgroundImage: `url('/media/misc/invoice5bar.jpg')`,
               } }>
               <div className="symbol bg-white-o-15 mr-3">
                 <span className="symbol-label text-success font-weight-bold font-size-h4">
                   <img
-                    src='/media/a4g/avatars/023-girl-13.svg'
+                    src='/media/a4g/User.svg'
                     alt=""
                   />
                 </span>
               </div>
               <div className="text-white m-0 flex-grow-1 mr-3 font-size-h5">
-              { user.firstname }{" "} { user.lastname }
+              { user.firstname } {" "} { user.lastname }
               </div>
               <span className="label label-success label-lg font-weight-bold label-inline">
                 messages

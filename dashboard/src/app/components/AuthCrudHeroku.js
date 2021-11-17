@@ -1,31 +1,31 @@
 //import React, {useState} from 'react';
-import { baseUrl } from 'app/baseUrl';
+//import { baseUrl } from 'app/baseUrl';
 
-export const LOGIN_URL = `${baseUrl}/api/login`;
-export const ISAUTHENTICATED_URL = `${baseUrl}/api/isAuthenticated`;
-export const LOGOUT_URL = `${baseUrl}/api/logout`;
+export const LOGIN_URL = `/api/login`;
+export const ISAUTHENTICATED_URL = `/api/isAuthenticated`;
+export const LOGOUT_URL = `/api/logout`;
 
-export const ADDCUSTOMER_URL = `${baseUrl}/api/addcustomer`;
-export const UPDATECUSTOMER_URL = `${baseUrl}/api/updatecustomer`;
-export const GETCUSTOMERBYID_URL = `${baseUrl}/api/getcustomerbyid`;
-export const LISTCUSTOMERS_URL = `${baseUrl}/api/listcustomers`;
-export const DELETECUSTOMER_URL = `${baseUrl}/api/deletecustomer`;
+export const ADDCUSTOMER_URL = `/api/addcustomer`;
+export const UPDATECUSTOMER_URL = `/api/updatecustomer`;
+export const GETCUSTOMERBYID_URL = `/api/getcustomerbyid`;
+export const LISTCUSTOMERS_URL = `/api/listcustomers`;
+export const DELETECUSTOMER_URL = `/api/deletecustomer`;
  
-export const ADDSUBSCRIPTION_URL = `${baseUrl}/api/addsubscription`;
-export const UPDATESUBSCRIPTION_URL = `${baseUrl}/api/updatesubscription`;
-export const DELETESUBSCRIPTION_URL = `${baseUrl}/api/deletesubscription`;
-export const LISTSUBSCRIPTIONS_URL = `${baseUrl}/api/listsubscriptions`;
+export const ADDSUBSCRIPTION_URL = `/api/addsubscription`;
+export const UPDATESUBSCRIPTION_URL = `/api/updatesubscription`;
+export const DELETESUBSCRIPTION_URL = `/api/deletesubscription`;
+export const LISTSUBSCRIPTIONS_URL = `/api/listsubscriptions`;
 
-export const ADDFRIEND_URL = `${baseUrl}/api/addfriend`;
-export const UPDATEFRIEND_URL = `${baseUrl}/api/updatefriend`;
-export const DELETEFRIEND_URL = `${baseUrl}/api/deletefriend`;
-export const LISTFRIENDS_URL = `${baseUrl}/api/listfriends`;
+export const ADDFRIEND_URL = `/api/addfriend`;
+export const UPDATEFRIEND_URL = `/api/updatefriend`;
+export const DELETEFRIEND_URL = `/api/deletefriend`;
+export const LISTFRIENDS_URL = `/api/listfriends`;
 
-export const VERIFYZIP_URL = `${baseUrl}/api/verifyzip`;
-export const FINDZIP_URL = `${baseUrl}/api/findzip`;
-export const CHECKEMAIL_URL = `${baseUrl}/api/checkemail`;
-export const CHECKCELL_URL = `${baseUrl}/api/checkcell`;
-export const CHANGEPASSWORD_URL = `${baseUrl}/api/changepassword`;
+export const VERIFYZIP_URL = `/api/verifyzip`;
+export const FINDZIP_URL = `/api/findzip`;
+export const CHECKEMAIL_URL = `/api/checkemail`;
+export const CHECKCELL_URL = `/api/checkcell`;
+export const CHANGEPASSWORD_URL = `/api/changepassword`;
 
 //const Origin = 'http://localhost:3002';
 //const Origin = 'http://localhost:4000';
@@ -33,7 +33,7 @@ export const CHANGEPASSWORD_URL = `${baseUrl}/api/changepassword`;
 // loginObj = email, pwd
 export async function DoLogin(loginObj) {
   let data = await PostLogin(loginObj);
-  //console.log(`AuthCrud DoLogin returning data: `, data);
+  console.log(`AuthCrud DoLogin returning data: `, data);
   return data;
 }
 
@@ -150,9 +150,9 @@ export async function logout() {
         //Origin: Origin,
       },
     });
-    //console.log(`AuthCrud logout returning res: `, res);
+    console.log(`AuthCrud logout`);
   } catch (error) {
-    //console.log(`Error: `, error.message);
+    console.log(`Error: `, error.message);
   }
   return;
 }

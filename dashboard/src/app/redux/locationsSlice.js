@@ -49,7 +49,12 @@ export const locationsSlice = createSlice({
     },
 
     resetLocations: (state, action) => {
-      state.locations.length = 0;
+      const custid = action.payload;
+      if(state.locations.length > 0) {
+        state.locations.forEach(id => {
+          return initialState;
+        });
+      };
     },
   },
 });

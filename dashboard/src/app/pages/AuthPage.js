@@ -7,7 +7,7 @@ import { Logout } from 'app/pages/Logout';
 import { ForgotPasswordPage } from 'app/pages/ForgotPasswordPage';
 import { DashboardPage } from 'app/pages/DashboardPage';
 import { ProfileStepper } from 'app/pages/ProfileStepper';
-import { EditProfilePage } from 'app/pages/EditProfilePage';
+import { UserProfilePage } from 'app/pages/UserProfilePage';
 import 'app/css/pages/login/login-1.scss';
 import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
 
@@ -31,7 +31,7 @@ function Routing() {
       ? (
         <Switch>
           <ContentRoute path="/dashboard" component={DashboardPage} />
-          <ContentRoute exact path="/user-profile" component={EditProfilePage} />
+          <ContentRoute exact path="/user-profile" component={UserProfilePage} />
           <ContentRoute exact path="/logout" component={Logout} />
           {/* <Redirect to="/dashboard" /> */}
         </Switch>

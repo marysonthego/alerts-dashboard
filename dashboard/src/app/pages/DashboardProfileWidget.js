@@ -2,6 +2,8 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'app/redux/userSlice';
 import SVG from 'react-inlinesvg';
 import { Dropdown } from 'react-bootstrap';
 //import { useHtmlClassService } from 'app/components/layout/MetronicLayout';
@@ -9,7 +11,10 @@ import { DropdownMenu2 } from 'app/components/DropdownMenu2';
 import { UserProfileDropdown } from 'app/pages/UserProfileDropdown';
 
 export function DashboardProfileWidget({ className }) {
-
+  const user = useSelector(selectCurrentUser);
+  if (user.custid === 0) {
+    return null;
+  }
   return (
     <div className={`card card-custom bg-gray-100 ${className}`}>
       {/* Header */}
