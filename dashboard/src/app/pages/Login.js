@@ -125,7 +125,7 @@ export function Login() {
     <body id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed asie-minimize-hoverable brand-dark">
       <div className="d-flex flex-column flex-root">
         {/*begin::Login*/}
-        <div
+        <div 
           className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white"
           id="kt_login">
           {/*begin::Aside*/}
