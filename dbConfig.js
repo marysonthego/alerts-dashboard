@@ -27,7 +27,6 @@ pool.query('SELECT datname FROM pg_database;', (err, res) => {
    for (let row of res.rows) {
      console.log(JSON.stringify(row));
    }
-   pool.end();
 });
 
 module.exports = { pool };
