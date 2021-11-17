@@ -5,6 +5,7 @@
 .dotenv old
 .zip
 dashboard/.env
+/utils
 # dependencies
 /~
 /node_modules
