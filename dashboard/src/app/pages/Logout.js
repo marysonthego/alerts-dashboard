@@ -13,12 +13,13 @@ import { Login } from 'app/pages/Login';
 
 export function Logout() {
   const dispatch = useDispatch();
+  const payload = '';
   async function doLogout() {
     await logout();
     sessionStorage.clear();
-    dispatch(resetUser());
-    dispatch(resetLocations());
-    dispatch(resetFriends());
+    dispatch(resetUser(payload));
+    dispatch(resetLocations(payload));
+    dispatch(resetFriends(payload));
   }
 
   doLogout();
