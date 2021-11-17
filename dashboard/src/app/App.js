@@ -6,8 +6,6 @@ import { I18nProvider } from 'app/helpers/i18n';
 import { MaterialThemeProvider } from 'app/components/layout/MaterialThemeProvider';
 import { SnackbarProvider } from 'notistack';
 import { Collapse } from '@material-ui/core';
-//import Snackbar from 'app/helpers/Snackbar';
-//import { createBrowserHistory } from 'history';
 
 const DebugRouter = ({ children }) => {
   let { location } = useHistory();
@@ -35,7 +33,6 @@ function App ({ basename }) {
   }, [location]);
 
   return (
-
     <MaterialThemeProvider>
       <I18nProvider>
         <SnackbarProvider dense maxSnack={ 3 } TransitionComponent={Collapse} preventDuplicate>
@@ -53,7 +50,6 @@ function App ({ basename }) {
         </SnackbarProvider>
       </I18nProvider>
     </MaterialThemeProvider>
-
   );
 }
 export default App;

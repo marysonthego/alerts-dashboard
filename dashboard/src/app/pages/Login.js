@@ -9,7 +9,6 @@ import { Logout } from 'app/pages/Logout';
 import { useDispatch } from 'react-redux';
 import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
 import { addUserState, updateUserState } from 'app/redux/userSlice';
-//import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
 import {initUser} from 'app/helpers/Initializers';
 
 const initialValues = {
