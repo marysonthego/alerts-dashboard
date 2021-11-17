@@ -22,7 +22,7 @@ console.log(`\n\nconnectionString: `, connectionString);
 
 pool.connect();
 
-pool.query('SELECT datname FROM pg_database;', (err, res) => {
+pool.query('SELECT count(*) FROM pg_database;', (err, res) => {
    if (err) throw err;
    for (let row of res.rows) {
      console.log(JSON.stringify(row));
