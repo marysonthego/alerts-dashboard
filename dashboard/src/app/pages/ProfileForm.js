@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import {Form} from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import clsx from 'clsx';
-import { 
-  makeStyles, 
-  TextField, 
-  Box 
+import {
+  makeStyles,
+  TextField,
+  Box
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import {CellNumberFormat} from 'app/helpers/Formatters';
+import { CellNumberFormat } from 'app/helpers/Formatters';
 import SVG from 'react-inlinesvg';
-import {toAbsoluteUrl} from 'app/helpers/AssetHelpers';
-import {initUserErrors} from 'app/helpers/Initializers';
+import { toAbsoluteUrl } from 'app/helpers/AssetHelpers';
+import { initUserErrors } from 'app/helpers/Initializers';
 import {
-  FormValidation, 
+  FormValidation,
   fieldsValidation
 } from 'app/helpers/FormValidation';
-import { 
+import {
   updateErrorState
 } from 'app/redux/errorsSlice';
 import { useDispatch, useSelector } from 'react-redux';
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
+export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
 
   const userState = useSelector(selectCurrentUser);
 
@@ -43,7 +43,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
 
   const [newUser, setNewUser] = useState(userState);
   const [newUserErrors, setNewUserErrors] = useState(initUserErrors);
-  
+
   const { enqueueSnackbar } = useSnackbar();
 
   const handleOnChange = e => {
@@ -52,19 +52,21 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
     let item = '';
     item += value;
 
-    if(field === 'pwd' || field === 'pwd2' || field === 'newpwd' || field === 'newpwd2') {
+    if (field === 'pwd' || field === 'pwd2' || field === 'newpwd' || field === 'newpwd2')
+    {
       setPwds({
         ...pwds,
         [field]: item
       })
-    } else {
+    } else
+    {
       setNewUser({
         ...newUser,
         [field]: item
       })
     }
-  };  
-  
+  };
+
   //Cell number to be formatted
   const handleCellChange = e => {
     let field = e.target.name;
@@ -80,23 +82,29 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
     let value = e.target.value;
     let required = e.target.required;
 
-    if(field === 'cell') {
+    if (field === 'cell')
+    {
       value = newUser.cell;
     }
 
-    if (value === '' && !required) {
+    if (value === '' && !required)
+    {
       return;
     };
     //fix capitalization
     let val = '';
-    if (field === 'firstname' || 
-    field === 'lastname' || 
-    field === 'city' || 
-    field === 'st') { 
-      if(value) {
-        if (field === 'st') {
+    if (field === 'firstname' ||
+      field === 'lastname' ||
+      field === 'city' ||
+      field === 'st')
+    {
+      if (value)
+      {
+        if (field === 'st')
+        {
           val = value.toUpperCase();
-        } else {
+        } else
+        {
           val = value.toLowerCase();
           let nameArray = val.split(' ');
           val = '';
@@ -111,29 +119,31 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         })
       }
     }
-    
-    if (typeof fieldsValidation[field] !== 'undefined') {
+
+    if (typeof fieldsValidation[field] !== 'undefined')
+    {
       let error =
         FormValidation(field, value, fieldsValidation, required, isADuplicate) || '';
-        setNewUserErrors({
-          ...newUserErrors,
-          [field]: error
-        })
-        dispatch(updateErrorState(newUserErrors)); 
-      if(field === 'pwd2' && newUserErrors.pwd2 === '') {
+      setNewUserErrors({
+        ...newUserErrors,
+        [field]: error
+      })
+      dispatch(updateErrorState(newUserErrors));
+      if (field === 'pwd2' && newUserErrors.pwd2 === '')
+      {
         handlePassword(value);
       }
-    }  
+    }
     dispatch(updateUserState(newUser));
-    dispatch(updateErrorState(newUserErrors)); 
+    dispatch(updateErrorState(newUserErrors));
   };
-    
+
   const ChangePassword = () => {
     enqueueSnackbar('You must login to change your password.', {
       variant: 'warning',
     });
     history.push({
-      pathname: '/password', 
+      pathname: '/password',
     });
   };
 
@@ -142,7 +152,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center mb-9 bg-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Text/Font.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/Text/Font.svg') }
             title="First Name Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -151,15 +161,15 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg  rounded text-dark px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg  rounded text-dark px-2 py-1 ${classes.input}` }
               type="text"
               name="firstname"
               required
-              value={newUser.firstname || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.firstname}
-              helperText={newUserErrors.firstname}
+              value={ newUser.firstname || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.firstname }
+              helperText={ newUserErrors.firstname }
             />
           </span>
         </Form>
@@ -168,7 +178,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Text/Font.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/Text/Font.svg') }
             title="Last Name Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -177,15 +187,15 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="lastname"
               required
-              value={newUser.lastname || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.lastname}
-              helperText={newUserErrors.lastname}
+              value={ newUser.lastname || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.lastname }
+              helperText={ newUserErrors.lastname }
             />
           </span>
         </Form>
@@ -194,9 +204,9 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl(
+            src={ toAbsoluteUrl(
               '/media/svg/icons/Communication/Urgent-mail.svg'
-            )}
+            ) }
             title="Email Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -205,15 +215,15 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="email"
               required
-              value={newUser.email || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.email}
-              helperText={newUserErrors.email}
+              value={ newUser.email || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.email }
+              helperText={ newUserErrors.email }
             />
           </span>
         </Form>
@@ -222,7 +232,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Devices/iPhone-X.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/Devices/iPhone-X.svg') }
             title="Cell Phone Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -231,18 +241,18 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}` }
               name="cell"
               required
-              value={newUser.cell || ''}
+              value={ newUser.cell || '' }
               type="tel"
-              onChange={handleCellChange}
-              onBlur={handleOnBlur}
-              helperText={newUserErrors.cell || ''}
-              error={!!newUserErrors.cell}
-              InputProps={{
+              onChange={ handleCellChange }
+              onBlur={ handleOnBlur }
+              helperText={ newUserErrors.cell || '' }
+              error={ !!newUserErrors.cell }
+              InputProps={ {
                 inputComponent: CellNumberFormat,
-              }}
+              } }
             />
           </span>
         </Form>
@@ -251,7 +261,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/General/Other2.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/General/Other2.svg') }
             title="Address 1"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark text-hover-primary font-size-lg">
@@ -260,14 +270,14 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg  rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="addr1"
-              value={newUser.addr1 || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.addr1}
-              helperText={newUserErrors.addr1}
+              value={ newUser.addr1 || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.addr1 }
+              helperText={ newUserErrors.addr1 }
             />
           </span>
         </Form>
@@ -276,7 +286,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center mb-9 bg-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/General/Other2.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/General/Other2.svg') }
             title="Address 2"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -285,14 +295,14 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="addr2"
-              value={newUser.addr2 || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.addr2}
-              helperText={newUserErrors.addr2}
+              value={ newUser.addr2 || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.addr2 }
+              helperText={ newUserErrors.addr2 }
             />
           </span>
         </Form>
@@ -301,7 +311,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Home/Flower3.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/Home/Flower3.svg') }
             title="City"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg ">
@@ -310,14 +320,14 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="city"
-              value={newUser.city || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.city}
-              helperText={newUserErrors.city}
+              value={ newUser.city || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.city }
+              helperText={ newUserErrors.city }
             />
           </span>
         </Form>
@@ -326,7 +336,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/a4g/Flag.svg')}
+            src={ toAbsoluteUrl('/media/a4g/Flag.svg') }
             title="State"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -335,14 +345,14 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="st"
-              value={newUser.st || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.st}
-              helperText={newUserErrors.st}
+              value={ newUser.st || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.st }
+              helperText={ newUserErrors.st }
             />
           </span>
         </Form>
@@ -351,7 +361,7 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
       <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Home/Mailbox.svg')}
+            src={ toAbsoluteUrl('/media/svg/icons/Home/Mailbox.svg') }
             title="Zip Code"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -360,64 +370,84 @@ export const ProfileForm = ({form, handlePassword, isADuplicate}) => {
         <Form>
           <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
             <TextField
-              className={`font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}`}
+              className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
               type="text"
               name="zip"
-              value={newUser.zip || ''}
-              onChange={handleOnChange}
-              onBlur={handleOnBlur}
-              error={!!newUserErrors.zip}
-              helperText={newUserErrors.zip}
+              value={ newUser.zip || '' }
+              onChange={ handleOnChange }
+              onBlur={ handleOnBlur }
+              error={ !!newUserErrors.zip }
+              helperText={ newUserErrors.zip }
             />
           </span>
         </Form>
       </div>
 
       { form === 'RegisterStep' && newUser.custid === 0 ?
-
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
-        <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
-          <SVG
-            src={toAbsoluteUrl('/media/svg/icons/Communication/Thumbtack.svg')}
-            title="Password Required"></SVG>
-        </span>
-        <Box className={classes.row}>
-          <TextField
-            className={clsx(classes.margin, classes.mr)}
-            label="Password"
-            required
-            name="pwd"
-            type="password"
-            value={pwds.pwd || ''}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            error={!!newUserErrors.pwd}
-            helperText={newUserErrors.pwd}
-          />
-          <TextField
-            className={classes.margin}
-            label="Re-enter Password"
-            required
-            name="pwd2"
-            type="password"
-            value={pwds.pwd2 || ''}
-            onChange={handleOnChange}
-            onBlur={handleOnBlur}
-            error={!!newUserErrors.pwd2}
-            helperText={
-              newUser.pwd2 === newUser.pwd ? newUserErrors.pwd2 : `The passwords do not match`
-            }
-          />
-        </Box>
-      </div>
-      : 
-      <button
-        type="button"
-        onClick={ChangePassword}
-        id="kt-profile"
-        className={`btn btn-info font-weight-bold px-9 py-4 my-3`}>
-        <span>Change Password</span>
-      </button> 
+        <>
+          <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+            <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
+              <SVG
+                src={ toAbsoluteUrl('/media/svg/icons/Communication/Thumbtack.svg') }
+                title="Password Required"></SVG>
+            </span>
+            <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
+              Password*
+            </div>
+            <Form>
+              <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
+                <TextField
+                  className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
+                  
+                  required
+                  type="password"
+                  name="pwd"
+                  value={ pwds.pwd || '' }
+                  onChange={ handleOnChange }
+                  onBlur={ handleOnBlur }
+                  error={ !!newUserErrors.pwd }
+                  helperText={ newUserErrors.pwd }
+                />
+              </span>
+            </Form>
+          </div>
+          <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+            <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
+              <SVG
+                src={ toAbsoluteUrl('/media/svg/icons/Communication/Thumbtack.svg') }
+                title="Password Required"></SVG>
+            </span>
+            <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
+              Password*
+            </div>
+            <Form>
+              <span className="font-weight-bold text-dark-75 py-1 font-size-lg">
+                <TextField
+                  className={ `font-weight-bold font-size-lg rounded px-2 py-1 ${classes.input}` }
+                  
+                  required
+                  name="pwd2"
+                  type="password"
+                  value={ pwds.pwd2 || '' }
+                  onChange={ handleOnChange }
+                  onBlur={ handleOnBlur }
+                  error={ !!newUserErrors.pwd2 }
+                  helperText={
+                    newUser.pwd2 === newUser.pwd ? newUserErrors.pwd2 : `The passwords do not match`
+                  }
+                />
+              </span>
+            </Form>
+          </div>
+        </>
+        :
+        <button
+          type="button"
+          onClick={ ChangePassword }
+          id="kt-profile"
+          className={ `btn btn-info font-weight-bold px-9 py-4 my-3` }>
+          <span>Change Password</span>
+        </button>
       }
     </div>
   );

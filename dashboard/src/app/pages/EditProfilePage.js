@@ -108,7 +108,7 @@ export const EditProfilePage = ({ className }) => {
             disabled={!isValid}
             id="kt-profile"
             className={`btn btn-warning font-weight-bold px-9 py-4 my-3`}>
-            <span>Submit</span>
+            <span>Save Changes</span>
           </button>
           </div>
         </div>

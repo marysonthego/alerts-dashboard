@@ -122,13 +122,18 @@ export const ProfileStepper = () => {
               dispatch(updateActiveStep(activeStep + 1));
             })
             .catch((error) => {
+              let snackType = '';
               console.error('addCustomer rejected error: ', error);
+              if (error.originalStatus === 404) {
+                snackType = '500ServerError';
+              }
+              else {
               dispatch(updateErrorState({ cell: 'Duplicate cell' }));
               dispatch(updateErrorState({ email: 'Duplicate email' }));
               setIsADuplicate(true);
-
+              snackType = 'signUpError';
+              }
               dispatch(updateActiveStep(activeStep - 1));
-              let snackType = 'signUpError';
               enqueueSnackbar(null, {
                 persist: true,
                 content: key => <Snackbar id={ key } message={ snackType } />
