@@ -10,7 +10,7 @@ export function CellNumberFormat(props) {
     name = {name}
     getInputRef={inputRef}
     allowEmptyFormatting={true}
-    format="+1 (###) ###-####" 
+    format="        +1 (###) ###-####" 
     mask="_" 
     type="tel"
     isNumericString ="true"
