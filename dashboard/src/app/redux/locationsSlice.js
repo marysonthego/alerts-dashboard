@@ -48,13 +48,17 @@ export const locationsSlice = createSlice({
       }
     },
 
+    // resetLocations: (state, action) => {
+    //   if(state.locations.length > 0) {
+    //     state.locations.forEach(id => {
+    //       return initLocation;
+    //     });
+    //   };
+    // },
+
     resetLocations: (state, action) => {
-      if(state.locations.length > 0) {
-        state.locations.forEach(id => {
-          return initialState;
-        });
-      };
-    },
+      return initialState;
+    }
   },
 });
 

@@ -210,6 +210,7 @@ export const AddFriendForm = () => {
         <TextField
           className={ classes.textfield }
           autoFocus
+          required
           label="First name*"
           name="firstname"
           type="text"

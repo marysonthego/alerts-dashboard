@@ -27,6 +27,21 @@ export const initLocation =
       airalert: false,
     };  
 
+    export const initLocations = [ 
+    {
+      id: 0,
+      custid: 0,
+      cell: "",
+      city: "",
+      st: "",
+      zip: "",
+      nickname: "",
+      weatheralert: false,
+      virusalert: false,
+      airalert: false,
+    },
+  ];
+
 export const initFriend = 
     {
       id: 0,
@@ -42,7 +57,22 @@ export const initFriend =
       airalert: false,
     };
   
-
+    export const initFriends = [
+    {
+      id: 0,
+      custid: 0,
+      active: true,
+      firstname: "",
+      city: "",
+      st: "",
+      zip: "",
+      cell: "",
+      weatheralert: false,
+      virusalert: false,
+      airalert: false,
+    },
+  ];
+  
 export const initUserErrors = {
   custid: 0,
   firstname: "",

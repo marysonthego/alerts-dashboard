@@ -48,12 +48,16 @@ export const friendsSlice = createSlice({
       }
     },
 
+    // resetFriends: (state, action) => {
+    //   if(state.friends.length > 0) {
+    //     state.friends.forEach(id => {
+    //       return initFriend;
+    //     });
+    //   };
+    // },
+
     resetFriends: (state, action) => {
-      if(state.friends.length > 0) {
-        state.friends.forEach(id => {
-          return initialState;
-        });
-      };
+      return initialState;
     },
   },
 });

@@ -10,18 +10,18 @@ import { resetFriends } from 'app/redux/friendsSlice';
 import { ContentRoute } from 'app/components/layout/ContentRoute';
 import { logout } from 'app/components/AuthCrud';
 import { Login } from 'app/pages/Login';
+import { initUser, initLocations, initFriends } from 'app/helpers/Initializers';
 
 export function Logout() {
   const dispatch = useDispatch();
-  const payload = useSelector(selectCurrentUser);
 
   async function doLogout() {
     await logout();
     
   }
-  dispatch(resetUserState(payload));
-  dispatch(resetLocations(payload));
-  dispatch(resetFriends(payload));
+  dispatch(resetUserState(null));
+  dispatch(resetLocations(null));
+  dispatch(resetFriends(null));
 
   doLogout();
 

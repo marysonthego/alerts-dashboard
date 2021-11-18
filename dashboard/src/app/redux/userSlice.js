@@ -44,7 +44,7 @@ export const userSlice = createSlice({
     },
 
   resetUserState: (state, action) => {
-    return initUser;
+    return initialState;
   },
 }
 
