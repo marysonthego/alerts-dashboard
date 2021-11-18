@@ -18,22 +18,20 @@ export function Routes() {
 
   return (
     <Switch >
-      {currentUser.isLoggedIn === 0 ? (
+      {currentUser.isLoggedIn === null || !currentUser.isLoggedIn ? (
         /*Render auth page when user at `/auth` and not authorized.*/
         <Route >
           <AuthPage/>
         </Route>
       ) : (
         /*Otherwise redirect to root page (`/`)*/
-        currentUser.isLoggedIn 
-        ? <Redirect from="/auth" to="/" />
-        : <Redirect to="/auth/login"/>
+         <Redirect from="/auth" to="/" />
       )}
 
       <Route path="/error" component={ErrorPage} />
       <Route path="/logout" component={Logout} />
 
-      {currentUser.isLoggedIn === 0 ? (
+      {currentUser.isLoggedIn === null || !currentUser.isLoggedIn ? (
         /*Redirect to `/auth` when user is not authorized*/
         <Redirect to="/auth" />
       ) : (
