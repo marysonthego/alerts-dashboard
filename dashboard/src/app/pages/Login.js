@@ -8,12 +8,10 @@ import { DoLogin } from 'app/components/AuthCrud';
 import { Logout } from 'app/pages/Logout';
 import { useDispatch, useSelector } from 'react-redux';
 import { 
-  addUserState, 
   updateUserState,
   updateIsLoggedInState,
   selectCurrentUser, 
 } from 'app/redux/userSlice';
-import { initUser } from 'app/helpers/Initializers';
 
 const initialValues = {
   email: '',
@@ -21,8 +19,7 @@ const initialValues = {
 };
 
 export function Login() {
-  const currentUser = useSelector(selectCurrentUser);
-  const [user, setUser] = useState(initUser);
+  let currentUser = useSelector(selectCurrentUser);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const { enqueueSnackbar,  } = useSnackbar();
@@ -90,29 +87,20 @@ export function Login() {
             variant: 'success',
           });
           const newState = 1;
-           setUser(prev => {
-             prev = {...prev, data, isLoggedIn: newState};
-           });
-           dispatch(addUserState(user));
-           //dispatch(updateUserState(user));
-           //dispatch(updateIsLoggedInState(1));
+           dispatch(updateUserState({...data, isLoggedIn: newState}));
+           console.log(`Login currentUser: `, currentUser);
            formik.resetForm();
         } 
         else {
           enqueueSnackbar('Login failed...', { 
            variant: 'error',
           });
-          setUser(prev => {
-            prev = {...prev, isLoggedIn: 0};
-          });
           dispatch(updateIsLoggedInState(0));
         };
        })
       .catch(e => {
         console.log(`login error e: `, e);
-        setUser(prev => {
-          prev = {...prev, isLoggedIn: 0};
-        });
+        dispatch(updateIsLoggedInState(0));
       })
       .finally(() => {
         disableLoading();
@@ -239,6 +227,7 @@ export function Login() {
                     ) : null}
                   </div>
                   <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
+
                     {currentUser.isLoggedIn === 1 ? (
                       <div>
                         <button
