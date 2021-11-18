@@ -93,8 +93,8 @@ export function Login() {
            setUser(prev => {
              prev = {...prev, data, isLoggedIn: newState};
            });
-           //dispatch(addUserState(data));
-           dispatch(updateUserState(user));
+           dispatch(addUserState(user));
+           //dispatch(updateUserState(user));
            //dispatch(updateIsLoggedInState(1));
            formik.resetForm();
         } 
