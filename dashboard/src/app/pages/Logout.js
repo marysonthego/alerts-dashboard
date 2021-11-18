@@ -27,8 +27,8 @@ export function Logout() {
 
   return (
     <Switch>
-      <ContentRoute exact path="/login" component={Login} />
-      <Redirect to="/login"/>
+      <ContentRoute exact path="/auth/login" component={Login} />
+      <Redirect to="/auth/login"/>
     </Switch>
   );
 }
