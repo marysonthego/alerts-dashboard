@@ -9,7 +9,6 @@ import { updateBackEnabled, updateNextEnabled } from 'app/redux/stepperSlice';
 import SVG from 'react-inlinesvg';
 import { useSnackbar } from 'notistack';
 import {
-  Box,
   TextField,
   Button,
   makeStyles,

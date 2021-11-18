@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 import { useFormik } from 'formik';
@@ -28,15 +28,11 @@ export function Login() {
   const { enqueueSnackbar,  } = useSnackbar();
   const dispatch = useDispatch();
 
-  // can't use auth cookie with http CORS on localhost
-   useEffect(() => {
     if(document.cookie.startsWith('connect.sid')) {
       dispatch(updateIsLoggedInState(1));
     } else {
         dispatch(updateIsLoggedInState(0));
       }
-    console.log(`Login uesEffect isLoggedIn:`, currentUser.isLoggedIn);
-  });
 
   const goToDashboard = () => {
     history.push({
@@ -125,7 +121,7 @@ export function Login() {
   }
 
   return (
-    <body id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed asie-minimize-hoverable brand-dark">
+    <div id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed asie-minimize-hoverable brand-dark">
       <div className="d-flex flex-column flex-root">
         {/*begin::Login*/}
         <div 
@@ -135,7 +131,7 @@ export function Login() {
           <div
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
             style={{
-              
+              height: '100vh',
               backgroundImage: `url('/media/a4g/a4g-splash300-20.png')`,
             
             }}>
@@ -302,7 +298,7 @@ export function Login() {
           </div>
         </div>
       </div>
-    </body>
+    </div>
   );
 }
 export default Login;

@@ -1,36 +1,20 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {
   Redirect, 
   Route, 
   Switch,
 } from "react-router-dom";
-import { 
-  useDispatch, 
-  useSelector 
-} from 'react-redux';
-import { 
-  selectCurrentUser, 
-  updateIsLoggedInState 
-} from 'app/redux/userSlice';
-import {Layout} from "app/components/layout/Layout";
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'app/redux/userSlice';
+import { Layout } from "app/components/layout/Layout";
 import BasePage from "app/BasePage";
-import {Logout} from 'app/pages/Logout';
-import {AuthPage} from "app/pages/AuthPage";
-import {ErrorPage} from "app/pages/ErrorPage1";
+import { Logout } from 'app/pages/Logout';
+import { AuthPage } from "app/pages/AuthPage";
+import { ErrorPage } from "app/pages/ErrorPage1";
 
 export function Routes() {
-  const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
-  
-  //can't use cookies with http CORS
-  useEffect(() => {
-    if(document.cookie.startsWith('connect.sid')) {
-        dispatch(updateIsLoggedInState(1));
-      } else {
-        dispatch(updateIsLoggedInState(0));
-      }
-      console.log(`Routes isLoggedIn:`, currentUser.isLoggedIn);
-  });
+  let currentUser = useSelector(selectCurrentUser);
+  console.log(`Routes currentUser:`, currentUser);
 
   return (
     <Switch >
@@ -41,8 +25,9 @@ export function Routes() {
         </Route>
       ) : (
         /*Otherwise redirect to root page (`/`)*/
-        
-        <Redirect from="/auth" to="/" />
+        currentUser.isLoggedIn 
+        ? <Redirect from="/auth" to="/" />
+        : <Redirect to="/auth/login"/>
       )}
 
       <Route path="/error" component={ErrorPage} />

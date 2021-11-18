@@ -1,16 +1,11 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { withStyles } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
-import { Paper } from '@material-ui/core';
 import { Typography } from '@material-ui/core';
 import { Card } from '@material-ui/core';
 import { CardActions } from '@material-ui/core';
-import { Button } from '@material-ui/core';
 import { IconButton } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import InputIcon from '@material-ui/icons/Input';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 const styles = theme => ({
   card: {
@@ -56,18 +51,11 @@ const Snackbar = (props) => {
   const { classes } = props;
   const message = props.message;
   const { closeSnackbar } = useSnackbar();
-  const history = useHistory();
   let displayedMsg = '';
 
   const handleDismiss = () => {
     closeSnackbar(props.id);
   };
-
-  const handleLogin = () => {
-    history.push({
-      pathname: '/auth/login',
-    });
-  }
 
   if (message === 'signUpError')
   {

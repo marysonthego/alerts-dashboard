@@ -65,7 +65,7 @@ export const ListFriends = () => {
 
   const dispatch = useDispatch();
   //read Friends from db
-    console.log(`FetchData start`);
+    //console.log(`FetchData start`);
     const { 
       data: list = [],
       isLoading,

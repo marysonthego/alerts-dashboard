@@ -1,5 +1,5 @@
 export const initUser = {
-    isLoggedIn: false,
+    isLoggedIn: 0,
     custid: 0,
     firstname: '',
     lastname: '',
@@ -64,7 +64,7 @@ export const initLocationErrors =
       zip: "",
     };
   
-export const initFriendErrors = [
+export const initFriendErrors = 
     {
       id: 0,
       friendId: 0,
@@ -73,11 +73,11 @@ export const initFriendErrors = [
       st: "",
       zip: "",
       cell: "",
-    }
-  ];
+    };
 
 export const initAll = {
   user: {
+    isLoggedIn: 0,
     custid: 0,
     firstname: '',
     lastname: '',

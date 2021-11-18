@@ -38,11 +38,15 @@ export const userSlice = createSlice({
     },
 
     updateIsLoggedInState: (state, action) => {
-      state.user.isLoggedIn = action.payload.isLoggedIn;
+      const{isLoggedIn} = action.payload;
+      const existingUser = state.user;
+      if(existingUser){
+        if(isLoggedIn) 
+          existingUser.isLoggedIn = isLoggedIn;
+      }
     },
 
   resetUserState: (state, action) => {
-    const custid = action.payload;
     return initUser;
   },
 }

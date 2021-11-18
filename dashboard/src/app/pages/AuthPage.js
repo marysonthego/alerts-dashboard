@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 import { ContentRoute } from 'app/components/layout/ContentRoute';
 import { Login } from 'app/pages/Login';
@@ -9,24 +9,13 @@ import { DashboardPage } from 'app/pages/DashboardPage';
 import { ProfileStepper } from 'app/pages/ProfileStepper';
 import { UserProfilePage } from 'app/pages/UserProfilePage';
 import 'app/css/pages/login/login-1.scss';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectCurrentUser, updateIsLoggedInState } from 'app/redux/userSlice';
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'app/redux/userSlice';
 
 function Routing() {
   const currentUser = useSelector(selectCurrentUser);
-  const dispatch = useDispatch();
-
-  //can't use cookies with http CORS
-  useEffect(() => {
-    if(document.cookie.startsWith('connect.sid')) {
-        dispatch(updateIsLoggedInState(1));
-      } else {
-        dispatch(updateIsLoggedInState(0));
-      }
-      console.log(`Routes isLoggedIn:`, currentUser.isLoggedIn);
-  });
-
-  //console.log(`AuthPage isLoggedIn:`, isLoggedIn);
+  console.log(`AuthPage currentUser:`, currentUser);
+  
   return (
     <div>
       { currentUser.isLoggedIn === 1

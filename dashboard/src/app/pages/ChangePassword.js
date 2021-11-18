@@ -10,7 +10,6 @@ import {
 import SVG from 'react-inlinesvg';
 import {FormValidation, fieldsValidation} from 'app/helpers/FormValidation';
 import {
-  initUser, 
   initUserErrors, 
 } from 'app/helpers/Initializers';
 import { changePassword } from 'app/components/AuthCrud';
@@ -25,8 +24,6 @@ import {
 } from 'app/redux/userSlice';
 import { 
   updateErrorState, 
-  deleteErrorState,
-  selectAllErrorsState, 
 } from 'app/redux/errorsSlice';
 const useStyles = makeStyles(theme => ({
   input: {

@@ -14,6 +14,7 @@ import { selectCurrentUser } from 'app/redux/userSlice';
 
 export default function BasePage(props) {
   const currentUser = useSelector(selectCurrentUser);
+  console.log(`BasePage isLoggedIn: `, currentUser.isLoggedIn);
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
       {currentUser.isLoggedIn ? (
