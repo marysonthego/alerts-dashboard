@@ -28,9 +28,6 @@ export const errorsSlice = createSlice({
     deleteErrorState: (state, action) => {
       state.errors = {...state.errors, data};
     },
-    updateErrorCustidState: (state, action) => {
-      state.errors = action.payload.custid;
-    },
     addLocationsErrorsState: (state, action) => {
       state.errors.locations = action.payload;
     }
@@ -38,9 +35,10 @@ export const errorsSlice = createSlice({
 });
 
 // Action creators are generated for each reducer function
-export const { addErrorState, updateErrorState, deleteErrorState, updateErrorCustidState } = errorsSlice.actions;
+export const { addErrorState, updateErrorState, deleteErrorState } = errorsSlice.actions;
 
 export default errorsSlice.reducer;
 
 export const selectAllErrorsState = state => state.errors;
 export const selectAllLocationsErrors = state => state.errors.locations;
+export const selectAllFriendsErrors = state => state.errors.friends;

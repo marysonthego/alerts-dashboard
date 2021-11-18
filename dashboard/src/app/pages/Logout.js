@@ -16,11 +16,9 @@ export function Logout() {
   const payload = useSelector(selectCurrentUser);
 
   async function doLogout() {
-    sessionStorage.clear();
     await logout();
     
   }
-  sessionStorage.clear();
   dispatch(resetUserState(payload));
   dispatch(resetLocations(payload));
   dispatch(resetFriends(payload));

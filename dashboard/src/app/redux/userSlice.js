@@ -14,24 +14,7 @@ export const userSlice = createSlice({
     addUserState: (state, action) => {
       state.user = action.payload;
     },
-      // prepare(isLoggedIn, custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype) {
-      //   return {
-      //     payload: {
-      //       isLoggedIn, 
-      //       custid, 
-      //       firstname, 
-      //       lastname, 
-      //       email, 
-      //       cell, 
-      //       addr1, 
-      //       addr2, 
-      //       city, 
-      //       st, 
-      //       zip, 
-      //       usertype
-      //     }
-      //   };
-      // },
+    
     updateUserState: (state, action) => {
       const {isLoggedIn, custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype } = action.payload;
       const existingUser = state.user;

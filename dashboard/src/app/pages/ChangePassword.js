@@ -9,10 +9,25 @@ import {
 } from '@material-ui/core';
 import SVG from 'react-inlinesvg';
 import {FormValidation, fieldsValidation} from 'app/helpers/FormValidation';
-import {useSessionStorage} from 'app/helpers/SessionStorageHelpers';
-import {initUser, initUserErrors} from 'app/helpers/Initializers';
+import {
+  initUser, 
+  initUserErrors, 
+} from 'app/helpers/Initializers';
 import { changePassword } from 'app/components/AuthCrud';
 import { useSnackbar } from 'notistack';
+import { 
+  useDispatch, 
+  useSelector 
+} from 'react-redux';
+import { 
+  selectCurrentUser, 
+  updateIsLoggedInState 
+} from 'app/redux/userSlice';
+import { 
+  updateErrorState, 
+  deleteErrorState,
+  selectAllErrorsState, 
+} from 'app/redux/errorsSlice';
 const useStyles = makeStyles(theme => ({
   input: {
     border: 'none',
@@ -21,30 +36,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const ChangePassword = () => {
-  const [isLoggedIn, setIsLoggedIn] = useSessionStorage("isLoggedIn", 0);
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
   const [loading] = useState(false);
   const [isValid, setIsValid] = useState(false);
-  const [user, setUser] = useSessionStorage('user', initUser);
   const [pwds, setPwds] = useState({});
-  const [userErrors, setUserErrors] = useSessionStorage('usererrors', initUserErrors);
+  const [userErrors, setUserErrors] = useState(initUserErrors);
   const history = useHistory();
   const classes = useStyles();
   const { enqueueSnackbar,  } = useSnackbar();
 
   useEffect(() => {
     if(document.cookie.startsWith('connect.sid')) {
-        setIsLoggedIn(1); 
-        setUser(user);
+      dispatch(updateIsLoggedInState(1));
       } else {
-        setIsLoggedIn(0);
+        dispatch(updateIsLoggedInState(0));
       }
-      //console.log(`ChangePassword useEffect isLoggedIn:`,isLoggedIn,`user:`,user);
-  },[isLoggedIn, setIsLoggedIn, setUser, user]);
+      console.log(`ChangePassword isLoggedIn:`, currentUser.isLoggedIn);
+  });
 
   const handleChange = e => {
     let field = e.target.name;
     let value = e.target.value;
-    //console.log(`ProfileForm handleChange field:`,field,`value:`,value);
+    //console.log(`ChangePassword handleChange field:`,field,`value:`,value);
       setPwds(prev => ({
         ...prev,
         [field]: value,
@@ -59,7 +73,7 @@ export const ChangePassword = () => {
 
   async function handleSubmit(e) {
     let inObj = {
-      custid: user.custid,
+      custid: currentUser.custid,
       pwd: pwds.newpwd,
     }
     await changePassword(inObj)
@@ -68,7 +82,7 @@ export const ChangePassword = () => {
           //console.log(`data:`, data);
           enqueueSnackbar('Your password has been changed.', { 
             variant: 'success',
-        });
+          });
         }
       })
   }
@@ -81,12 +95,15 @@ export const ChangePassword = () => {
 
     const error = FormValidation(field, value, fieldsValidation, required, isDuplicate) || '';
 
-    //console.log(`ProfileForm FormValidation returned error:`, error,`field:`, field);
+    //console.log(`ChangePassword FormValidation returned error:`, error,`field:`, field);
+    
     setUserErrors(prev => ({
       ...prev,
       [field]: error,
     }));   
-    if (error) setIsValid(false);
+    dispatch(updateErrorState(userErrors))
+    if (error) 
+      setIsValid(false);
 
     if(userErrors.pwd === '' && userErrors.newpwd === '' && userErrors.newpwd2 === '')
       setIsValid(true);

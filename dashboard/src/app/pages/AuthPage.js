@@ -9,25 +9,27 @@ import { DashboardPage } from 'app/pages/DashboardPage';
 import { ProfileStepper } from 'app/pages/ProfileStepper';
 import { UserProfilePage } from 'app/pages/UserProfilePage';
 import 'app/css/pages/login/login-1.scss';
-import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectCurrentUser, updateIsLoggedInState } from 'app/redux/userSlice';
 
 function Routing() {
-  const [isLoggedIn, setIsLoggedIn] = useSessionStorage("isLoggedIn", 0);
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
 
+  //can't use cookies with http CORS
   useEffect(() => {
     if(document.cookie.startsWith('connect.sid')) {
-        //console.log(`AuthPage useEffect 1`);
-        setIsLoggedIn(1); 
+        dispatch(updateIsLoggedInState(1));
       } else {
-        //console.log(`AuthPage useEffect 0`);
-        setIsLoggedIn(0);
+        dispatch(updateIsLoggedInState(0));
       }
+      console.log(`Routes isLoggedIn:`, currentUser.isLoggedIn);
   });
 
   //console.log(`AuthPage isLoggedIn:`, isLoggedIn);
   return (
     <div>
-      { isLoggedIn === 1
+      { currentUser.isLoggedIn === 1
       ? (
         <Switch>
           <ContentRoute path="/dashboard" component={DashboardPage} />

@@ -1,23 +1,22 @@
 import React, {Suspense} from 'react';
 import {Redirect, Switch} from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import {LayoutSplashScreen} from 'app/components/layout/MetronicSplashScreen';
 import {ContentRoute} from 'app/components/layout/ContentRoute';
 import {DashboardPage} from 'app/pages/DashboardPage';
 import {ChangePassword} from 'app/pages/ChangePassword';
 import {Login} from 'app/pages/Login';
 import {Logout} from 'app/pages/Logout';
-import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
 import {UserProfilePage} from 'app/pages/UserProfilePage';
 import { LocationsStep } from 'app/pages/LocationsStep';
 import { FriendsStep } from 'app/pages/FriendsStep';
+import { selectCurrentUser } from 'app/redux/userSlice';
 
 export default function BasePage(props) {
-  const [isLoggedIn] = useSessionStorage("isLoggedIn", 0); //0 with CORS
-
-  console.log(`BasePage isLoggedIn: `, isLoggedIn);
+  const currentUser = useSelector(selectCurrentUser);
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
-      {isLoggedIn ? (
+      {currentUser.isLoggedIn ? (
           <Switch>
           
             <ContentRoute exact path="/dashboard" component={DashboardPage} />

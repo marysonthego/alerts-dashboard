@@ -6,10 +6,14 @@ import * as Yup from 'yup';
 import { FormattedMessage } from 'react-intl';
 import { DoLogin } from 'app/components/AuthCrud';
 import { Logout } from 'app/pages/Logout';
-import { useDispatch } from 'react-redux';
-import { useSessionStorage } from 'app/helpers/SessionStorageHelpers';
-import { addUserState, updateUserState } from 'app/redux/userSlice';
-import {initUser} from 'app/helpers/Initializers';
+import { useDispatch, useSelector } from 'react-redux';
+import { 
+  addUserState, 
+  updateUserState,
+  updateIsLoggedInState,
+  selectCurrentUser, 
+} from 'app/redux/userSlice';
+import { initUser } from 'app/helpers/Initializers';
 
 const initialValues = {
   email: '',
@@ -17,7 +21,7 @@ const initialValues = {
 };
 
 export function Login() {
-  const [isLoggedIn, setIsLoggedIn] = useSessionStorage("isLoggedIn", 0);
+  const currentUser = useSelector(selectCurrentUser);
   const [user, setUser] = useState(initUser);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -27,12 +31,12 @@ export function Login() {
   // can't use auth cookie with http CORS on localhost
    useEffect(() => {
     if(document.cookie.startsWith('connect.sid')) {
-        setIsLoggedIn(1); 
-      } else {
-        setIsLoggedIn(0);
+      dispatch(updateIsLoggedInState(1));
+    } else {
+        dispatch(updateIsLoggedInState(0));
       }
-    //console.log(`Login uesEffect isLoggedIn:`,isLoggedIn);
-  },[ isLoggedIn, setIsLoggedIn]);
+    console.log(`Login uesEffect isLoggedIn:`, currentUser.isLoggedIn);
+  });
 
   const goToDashboard = () => {
     history.push({
@@ -95,7 +99,7 @@ export function Login() {
            });
            dispatch(addUserState(data));
            dispatch(updateUserState(user));
-           setIsLoggedIn(1);
+           dispatch(updateIsLoggedInState(1));
            formik.resetForm();
         } 
         else {
@@ -105,7 +109,7 @@ export function Login() {
           setUser(prev => {
             prev = {...prev, isLoggedIn: false};
           });
-          setIsLoggedIn(0);
+          dispatch(updateIsLoggedInState(0));
         };
        })
       .catch(e => {
@@ -239,7 +243,7 @@ export function Login() {
                     ) : null}
                   </div>
                   <div className="form-group d-flex flex-wrap justify-content-between align-items-center">
-                    {isLoggedIn === 1 ? (
+                    {currentUser.isLoggedIn === 1 ? (
                       <div>
                         <button
                           type="button"
