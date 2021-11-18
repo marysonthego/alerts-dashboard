@@ -89,13 +89,13 @@ export function Login() {
           enqueueSnackbar('You are logged in', { 
             variant: 'success',
           });
-          const newState = true;
+          const newState = 1;
            setUser(prev => {
              prev = {...prev, data, isLoggedIn: newState};
            });
-           dispatch(addUserState(data));
+           //dispatch(addUserState(data));
            dispatch(updateUserState(user));
-           dispatch(updateIsLoggedInState(1));
+           //dispatch(updateIsLoggedInState(1));
            formik.resetForm();
         } 
         else {
@@ -103,7 +103,7 @@ export function Login() {
            variant: 'error',
           });
           setUser(prev => {
-            prev = {...prev, isLoggedIn: false};
+            prev = {...prev, isLoggedIn: 0};
           });
           dispatch(updateIsLoggedInState(0));
         };
@@ -111,7 +111,7 @@ export function Login() {
       .catch(e => {
         console.log(`login error e: `, e);
         setUser(prev => {
-          prev = {...prev, isLoggedIn: false};
+          prev = {...prev, isLoggedIn: 0};
         });
       })
       .finally(() => {
