@@ -736,6 +736,7 @@ router.post("/api/findzip", async (req, res) => {
     return res.status(404).json({ msg: `Zip not found for ${req.body.city}, ${req.body.st}` });
   } catch (err)
   {
+    console.log(`\n\nerr: `, err);
     return (err);
   }
 });

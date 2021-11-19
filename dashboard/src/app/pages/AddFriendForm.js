@@ -205,7 +205,7 @@ export const AddFriendForm = () => {
   }; // handleValidation
 
   return (
-<Box sx={{ width: '100%' }}>
+<Box sx={{ width: '80%' }}>
 
     <div >
       <div className={ classes.row }>

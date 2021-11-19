@@ -17,7 +17,7 @@ import {
   Box,
 } from '@material-ui/core';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles ({
   container: {
     display: 'flex',
     marginBottom: '2em',
@@ -43,7 +43,7 @@ const useStyles = makeStyles(theme => ({
     width: '100%',
     height: '2px',
   },
-}));
+});
 
 export const AddLocationForm = () => {
   const classes = useStyles();
@@ -195,6 +195,7 @@ export const AddLocationForm = () => {
   }; // handleValidation
 
   return (
+    
     <Box sx={{ width: '100%' }}>
 
       <div className={ classes.row }>

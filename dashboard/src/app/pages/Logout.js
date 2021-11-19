@@ -3,14 +3,13 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser, resetUserState } from 'app/redux/userSlice';
+import { useDispatch } from 'react-redux';
+import { resetUserState } from 'app/redux/userSlice';
 import { resetLocations } from 'app/redux/locationsSlice';
 import { resetFriends } from 'app/redux/friendsSlice';
 import { ContentRoute } from 'app/components/layout/ContentRoute';
 import { logout } from 'app/components/AuthCrud';
 import { Login } from 'app/pages/Login';
-import { initUser, initLocations, initFriends } from 'app/helpers/Initializers';
 
 export function Logout() {
   const dispatch = useDispatch();

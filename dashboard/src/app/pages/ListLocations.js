@@ -33,7 +33,7 @@ import {
   Paper,
   Switch,
 } from '@material-ui/core';
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles({
   container: {
     display: 'flex',
     marginBottom: '2em',
@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   textfield: {
     marginRight: '1rem',
   },
-}));
+});
 
 export const ListLocations = () => {
   let custid = useSelector(selectUserCustid);
@@ -197,6 +197,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
+    
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
@@ -264,26 +265,7 @@ function EnhancedTable(props) {
       )
     );
   };
-
-  const handleBlur = (e, id) => {
-    e.preventDefault();
-    let field = e.target.name;
-    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    let loc = Object.assign({}, rows[id]);
-    loc = {...loc, [field]: value};
-    dispatch(editLocation(loc));
-    //console.log(`HandleBlur value: `, value);
-    
-    try {
-    updateLocation(loc).unwrap();
-    } catch(error) {
-      console.log(`rejected error: `, error);
-      enqueueSnackbar(`Failed to update location`, {
-        variant: 'error',
-      });
-    };
-  };
-
+  
   const handleChange = (e, row) => {
     e.preventDefault();
     let field = e.target.name;
@@ -478,7 +460,7 @@ function EnhancedTable(props) {
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={6} />
+                  <TableCell colSpan={8} />
                 </TableRow>
               )}
             </TableBody>

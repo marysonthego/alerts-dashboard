@@ -10,8 +10,7 @@ import {
   apiSlice,
 } from 'app/redux/apiSlice';
 import { 
-  addNewFriend, 
-  editFriend, 
+  addNewFriend,  
   removeFriend,  
 } from 'app/redux/friendsSlice';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
@@ -34,7 +33,8 @@ import {
   Paper,
   Switch,
 } from '@material-ui/core';
-const useStyles = makeStyles(theme => ({
+
+const useStyles = makeStyles({
   container: {
     display: 'flex',
     marginBottom: '2em',
@@ -58,7 +58,7 @@ const useStyles = makeStyles(theme => ({
   textfield: {
     marginRight: '1rem',
   },
-}));
+});
 
 export const ListFriends = () => {
   let custid = useSelector(selectUserCustid);
@@ -242,7 +242,6 @@ function EnhancedTable(props) {
   
   const [ deleteFriend ] = useDeleteFriendMutation();
   const dispatch = useDispatch();
-  const [ updateFriend ] = useUpdateFriendMutation();  
   const { enqueueSnackbar } = useSnackbar();
 
   function handleFriendsRefetch({custid}) {
@@ -252,49 +251,6 @@ function EnhancedTable(props) {
         {subscribe: false, forceRefetch: true }
       )
     );
-  };
-
-  const handleBlur = (e, id) => {
-    e.preventDefault();
-    let field = e.target.name;
-    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    let fr = Object.assign({}, rows[id]);
-    fr = {...fr, [field]: value};
-    dispatch(editFriend(fr));
-    //console.log(`HandleBlur value: `, value);
-    
-    try {
-    updateFriend(fr).unwrap();
-    } catch(error) {
-      console.log(`rejected error: `, error);
-      enqueueSnackbar(`Failed to update friend`, {
-        variant: 'error',
-      });
-    };
-  };
-
-  const handleChange = (e, row) => {
-    e.preventDefault();
-    let field = e.target.name;
-    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    console.log(`row: `, row.id, row);
-    let fr = Object.assign({}, row);
-    fr = {...fr, [field]: value};
-    
-    if(e.target.type === 'checkbox') {
-    try {
-      updateFriend(fr).unwrap();
-    
-      } catch(error) {
-        console.log(`rejected error: `, error);
-        // enqueueSnackbar(`Failed to update friend`, {
-        //   variant: 'info',
-        // });
-      };
-      dispatch(editFriend(fr));
-    };
-    handleFriendsRefetch({custid: custid});
-    console.log(`HandleChange field: value `, field, value);
   };
   
   function HandleDelete (e) {

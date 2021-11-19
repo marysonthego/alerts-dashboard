@@ -1,12 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+//import { baseUrl } from 'app/baseUrl';
 //const Origin = 'http://localhost:3002'; //CORS Origin must be in server's whitelist
 
 export const apiSlice = createApi({
   reducerPath: 'apiSlice',  //all data will be in Redux store at store.apiSlice
-  //baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api" }),
-  
-  baseQuery: fetchBaseQuery({ baseUrl: "/api" }),tagTypes: ['User', 'Locations', 'Friends'],
+  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4000/api" }),tagTypes: ['User', 'Locations', 'Friends'],
   keepUnusedDataFor: 5,
+  
+  //baseQuery: fetchBaseQuery({ baseUrl: "/api" }),tagTypes: ['User', 'Locations', 'Friends'],
+  //baseQuery: fetchBaseQuery( '${baseUrl}/api' ),tagTypes: ['User', 'Locations', 'Friends'],
   //endpoints are calls to the Postgres server
   endpoints: builder => ({
 

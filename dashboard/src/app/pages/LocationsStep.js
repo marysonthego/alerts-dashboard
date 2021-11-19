@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     flexShrink: '1',
 
-    '@media (max-width: 760px)': {
+    '@media (max-width: 390px)': {
       flexDirection: 'column',
       justifyContent: 'flexStart',
     },
@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     flexShrink: '1',
     backgroundColor: 'white',
     width: '30%',
-    '@media (max-width: 760px)': {
+    '@media (max-width: 390px)': {
       width: '100%',
       margin: '1vw',
     },
@@ -132,7 +132,7 @@ export const LocationsStep = ({
   }; // LocationsHeader
   console.log(`LocationsStep custid: `, custid);
   return (
-    <Box className="container">
+    <Box p={ 2 }>
       {/* begin::Head */ }
       <Box className="head">
         <div className="text-center mt-10">
@@ -158,9 +158,11 @@ export const LocationsStep = ({
           </Card>
         )) }
       </Box>
-        <LocationsHeader />
-        <AddLocationForm />
-        <ListLocations />
+
+      <LocationsHeader />
+      <AddLocationForm />
+      <ListLocations />
     </Box>
+
   );
 };
