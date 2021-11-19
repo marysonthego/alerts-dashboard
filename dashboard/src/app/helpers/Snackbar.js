@@ -57,16 +57,16 @@ const Snackbar = (props) => {
     closeSnackbar(props.id);
   };
 
-  if (message === 'signUpError')
-  {
+  if (message === 'signUpError') {
     displayedMsg = "The email address and cell phone combination you entered is already in use."
-  } else if (message === '500ServerError')
-  {
+  } else if (message === '500ServerError') {
     displayedMsg = "Server Error. Please try again later."
-  } else
-  {
+  } else if (message === 'missingRequiredField') {
+    displayedMsg = "Please complete required fields"
+  } else {
     return null;
   }
+  
   return (
     <Card className={ classes.card }>
       <CardActions classes={ { root: classes.actionRoot } }>

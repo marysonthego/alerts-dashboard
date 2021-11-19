@@ -380,7 +380,7 @@ function EnhancedTable(props) {
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 550 }}
+            sx={{ minWidth: 500 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >

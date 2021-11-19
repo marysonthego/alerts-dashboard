@@ -111,6 +111,14 @@ export const ProfileStepper = () => {
           let { ...newUser } = userState;
           newUser = { ...newUser, pwd: pwd };
 
+          if(newUser.cell === "" || newUser.email === "" || newUser.pwd === "" || newUser.firstname === "" || newUser.lastname === "") {
+            let snackType='missingRequiredField'
+            enqueueSnackbar(null, {
+              persist: true,
+              content: key => <Snackbar id={ key } message={ snackType } />
+            });
+          }
+
           addCustomer(newUser).unwrap()
             .then((payload) => {
               console.log(`addCustomer fulfilled payload: `, payload)
@@ -128,10 +136,10 @@ export const ProfileStepper = () => {
                 snackType = '500ServerError';
               }
               else {
-              dispatch(updateErrorState({ cell: 'Duplicate cell' }));
-              dispatch(updateErrorState({ email: 'Duplicate email' }));
-              setIsADuplicate(true);
-              snackType = 'signUpError';
+                dispatch(updateErrorState({ cell: 'Duplicate cell' }));
+                dispatch(updateErrorState({ email: 'Duplicate email' }));
+                setIsADuplicate(true);
+                snackType = 'signUpError';
               }
               dispatch(updateActiveStep(activeStep - 1));
               enqueueSnackbar(null, {

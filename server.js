@@ -189,7 +189,7 @@ router.post("/api/addcustomer", async (req, res) => {
     } = req.body;
 
     let hashedpwd = await bcrypt.hash(pwd, saltRounds);
-    usertype = "admin";
+    usertype = "customer";
     console.log(`\nPOST addcustomer req.body: `, req.body);
     //insert new Customer
     pool.query(`INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype)

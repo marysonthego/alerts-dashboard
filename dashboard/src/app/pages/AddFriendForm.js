@@ -12,6 +12,7 @@ import {
   TextField,
   Button,
   makeStyles,
+  Box,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -28,7 +29,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: 'center',
     flexShrink: '1',
 
-    '@media (max-width: 560px)': {
+    '@media (max-width: 760px)': {
       flexDirection: 'column',
       justifyContent: 'flexStart',
     },
@@ -204,6 +205,7 @@ export const AddFriendForm = () => {
   }; // handleValidation
 
   return (
+<Box sx={{ width: '100%' }}>
 
     <div >
       <div className={ classes.row }>
@@ -288,5 +290,6 @@ export const AddFriendForm = () => {
       </div>
       <hr className={ classes.hr } />
     </div>
+    </Box>
   );
 };

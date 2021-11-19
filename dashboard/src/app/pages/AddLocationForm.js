@@ -14,6 +14,7 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
+  Box,
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -194,7 +195,8 @@ export const AddLocationForm = () => {
   }; // handleValidation
 
   return (
-    <div >
+    <Box sx={{ width: '100%' }}>
+
       <div className={ classes.row }>
         <TextField
           className={ classes.textfield }
@@ -302,6 +304,6 @@ export const AddLocationForm = () => {
         </span>
       </div>
       <hr className={ classes.hr } />
-    </div>
+      </Box>
   );
 };
