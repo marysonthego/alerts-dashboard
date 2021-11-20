@@ -2,7 +2,6 @@ import React, {useMemo} from "react";
 import {Link} from "react-router-dom";
 import objectPath from "object-path";
 import SVG from "react-inlinesvg";
-import {toAbsoluteUrl} from "app/helpers/AssetHelpers";
 import {useHtmlClassService} from "app/components/layout/MetronicLayout";
 
 export function HeaderMobile() {
@@ -34,17 +33,7 @@ export function HeaderMobile() {
           {/*end::Logo*/}
 
           {/*begin::Toolbar*/}
-          <div className="d-flex align-items-center">
-            {layoutProps.asideDisplay && (
-                <>
-                  {/*begin::Aside Mobile Toggle*/}
-                  <button className="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
-                    <span/>
-                  </button>
-                  {/*end::Aside Mobile Toggle*/}
-                </>
-            )}
-
+          
             {layoutProps.headerMenuSelfDisplay && (
                 <>
                   {/*begin::Header Menu Mobile Toggle*/}
@@ -55,20 +44,9 @@ export function HeaderMobile() {
                 </>
             )}
 
-            {/*begin::Topbar Mobile Toggle*/}
-            <button
-                className="btn btn-hover-text-primary p-0 ml-2"
-                id="kt_header_mobile_topbar_toggle"
-            >
-              <span className="svg-icon svg-icon-xl">
-                <SVG src={toAbsoluteUrl("/media/svg/icons/General/User.svg")} />
-              </span>
-            </button>
-            {/*end::Topbar Mobile Toggle*/}
+        
           </div>
           {/*end::Toolbar*/}
-        </div>
-        {/*end::Header Mobile*/}
       </>
   );
 }

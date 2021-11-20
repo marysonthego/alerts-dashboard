@@ -47,16 +47,6 @@ export function SubHeader() {
         <div
             className={`${layoutProps.subheaderContainerCssClasses} d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap`}
         >
-          {/* Info */}
-          <div className="d-flex align-items-center flex-wrap mr-1">
-            {layoutProps.subheaderMobileToggle && (
-                <button
-                    className="burger-icon burger-icon-left mr-4 d-inline-block d-lg-none"
-                    id="kt_subheader_mobile_toggle"
-                >
-                  <span/>
-                </button>
-            )}
 
             <div className="d-flex align-items-baseline mr-5">
               <h5 className="text-dark font-weight-bold my-2 mr-5">
@@ -69,7 +59,7 @@ export function SubHeader() {
             </div>
 
 
-            <BreadCrumbs items={subheader.breadcrumbs}/>
+          
           </div>
 
           {/* Toolbar */}
@@ -82,6 +72,6 @@ export function SubHeader() {
             <QuickActions/>
           </div>
         </div>
-      </div>
+    
   );
 }
