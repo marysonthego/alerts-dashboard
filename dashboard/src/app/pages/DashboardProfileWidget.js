@@ -49,7 +49,7 @@ export function DashboardProfileWidget ({ className }) {
         {/* Stat */ }
         <div className="card-spacer mt-0">
           <div className="row mt-5">
-            <div className="col bg-warning px-6 py-8 rounded-xl mr-7 mb-7">
+            <div className="col bg-info px-6 py-8 rounded-xl mr-7 mb-7">
               <Link
                 to="/user-profile"
                 className="text-primary font-weight-bold font-size-h6 mt-2">
@@ -63,7 +63,7 @@ export function DashboardProfileWidget ({ className }) {
                 </div>
               </Link>
             </div>
-            <div className="col bg-warning px-6 py-8 rounded-xl mb-7">
+            <div className="col bg-info px-6 py-8 rounded-xl mb-7">
               <Link
                 to="/friends-list"
                 className="text-primary font-weight-bold font-size-h6 mt-2">
@@ -79,7 +79,7 @@ export function DashboardProfileWidget ({ className }) {
             </div>
           </div>
           <div className="row mt-5">
-            <div className="col bg-warning px-6 py-8 rounded-xl mr-7 mb-7">
+            <div className="col bg-info px-6 py-8 rounded-xl mr-7 mb-7">
               <Link
                 to="/locations-list"
                 className="text-primary font-weight-bold font-size-h6 mt-2">
@@ -94,7 +94,7 @@ export function DashboardProfileWidget ({ className }) {
                 </div>
               </Link>
             </div>
-            <div className="col bg-warning px-6 py-8 rounded-xl mb-7">
+            <div className="col bg-info px-6 py-8 rounded-xl mb-7">
               <Link
                 to="/latest-alerts"
                 className="text-primary font-weight-bold font-size-h6 mt-2">

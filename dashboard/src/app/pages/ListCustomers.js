@@ -150,67 +150,67 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'custid',
     numeric: true,
-    disablePadding: false,
+    disablePadding: true,
     label: 'custid',
   },
   {
     id: 'firstname',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'First name',
   },
   {
     id: 'lastname',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Last name',
   },
   {
     id: 'email',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Email',
   },
   {
     id: 'cell',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Cell',
   },
   {
     id: 'addr1',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Address 1',
   },
   {
     id: 'addr2',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Address 2',
   },
   {
     id: 'city',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'City',
   },
   {
     id: 'st',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'State',
   },
   {
     id: 'zip',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'Zip',
   },
   {
     id: 'usertype',
     numeric: false,
-    disablePadding: false,
+    disablePadding: true,
     label: 'User Type',
   },
 ];
@@ -225,7 +225,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell padding="none">
           <Checkbox
             color="primary"
             indeterminate={numSelected > 0 && numSelected < rowCount}
@@ -267,14 +267,14 @@ EnhancedTableHead.propTypes = {
 };
 
 function EnhancedTable(props) {
-  const { rows, custid } = props;
+  const { rows } = props;
   let length = rows.length;
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
-  const [rowsPerPage, setRowsPerPage] = useState(20);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   
   const [ deleteCustomer ] = useDeleteCustomerMutation();
   const [ updateCustomer ] = useUpdateCustomerMutation();
@@ -307,7 +307,7 @@ function EnhancedTable(props) {
       };
       dispatch(editCustomer(cust));
     };
-    handleCustomersRefetch({custid: custid});
+    handleCustomersRefetch();
     console.log(`HandleChange field: value `, field, value);
   };
   
@@ -327,9 +327,9 @@ function EnhancedTable(props) {
             });
           };
           dispatch(removeCustomer(custid));
-          handleCustomersRefetch({custid: custid});
+          handleCustomersRefetch();
       });
-      handleCustomersRefetch({custid: custid});
+      handleCustomersRefetch();
     };
   };
 
@@ -435,17 +435,17 @@ function EnhancedTable(props) {
                           }}
                         />
                       </TableCell>
-                      <TableCell align="left" width="100px">{row.custid}</TableCell>
+                      <TableCell align="right" width="70px">{row.custid}</TableCell>
                       <TableCell align="left" width="100px">{row.firstname}</TableCell>
                       <TableCell align="left" width="100px">{row.lastname}</TableCell>
-                      <TableCell align="left" width="100px">{row.email}</TableCell>
+                      <TableCell align="right" width="100px">{row.email}</TableCell>
                       <TableCell align="left">{row.cell}</TableCell>
-                      <TableCell align="left" width="100px">{row.addr1}</TableCell>
-                      <TableCell align="left" width="100px">{row.addr2}</TableCell>
+                      <TableCell align="left" width="70px">{row.addr1}</TableCell>
+                      <TableCell align="left" width="70px">{row.addr2}</TableCell>
                       <TableCell align="left">{row.city}</TableCell>
-                      <TableCell align="left">{row.st}</TableCell>
-                      <TableCell align="left">{row.zip}</TableCell>
-                      <TableCell align="left" width="100px">{row.usertype}</TableCell>
+                      <TableCell align="left" width="50px">{row.st}</TableCell>
+                      <TableCell align="right" width="70px">{row.zip}</TableCell>
+                      <TableCell align="left" width="50px">{row.usertype}</TableCell>
                     </TableRow>
                   );
                 })}
@@ -455,7 +455,7 @@ function EnhancedTable(props) {
                     height: (dense ? 33 : 53) * emptyRows,
                   }}
                 >
-                  <TableCell colSpan={11} />
+                  <TableCell />
                 </TableRow>
               )}
             </TableBody>
@@ -473,7 +473,7 @@ function EnhancedTable(props) {
       </Paper>
     
         <Button variant="contained" 
-        className="btn btn-warning font-weight-bold mr-20" 
+        className="btn btn-error font-weight-bold mr-20" 
         startIcon={<DeleteForeverIcon />}
         disabled={selected.length > 0 ? false : true}
         onClick={HandleDelete}>
