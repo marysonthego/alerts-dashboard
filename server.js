@@ -346,10 +346,10 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
 });
 
 router.get("/api/listcustomers", async (req, res) => {
-  const response = await pool.query(`SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate, lastupdate FROM customer`);
-  if (Boolean(response.rows))
+  const response = await pool.query(`SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype,  createdate, lastupdate FROM customer`);
+  if (response.rows.length > 0)
   {
-    console.log(`\nlistcustomers response.rows: `, response.rows);
+    console.log(`\n\nlistcustomers response.rows: `, response.rows);
     return res.status(200).send(response.rows);
   }
   return res.status(404);

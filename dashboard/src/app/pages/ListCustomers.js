@@ -68,7 +68,7 @@ export const ListCustomers = () => {
 
   const dispatch = useDispatch();
 
-    //console.log(`FetchData start`);
+    console.log(`List Customers FetchData start`);
     const { 
       data: list = [],
       isLoading,
@@ -390,11 +390,12 @@ function EnhancedTable(props) {
 
   return (
     <Box sx={{ width: '100%' }}>
+      <h3>Customer List</h3>
       <Paper sx={{ width: '100%', mb: 2 }}>
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
           <Table
-            sx={{ minWidth: 500 }}
+            sx={{ minWidth: 300 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >

@@ -19,10 +19,7 @@ export const apiSlice = createApi({
       query: () => ({
       url: '/listcustomers',
       //Origin: Origin,
-      providesTags: (result = [], error, arg) => 
-      result
-        ?[result.map(({custid}) => ({type: 'User', custid})), 'User']
-        : ['User']
+      providesTags: ['Customers'],
       }),
     }),
 
