@@ -27,7 +27,7 @@ export default function BasePage (props) {
           <ContentRoute exact path="/password" component={ChangePassword}/>
           <ContentRoute exact path="/locations-list" component={LocationsStep}/>
           <ContentRoute exact path="/friends-list" component={FriendsStep}/>
-          
+          <ContentRoute exact path="/list-customers" component={ListCustomers}/>
           currentUser.usertype === 'admin' ? (
             <ContentRoute exact path="/list-customers" component={ListCustomers}/>
           ) : (<Redirect to="/error"/>)
