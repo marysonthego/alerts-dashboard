@@ -356,27 +356,21 @@ router.get("/api/listcustomers", async (req, res) => {
 });
 
 // delete customer by custid
-router.post("/api/deletecustomer", async function (req, res) {
-  const {
-    custid
-  } = req.body;
-  pool.query(
-    `DELETE from customer WHERE customer.custid = $1 RETURNING custid`,
-    [custid],
-    (err, results) => {
-      //delete failed
-      if (err)
-      {
-        console.error(`\nDelete customer failed. error: `, err.message);
-        let msg = err.message;
-        return res.status(409).send(msg);
-      } else
-      {
-        console.error(`\nDelete customer success: `, results);
-        let msg = results;
-        return res.status(200).send(msg);
-      }
-    });
+router.delete("/api/deletecustomer/:custid", async function (req, res) {
+  try {
+  let custid = req.params.custid;
+  
+  const response = await pool.query(
+    `DELETE from customer WHERE customer.custid = $1 RETURNING custid`, [custid]);
+
+    if (response) {
+      console.log(`\n\ndeletecustomer response: `, response.rows);
+      return res.status(200).send(response.rows);
+    }
+  } catch (err) {
+    console.log(`\n\ndelete customer err: `, err);
+    return res.status(404).send(err);
+  }
 });
 
 // add new subscription for custid and zip

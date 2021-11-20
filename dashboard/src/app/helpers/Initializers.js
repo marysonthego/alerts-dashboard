@@ -13,6 +13,23 @@ export const initUser = {
     usertype: 'customer',
 };
 
+export const initCustomers = [
+  {
+  isLoggedIn: 0,
+  custid: 0,
+  firstname: '',
+  lastname: '',
+  email: '',
+  cell: '',
+  addr1: '',
+  addr2: '',
+  city: '',
+  st: '',
+  zip: '',
+  usertype: 'customer',
+  },
+]
+
 export const initLocation = 
     {
       id: 0,

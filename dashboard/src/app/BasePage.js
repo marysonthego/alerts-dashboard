@@ -10,6 +10,7 @@ import { Logout } from 'app/pages/Logout';
 import { UserProfilePage } from 'app/pages/UserProfilePage';
 import { LocationsStep } from 'app/pages/LocationsStep';
 import { FriendsStep } from 'app/pages/FriendsStep';
+import { ListCustomers } from 'app/pages/ListCustomers';
 import { selectCurrentUser } from 'app/redux/userSlice';
 
 export default function BasePage (props) {
@@ -25,8 +26,11 @@ export default function BasePage (props) {
           <ContentRoute exact path="/logout" component={Logout}/>
           <ContentRoute exact path="/password" component={ChangePassword}/>
           <ContentRoute exact path="/locations-list" component={LocationsStep}/>
-          <ContentRoute exact path="/friends-list" component={FriendsStep}/> */}
+          <ContentRoute exact path="/friends-list" component={FriendsStep}/>
           <Redirect from="/" to="/dashboard" />
+          currentUser.usertype === 'admin' ? (
+            <ContentRoute exact path="/list-customers" component={ListCustomers}/>
+          ) : (null)
         </Switch>
       ) : (
         <Switch>
@@ -34,7 +38,7 @@ export default function BasePage (props) {
           <Redirect to="/auth/login" />
           <Redirect to="/error" />
         </Switch>
-      ) }
+      )}
     </Suspense>
   );
 }

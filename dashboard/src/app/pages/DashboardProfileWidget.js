@@ -10,15 +10,16 @@ import { Dropdown } from 'react-bootstrap';
 import { DropdownMenu2 } from 'app/components/DropdownMenu2';
 import { UserProfileDropdown } from 'app/pages/UserProfileDropdown';
 
-export function DashboardProfileWidget({ className }) {
+export function DashboardProfileWidget ({ className }) {
   const user = useSelector(selectCurrentUser);
   console.log(`user: `, user);
-  if (user.custid === 0) {
+  if (user.custid === 0)
+  {
     return null;
   }
   return (
-    <div className={`card card-custom bg-gray-100 ${className}`}>
-      {/* Header */}
+    <div className={ `card card-custom bg-gray-100 ${className}` }>
+      {/* Header */ }
       <div className="card-header border-0 bg-gray-200 py-5">
         <h3 className="card-title font-weight-bolder text-warning">
           Your Profile
@@ -42,10 +43,10 @@ export function DashboardProfileWidget({ className }) {
           </Dropdown>
         </div>
       </div>
-      {/* Body */}
+      {/* Body */ }
       <div className="card-body p-0 position-relative overflow-hidden bg-gray-200">
-       
-        {/* Stat */}
+
+        {/* Stat */ }
         <div className="card-spacer mt-0">
           <div className="row mt-5">
             <div className="col bg-warning px-6 py-8 rounded-xl mr-7 mb-7">
@@ -55,7 +56,7 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={('/media/svg/icons/Code/Settings4.svg')}>
+                      src={ ('/media/svg/icons/Code/Settings4.svg') }>
                     </SVG>
                   </span>
                   Account
@@ -69,7 +70,7 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={('/media/svg/icons/Communication/Group.svg')}>
+                      src={ ('/media/svg/icons/Communication/Group.svg') }>
                     </SVG>
                   </span>
                   Friends
@@ -85,9 +86,9 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={(
+                      src={ (
                         '/media/svg/icons/Communication/Flag.svg'
-                      )}></SVG>
+                      ) }></SVG>
                   </span>
                   Alert Settings
                 </div>
@@ -100,24 +101,42 @@ export function DashboardProfileWidget({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={(
+                      src={ (
                         '/media/svg/icons/Electric/Highvoltage.svg'
-                      )}></SVG>
+                      ) }></SVG>
                   </span>
                   Latest Alerts
-               </div>
+                </div>
+              </Link>
+            </div>
+          </div>
+
+          <div className="row mt-5">
+            <div className="col bg-warning px-6 py-8 rounded-xl mb-7">
+              <Link
+                to="/list-customers"
+                className="text-primary font-weight-bold font-size-h6 mt-2">
+                <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
+                  <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+                    <SVG
+                      src={ (
+                        '/media/a4g/Clipboard.svg'
+                      ) }></SVG>
+                  </span>
+                  Customer List
+                </div>
               </Link>
             </div>
           </div>
         </div>
+      </div>
 
-        {/* Resize */}
-        <div className="resize-triggers">
-          <div className="expand-trigger">
-            <div style={{ width: '411px', height: '461px' }} />
-          </div>
-          <div className="contract-trigger" />
+      {/* Resize */ }
+      <div className="resize-triggers">
+        <div className="expand-trigger">
+          <div style={ { width: '411px', height: '461px' } } />
         </div>
+        <div className="contract-trigger" />
       </div>
     </div>
   );
