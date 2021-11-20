@@ -110,7 +110,8 @@ export function DashboardProfileWidget ({ className }) {
               </Link>
             </div>
           </div>
-
+          
+          {user.usertype === 'admin' ? (
           <div className="row mt-5">
             <div className="col bg-warning px-6 py-8 rounded-xl mb-7">
               <Link
@@ -128,6 +129,7 @@ export function DashboardProfileWidget ({ className }) {
               </Link>
             </div>
           </div>
+          ) : (null)}
         </div>
       </div>
 
