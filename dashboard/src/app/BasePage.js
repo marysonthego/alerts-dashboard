@@ -14,7 +14,7 @@ import { ListCustomers } from 'app/pages/ListCustomers';
 import { selectCurrentUser } from 'app/redux/userSlice';
 
 export default function BasePage (props) {
-  const currentUser = useSelector(selectCurrentUser);
+  let currentUser = useSelector(selectCurrentUser);
   console.log(`BasePage isLoggedIn: `, currentUser.isLoggedIn);
 
   return (
@@ -28,9 +28,9 @@ export default function BasePage (props) {
           <ContentRoute exact path="/locations-list" component={LocationsStep}/>
           <ContentRoute exact path="/friends-list" component={FriendsStep}/>
           <ContentRoute exact path="/list-customers" component={ListCustomers}/>
-          currentUser.usertype === 'admin' ? (
+          {currentUser.usertype === 'admin' ? (
             <ContentRoute exact path="/list-customers" component={ListCustomers}/>
-          ) : (<Redirect to="/error"/>)
+          ) : (<Redirect to="/error"/>)}
           <Redirect from="/" to="/dashboard" />
         </Switch>
       ) : (
