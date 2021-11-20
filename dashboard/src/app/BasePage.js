@@ -30,7 +30,7 @@ export default function BasePage (props) {
           
           currentUser.usertype === 'admin' ? (
             <ContentRoute exact path="/list-customers" component={ListCustomers}/>
-          ) : (null)
+          ) : (<Redirect to="/error"/>)
           <Redirect from="/" to="/dashboard" />
         </Switch>
       ) : (
