@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import userReducer from 'app/redux/userSlice';
+import customersReducer from 'app/redux/customersSlice';
 import locationsReducer from 'app/redux/locationsSlice';
 import friendsReducer from 'app/redux/friendsSlice';
 import errorsReducer from 'app/redux/errorsSlice';
@@ -13,6 +14,7 @@ export default configureStore({
     friends: friendsReducer,
     errors: errorsReducer,
     stepper: stepperReducer,
+    customers: customersReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
 
