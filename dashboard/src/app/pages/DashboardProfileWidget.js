@@ -6,7 +6,6 @@ import { useSelector } from 'react-redux';
 import { selectCurrentUser } from 'app/redux/userSlice';
 import SVG from 'react-inlinesvg';
 import { Dropdown } from 'react-bootstrap';
-//import { useHtmlClassService } from 'app/components/layout/MetronicLayout';
 import { DropdownMenu2 } from 'app/components/DropdownMenu2';
 import { UserProfileDropdown } from 'app/pages/UserProfileDropdown';
 
