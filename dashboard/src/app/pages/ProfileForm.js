@@ -183,8 +183,8 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
   }
 
   return (
-    <div className="card-body pt-0">
-      <div className="d-flex align-items-center mb-9 bg-warning rounded p-5">
+    <div className="card-body pt-0" style={{width: '250px'}}>
+      <div className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/Text/Font.svg') }
