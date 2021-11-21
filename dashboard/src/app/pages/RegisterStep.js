@@ -5,7 +5,7 @@ export const RegisterStep = ({ form, className, handlePassword, handleData }) =>
 
   return (
     <>
-      <div className={`card card-custom ${className}`}>
+      <div className={`card card-custom ${className}`} style={{justifyContent: 'center'}}>
         {/* Header */}
         <div className="card-header border-0">
           <h3 className="card-title font-weight-bolder text-dark">

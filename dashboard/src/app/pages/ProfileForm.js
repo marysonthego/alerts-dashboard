@@ -183,7 +183,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
   }
 
   return (
-    <div className="card-body pt-0" style={{width: '250px'}}>
+    <div className="card-body pt-0" style={{width: '350px'}}>
       <div className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
@@ -210,7 +210,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/Text/Font.svg') }
@@ -236,7 +236,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl(
@@ -264,7 +264,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/Devices/iPhone-X.svg') }
@@ -293,7 +293,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/General/Other2.svg') }
@@ -318,7 +318,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center mb-9 bg-warning rounded p-5">
+      <div className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/General/Other2.svg') }
@@ -343,7 +343,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/Home/Flower3.svg') }
@@ -368,7 +368,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/a4g/Flag.svg') }
@@ -393,7 +393,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+      <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
             src={ toAbsoluteUrl('/media/svg/icons/Home/Mailbox.svg') }
@@ -420,7 +420,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
 
       { form === 'RegisterStep' && newUser.custid === 0 ?
         <>
-          <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+          <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
             <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
               <SVG
                 src={ toAbsoluteUrl('/media/svg/icons/Communication/Thumbtack.svg') }
@@ -446,7 +446,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               </span>
             </Form>
           </div>
-          <div className="d-flex align-items-center bg-warning rounded p-5 mb-9">
+          <div className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
             <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
               <SVG
                 src={ toAbsoluteUrl('/media/svg/icons/Communication/Thumbtack.svg') }
