@@ -305,7 +305,7 @@ function EnhancedTable(props) {
       dispatch(editCustomer(cust));
     };
     handleCustomersRefetch();
-    console.log(`HandleChange field: value `, field, value);
+    //console.log(`HandleChange field: value `, field, value);
   
   function HandleDelete (e) {
     if(selected.length > 0) {
