@@ -39,7 +39,8 @@ import {
   Typography,
   makeStyles,
   IconButton,
-  Toolbar
+  Toolbar,
+  AppBar,
 } from '@material-ui/core';
 import { RegisterStep } from 'app/pages/RegisterStep';
 import { LocationsStep } from 'app/pages/LocationsStep';
@@ -63,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   },
   hr: {
     border: '0px',
-    width: '100%',
+    width: '80%',
     height: '1px',
   },
 }));
@@ -270,7 +271,7 @@ export const ProfileStepper = () => {
             // Last Component
             <>
               {/* begin::stepper */ }
-              <Toolbar>
+              <AppBar>
               <Box>
                 <Typography
                   variant="h4"
@@ -287,7 +288,7 @@ export const ProfileStepper = () => {
                   </Step>
                 )) }
               </Stepper>
-              </Toolbar>
+              
               {/* forms go here */ }
               <Box
                 p={ 0 }
@@ -298,6 +299,7 @@ export const ProfileStepper = () => {
                 justifyContent="center">
                 { walkSteps(activeStep) }
               </Box>
+              </AppBar>
               <div className={ clsx(classes.row, classes.navButtons) }>
                 <IconButton
                   key={ 'IB' + 1 }
