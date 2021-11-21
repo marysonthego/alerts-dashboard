@@ -105,7 +105,6 @@ export const ListCustomers = () => {
       });
     
       rows = custs.map((row) => {
-        //row = {...row};
         return row;
       });
     };
@@ -149,7 +148,7 @@ function stableSort(array, comparator) {
 
 const headCells = [
   { id: 'custid',
-    numeric: true,
+    numeric: false,
     disablePadding: true,
     label: 'custid',
   },
@@ -298,10 +297,8 @@ function EnhancedTable(props) {
     let cust = Object.assign({}, row);
     cust = {...cust, [field]: value};
     
-    if(e.target.type === 'checkbox') {
     try {
       updateCustomer(cust).unwrap();
-    
       } catch(error) {
         console.log(`rejected error: `, error);
       };
@@ -309,13 +306,12 @@ function EnhancedTable(props) {
     };
     handleCustomersRefetch();
     console.log(`HandleChange field: value `, field, value);
-  };
   
   function HandleDelete (e) {
     if(selected.length > 0) {
       selected.forEach(custid => {
         try {
-          console.log(`custid: `, custid);
+          console.log(`delete custid: `, custid);
           deleteCustomer(custid).unwrap();
           
           } catch (err) {
@@ -341,7 +337,7 @@ function EnhancedTable(props) {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.id);
+      const newSelecteds = rows.map((n) => n.custid);
       setSelected(newSelecteds);
       console.log(`selected: `, selected, `newSelecteds: `, newSelecteds);
       return;
@@ -349,12 +345,12 @@ function EnhancedTable(props) {
     setSelected([]);
   };
 
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
+  const handleClick = (event, custid) => {
+    const selectedIndex = selected.indexOf(custid);
     let newSelected = [];
 
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
+      newSelected = newSelected.concat(selected, custid);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -382,7 +378,7 @@ function EnhancedTable(props) {
     setDense(event.target.checked);
   };
 
-  const isSelected = (id) => selected.indexOf(id) !== -1;
+  const isSelected = (custid) => selected.indexOf(custid) !== -1;
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
@@ -413,7 +409,7 @@ function EnhancedTable(props) {
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
-                  const isItemSelected = isSelected(row.id);
+                  const isItemSelected = isSelected(row.custid);
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
@@ -422,12 +418,12 @@ function EnhancedTable(props) {
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.id+''}
+                      key={row.custid+''}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell padding="none">
                         <Checkbox
-                          onClick={(event) => handleClick(event, row.id)}
+                          onClick={(event) => handleClick(event, row.custid)}
                           color="primary"
                           checked={isItemSelected}
                           inputProps={{
@@ -435,16 +431,16 @@ function EnhancedTable(props) {
                           }}
                         />
                       </TableCell>
-                      <TableCell align="right" width="70px">{row.custid}</TableCell>
-                      <TableCell align="left" width="100px">{row.firstname}</TableCell>
-                      <TableCell align="left" width="100px">{row.lastname}</TableCell>
-                      <TableCell align="right" width="100px">{row.email}</TableCell>
+                      <TableCell align="left" width="50px">{row.custid}</TableCell>
+                      <TableCell align="left" width="70px">{row.firstname}</TableCell>
+                      <TableCell align="left" width="70px">{row.lastname}</TableCell>
+                      <TableCell align="left" width="70px">{row.email}</TableCell>
                       <TableCell align="left">{row.cell}</TableCell>
                       <TableCell align="left" width="70px">{row.addr1}</TableCell>
                       <TableCell align="left" width="70px">{row.addr2}</TableCell>
-                      <TableCell align="left">{row.city}</TableCell>
-                      <TableCell align="left" width="50px">{row.st}</TableCell>
-                      <TableCell align="right" width="70px">{row.zip}</TableCell>
+                      <TableCell align="left" width="70px">{row.city}</TableCell>
+                      <TableCell align="left" width="30px">{row.st}</TableCell>
+                      <TableCell align="left" width="50px">{row.zip}</TableCell>
                       <TableCell align="left" width="50px">{row.usertype}</TableCell>
                     </TableRow>
                   );
