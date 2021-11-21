@@ -295,7 +295,7 @@ export const ProfileStepper = () => {
                 m={ 0 }
                 display="flex"
                 flexWrap="nowrap"
-                flexDirection="column"
+                flexDirection="row"
                 justifyContent="center">
                 { walkSteps(activeStep) }
               </Box>
