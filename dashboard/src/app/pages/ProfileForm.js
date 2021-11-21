@@ -183,7 +183,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
   }
 
   return (
-    <div className="d-flex flex-column align-items-center card-body pt-0" style={{width: '350px'}}>
+    <div style={{width: '350px'}} className="d-flex flex-column align-items-center card-body pt-0" >
       <div className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
