@@ -271,7 +271,7 @@ export const ProfileStepper = () => {
             // Last Component
             <>
               {/* begin::stepper */ }
-              <AppBar>
+              
               <Box>
                 <Typography
                   variant="h4"
@@ -299,7 +299,7 @@ export const ProfileStepper = () => {
                 justifyContent="center">
                 { walkSteps(activeStep) }
               </Box>
-              </AppBar>
+              
               <div className={ clsx(classes.row, classes.navButtons) }>
                 <IconButton
                   key={ 'IB' + 1 }
