@@ -39,6 +39,7 @@ import {
   Typography,
   makeStyles,
   IconButton,
+  Toolbar
 } from '@material-ui/core';
 import { RegisterStep } from 'app/pages/RegisterStep';
 import { LocationsStep } from 'app/pages/LocationsStep';
@@ -269,6 +270,7 @@ export const ProfileStepper = () => {
             // Last Component
             <>
               {/* begin::stepper */ }
+              <Toolbar>
               <Box>
                 <Typography
                   variant="h4"
@@ -285,6 +287,7 @@ export const ProfileStepper = () => {
                   </Step>
                 )) }
               </Stepper>
+              </Toolbar>
               {/* forms go here */ }
               <Box
                 p={ 0 }
