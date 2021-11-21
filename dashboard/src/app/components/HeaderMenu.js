@@ -23,7 +23,7 @@ export function HeaderMenu({ layoutProps }) {
             {/*begin::1 Level*/}
             <li className={`menu-item menu-item-rel ${getMenuItemActive('/dashboard')}`}>
                 <NavLink className="menu-link" to="/dashboard">
-                    <span className="menu-text">Header Menu</span>
+                    <span className="menu-text">Dashboard</span>
                     {layoutProps.rootArrowEnabled && (<i className="menu-arrow" />)}
                 </NavLink>
             </li>
@@ -34,9 +34,9 @@ export function HeaderMenu({ layoutProps }) {
             <li
                 data-menu-toggle={layoutProps.menuDesktopToggle}
                 aria-haspopup="true"
-                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/google-material')}`}>
-                <NavLink className="menu-link menu-toggle" to="/google-material">
-                    <span className="menu-text">Material UI</span>
+                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/user-profile')}`}>
+                <NavLink className="menu-link menu-toggle" to="/user-profile">
+                    <span className="menu-text">Edit Profile</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div className="menu-submenu menu-submenu-classic menu-submenu-left">
@@ -601,12 +601,12 @@ export function HeaderMenu({ layoutProps }) {
             {/*Mega submenu*/}
             {/*begin::1 Level*/}
             <li
-                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/react-bootstrap')}`}
+                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/locations-list')}`}
                 data-menu-toggle={layoutProps.menuDesktopToggle}
                 aria-haspopup="true"
             >
-                <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
-                    <span className="menu-text">Bootstrap</span>
+                <NavLink className="menu-link menu-toggle" to="/locations-list">
+                    <span className="menu-text">Alert Settings</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div
@@ -873,9 +873,9 @@ export function HeaderMenu({ layoutProps }) {
             <li
                 data-menu-toggle={layoutProps.menuDesktopToggle}
                 aria-haspopup="true"
-                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/custom')}`}>
-                <NavLink className="menu-link menu-toggle" to="/custom">
-                    <span className="menu-text">Custom</span>
+                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/friends-list')}`}>
+                <NavLink className="menu-link menu-toggle" to="/friends-list">
+                    <span className="menu-text">Friends</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
                 <div className="menu-submenu menu-submenu-classic menu-submenu-left">

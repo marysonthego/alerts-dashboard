@@ -109,7 +109,7 @@ export function Login() {
   }
 
   return (
-    <div id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed asie-minimize-hoverable brand-dark">
+    <div id="kt_body" className="quick-panel-right demo-panel-right offcanvas-right header-fixed header-mobile-fixed subheader-enabled subheader-fixed aside-enabled aside-fixed aside-minimize-hoverable brand-dark">
       <div className="d-flex flex-column flex-root">
         {/*begin::Login*/}
         <div 

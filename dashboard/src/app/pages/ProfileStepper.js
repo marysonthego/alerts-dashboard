@@ -50,7 +50,6 @@ import { DonationStep } from 'app/pages/DonationStep';
 import { Success } from 'app/pages/Success';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
-
 const useStyles = makeStyles(theme => ({
   page: {
     marginBottom: '5em',
@@ -68,7 +67,6 @@ const useStyles = makeStyles(theme => ({
     height: '1px',
   },
 }));
-
 const stepLabels = [
   'Your Info',
   'Locations & Alerts',
@@ -76,7 +74,6 @@ const stepLabels = [
   'Alerts Summary',
   'Support Us!',
 ];
-
 export const ProfileStepper = () => {
   const dispatch = useDispatch();
   const [pwd, setPwd] = useState('');
@@ -85,7 +82,6 @@ export const ProfileStepper = () => {
   const [addCustomer] = useAddCustomerMutation();
   const [updateCustomer] = useUpdateCustomerMutation();
   const [isADuplicate, setIsADuplicate] = useState(false);
-
   const classes = useStyles();
   const activeStep = useSelector(selectActiveStep);
   const backEnabled = useSelector(selectBackEnabled);
@@ -97,10 +93,8 @@ export const ProfileStepper = () => {
   const refEN = createRef(); //Enable Next
   const refDN = createRef(); //Disable Next
   const { enqueueSnackbar } = useSnackbar();
-
   const HandleNextButtonClick = () => {
     let prevStep = activeStep;
-
     switch (prevStep)
     {
       case 0:
@@ -112,7 +106,6 @@ export const ProfileStepper = () => {
         {
           let { ...newUser } = userState;
           newUser = { ...newUser, pwd: pwd };
-
           if(newUser.cell === "" || newUser.email === "" || newUser.pwd === "" || newUser.firstname === "" || newUser.lastname === "") {
             let snackType='missingRequiredField'
             enqueueSnackbar(null, {
@@ -120,7 +113,6 @@ export const ProfileStepper = () => {
               content: key => <Snackbar id={ key } message={ snackType } />
             });
           }
-
           addCustomer(newUser).unwrap()
             .then((payload) => {
               console.log(`addCustomer fulfilled payload: `, payload)
@@ -163,11 +155,9 @@ export const ProfileStepper = () => {
         break;
     };
   };
-
   const handlePassword = (value) => {
     setPwd(value);
   };
-
   // Go to prev step
   const handleBackButtonClick = async () => {
     let lastStep = activeStep;
@@ -178,7 +168,6 @@ export const ProfileStepper = () => {
         if (isValid)
         {
           let { ...newUser } = userState; //copy object
-
           updateCustomer(newUser).unwrap()
             .then((payload) => {
               //console.log(`updateCustomer fulfilled payload: `, payload)
@@ -192,7 +181,6 @@ export const ProfileStepper = () => {
               console.error('updateCustomer rejected error: ', error);
               dispatch(updateErrorState({ cell: 'Duplicate cell' }));
               dispatch(updateErrorState({ email: 'Duplicate email' }));
-
               dispatch(updateActiveStep(activeStep - 1));
               enqueueSnackbar(`email-cell combination is already in use`, {
                 variant: 'error',
@@ -209,7 +197,6 @@ export const ProfileStepper = () => {
         break;
     }
   };
-
   const walkSteps = activeStep => {
     switch (activeStep)
     {
@@ -253,7 +240,6 @@ export const ProfileStepper = () => {
         break;
     }
   };
-
   return (
     <>
       <div className="d-flex flex-column flex-root bg-white">
@@ -280,7 +266,6 @@ export const ProfileStepper = () => {
                   { stepLabels[activeStep] }
                 </Typography>
               </Box>
-
               <Stepper activeStep={ activeStep } alternativeLabel>
                 { stepLabels.map(stepLabel => (
                   <Step key={ stepLabel }>
@@ -328,7 +313,6 @@ export const ProfileStepper = () => {
     </>
   );
 };
-
 //refDB
 export const disableBack = forwardRef((_props, ref) => {
   return (
@@ -338,7 +322,6 @@ export const disableBack = forwardRef((_props, ref) => {
     />
   )
 });
-
 //refEB
 export const enableBack = forwardRef((_props, ref) => {
   return (
@@ -348,7 +331,6 @@ export const enableBack = forwardRef((_props, ref) => {
     />
   )
 });
-
 //refEN
 export const enableNext = forwardRef((_props, ref) => {
   return (
@@ -358,7 +340,6 @@ export const enableNext = forwardRef((_props, ref) => {
     />
   )
 });
-
 //refDN
 export const disableNext = forwardRef((_props, ref) => {
   return (
@@ -368,4 +349,3 @@ export const disableNext = forwardRef((_props, ref) => {
     />
   )
 });
-

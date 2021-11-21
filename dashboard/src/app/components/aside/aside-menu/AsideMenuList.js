@@ -79,7 +79,7 @@ export function AsideMenuList({ layoutProps }) {
             <ul className="menu-subnav">
               <li className="menu-item  menu-item-parent" aria-haspopup="true">
                 <span className="menu-link">
-                  <span className="menu-text">Material UI</span>
+                  <span className="menu-text">Edit Profile</span>
                 </span>
               </li>
 
@@ -985,17 +985,17 @@ export function AsideMenuList({ layoutProps }) {
         {/*begin::1 Level*/}
         <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/react-bootstrap",
+            "/locations-list",
             true
           )}`}
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/react-bootstrap">
+          <NavLink className="menu-link menu-toggle" to="/locations-list">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Shopping/Box2.svg")} />
             </span>
-            <span className="menu-text">Bootstrap</span>
+            <span className="menu-text">Alert Settings</span>
             <i className="menu-arrow" />
           </NavLink>
           <div className="menu-submenu ">
@@ -1006,7 +1006,7 @@ export function AsideMenuList({ layoutProps }) {
                   aria-haspopup="true"
                 >
                   <span className="menu-link">
-                    <span className="menu-text">Bootstrap</span>
+                    <span className="menu-text">Alert Settings</span>
                   </span>
                 </li>
 
@@ -1540,7 +1540,7 @@ export function AsideMenuList({ layoutProps }) {
         {/* Custom */}
         {/* begin::section */}
         <li className="menu-section ">
-          <h4 className="menu-text">Custom</h4>
+          <h4 className="menu-text">Friends</h4>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
         {/* end:: section */}
