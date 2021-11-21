@@ -376,6 +376,8 @@ function EnhancedTable(props) {
             sx={{ minWidth: 500 }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
+            overflow-y="auto"
+            overflow-x="hidden"
           >
             <EnhancedTableHead
               numSelected={selected.length}
