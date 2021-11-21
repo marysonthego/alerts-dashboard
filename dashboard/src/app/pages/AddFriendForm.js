@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: '2em',
     marginLeft: '2em',
     flexDirection: 'column',
-    justifyContent: 'flexStart',
+    justifyContent: 'center',
   },
   row: {
     display: 'flex',
@@ -205,7 +205,7 @@ export const AddFriendForm = () => {
   }; // handleValidation
 
   return (
-<Box sx={{ width: '80%' }}>
+<Box sx={{ width: '100%' }}>
 
     <div >
       <div className={ classes.row }>
