@@ -137,21 +137,27 @@ export function AsideMenuList ({ layoutProps }) {
         </li>
         {/*begin::1 Level*/ }
         { user.usertype === 'admin' ? (
-          <li
-            className={ `menu-item menu-item-submenu ${getMenuItemActive("/list-customers",
-              true
-            )}` }
-            aria-haspopup="true"
-            data-menu-toggle="hover"
-          >
-            <NavLink className="menu-link menu-toggle" to="/list-customers">
-              <span className="svg-icon menu-icon">
-                <SVG src="/media/a4g/Clipboard.svg" />
-              </span>
-              <span className="menu-text">Logout</span>
-              <i className="menu-arrow" />
-            </NavLink>
-          </li>
+          <>
+            <li className="menu-section ">
+              <h4 className="menu-text">Admin</h4>
+              <i className="menu-icon flaticon-more-v2"></i>
+            </li>
+            <li
+              className={ `menu-item menu-item-submenu ${getMenuItemActive("/list-customers",
+                true
+              )}` }
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <NavLink className="menu-link menu-toggle" to="/list-customers">
+                <span className="svg-icon menu-icon">
+                  <SVG src="/media/a4g/Clipboard.svg" />
+                </span>
+                <span className="menu-text">Customers</span>
+                <i className="menu-arrow" />
+              </NavLink>
+            </li>
+          </>
         ) : (null) }
       </ul>
       {/* end::Menu Nav */ }
