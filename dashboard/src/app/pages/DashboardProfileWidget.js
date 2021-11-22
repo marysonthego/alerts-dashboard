@@ -89,7 +89,7 @@ export function DashboardProfileWidget ({ className }) {
                         '/media/svg/icons/Communication/Flag.svg'
                       ) }></SVG>
                   </span>
-                  Alert Settings
+                  Alert Locations
                 </div>
               </Link>
             </div>

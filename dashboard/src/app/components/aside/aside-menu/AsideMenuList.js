@@ -66,16 +66,26 @@ export function AsideMenuList ({ layoutProps }) {
             <i className="menu-arrow" />
           </NavLink>
         </li>
-        <div className="menu-submenu ">
-          <i className="menu-arrow" />
-        </div>
-        <ul className="menu-subnav">
-          <li className="menu-item  menu-item-parent" aria-haspopup="true">
-            <span className="menu-link">
-              <span className="menu-text">Edit Profile</span>
+
+        {/*begin::1 Level*/ }
+        <li
+          className={ `menu-item menu-item-submenu ${getMenuItemActive("/password",
+            true
+          )}` }
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/password">
+            <span className="svg-icon menu-icon">
+              <SVG src="/media/svg/icons/Code/Commit.svg" />
             </span>
-          </li>
-        </ul>
+            <span className="menu-text">Change Password</span>
+            <i className="menu-arrow" />
+          </NavLink>
+        </li>
+
+
+
         {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive(
@@ -92,60 +102,57 @@ export function AsideMenuList ({ layoutProps }) {
             <span className="menu-text">Alert Locations</span>
             <i className="menu-arrow" />
           </NavLink>
-          <div className="menu-submenu ">
-            <ul className="menu-subnav">
-              <ul className="menu-subnav">
-                <li
-                  className="menu-item  menu-item-parent"
-                  aria-haspopup="true"
-                >
-                  <span className="menu-link">
-                    <span className="menu-text">Alert Locations</span>
-                  </span>
-                </li>
-              </ul>
-
-              {/*begin::1 Level*/ }
-              <li
-                className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }
-                aria-haspopup="true"
-              >
-                <NavLink className="menu-link" to="/friends-list">
-                  <span className="svg-icon menu-icon">
-                    <SVG
-                      src="/media/svg/icons/General/Smile.svg"
-                    />
-                  </span>
-                  <span className="menu-text">Friends</span>
-                </NavLink>
-              </li>
-              {/*end::1 Level*/ }
-
-              {/* Custom */ }
-              {/* begin::section */ }
-              <li className="menu-section ">
-                <h4 className="menu-text">Friends</h4>
-                <i className="menu-icon flaticon-more-v2"></i>
-              </li>
-              {/* end:: section */ }
-
-              {/* Error Pages */ }
-              {/*begin::1 Level*/ }
-              <li
-                className={ `menu-item menu-item-submenu ${getMenuItemActive(
-                  "/error",
-                  true
-                )}` }
-                aria-haspopup="true"
-                data-menu-toggle="hover"
-              >
-              </li>
-            </ul>
-          </div>
+        </li>
+        {/*begin::1 Level*/ }
+        <li
+          className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/friends-list">
+            <span className="svg-icon menu-icon">
+              <SVG
+                src="/media/svg/icons/General/Smile.svg"
+              />
+            </span>
+            <span className="menu-text">Friends</span>
+          </NavLink>
         </li>
         {/*end::1 Level*/ }
+        {/*begin::1 Level*/ }
+        <li
+          className={ `menu-item menu-item-submenu ${getMenuItemActive("/logout",
+            true
+          )}` }
+          aria-haspopup="true"
+          data-menu-toggle="hover"
+        >
+          <NavLink className="menu-link menu-toggle" to="/logout">
+            <span className="svg-icon menu-icon">
+              <SVG src="/media/svg/icons/Navigation/Sign-out.svg" />
+            </span>
+            <span className="menu-text">Logout</span>
+            <i className="menu-arrow" />
+          </NavLink>
+        </li>
+        {/*begin::1 Level*/ }
+        { user.usertype === 'admin' ? (
+          <li
+            className={ `menu-item menu-item-submenu ${getMenuItemActive("/list-customers",
+              true
+            )}` }
+            aria-haspopup="true"
+            data-menu-toggle="hover"
+          >
+            <NavLink className="menu-link menu-toggle" to="/list-customers">
+              <span className="svg-icon menu-icon">
+                <SVG src="/media/a4g/Clipboard.svg" />
+              </span>
+              <span className="menu-text">Logout</span>
+              <i className="menu-arrow" />
+            </NavLink>
+          </li>
+        ) : (null) }
       </ul>
-
       {/* end::Menu Nav */ }
     </>
   );
