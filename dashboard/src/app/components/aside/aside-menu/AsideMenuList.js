@@ -4,15 +4,11 @@ import React from "react";
 //import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
-//import { checkIsActive } from "app/helpers/RouterHelpers";
 
 export function AsideMenuList ({ layoutProps }) {
   //const location = useLocation();
+
   const getMenuItemActive = (url, hasSubmenu = false) => {
-    //return checkIsActive(location, url)
-    //? ` ${!hasSubmenu &&
-    //  "menu-item-active"} menu-item-open menu-item-not-hightlighted`
-    //: "";
     return `menu-item-open menu-item-not-hightlighted`;
   };
 
@@ -27,7 +23,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Design/Layers.svg" />
+              <SVG src="/media/svg/icons/Devices/Display1.svg" />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -41,22 +37,19 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link" to="/locations-list">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Home/Library.svg" />
+              <SVG src="/media/a4g/marker1.svg" />
             </span>
-            <span className="menu-text">Alerts Settings</span>
+            <span className="menu-text">Alert Locations</span>
           </NavLink>
         </li>
         {/*end::1 Level*/ }
 
-        {/* Components */ }
         {/* begin::section */ }
         <li className="menu-section ">
           <h4 className="menu-text">Profile</h4>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
         {/* end:: section */ }
-
-        {/* Material-UI */ }
         {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive("/user-profile",
@@ -67,7 +60,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/user-profile">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Design/Cap-2.svg" />
+              <SVG src="/media/svg/icons/Code/Commit.svg" />
             </span>
             <span className="menu-text">Edit Profile</span>
             <i className="menu-arrow" />
@@ -82,9 +75,7 @@ export function AsideMenuList ({ layoutProps }) {
               <span className="menu-text">Edit Profile</span>
             </span>
           </li>
-
         </ul>
-
         {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive(
@@ -96,9 +87,9 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/locations-list">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Shopping/Box2.svg" />
+              <SVG src="/media/a4g/marker1.svg" />
             </span>
-            <span className="menu-text">Alert Settings</span>
+            <span className="menu-text">Alert Locations</span>
             <i className="menu-arrow" />
           </NavLink>
           <div className="menu-submenu ">
@@ -109,23 +100,23 @@ export function AsideMenuList ({ layoutProps }) {
                   aria-haspopup="true"
                 >
                   <span className="menu-link">
-                    <span className="menu-text">Alert Settings</span>
+                    <span className="menu-text">Alert Locations</span>
                   </span>
                 </li>
               </ul>
 
               {/*begin::1 Level*/ }
               <li
-                className={ `menu-item ${getMenuItemActive("/user-profile", false)}` }
+                className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }
                 aria-haspopup="true"
               >
-                <NavLink className="menu-link" to="/user-profile">
+                <NavLink className="menu-link" to="/friends-list">
                   <span className="svg-icon menu-icon">
                     <SVG
-                      src="/media/svg/icons/Communication/Add-user.svg"
+                      src="/media/svg/icons/General/Smile.svg"
                     />
                   </span>
-                  <span className="menu-text">User Profile</span>
+                  <span className="menu-text">Friends</span>
                 </NavLink>
               </li>
               {/*end::1 Level*/ }
