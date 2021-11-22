@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/role-supports-aria-props */
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-//import { useLocation } from "react-router";
+import { useSelector } from 'react-redux';
+import { selectCurrentUser } from 'app/redux/userSlice';
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 
 export function AsideMenuList ({ layoutProps }) {
-  //const location = useLocation();
+  const user = useSelector(selectCurrentUser);
 
   const getMenuItemActive = (url, hasSubmenu = false) => {
     return `menu-item-open menu-item-not-hightlighted`;
