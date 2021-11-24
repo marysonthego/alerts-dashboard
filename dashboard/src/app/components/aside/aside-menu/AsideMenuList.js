@@ -36,14 +36,14 @@ export function AsideMenuList ({ layoutProps }) {
 
         {/*begin::1 Level*/ }
         <li
-          className={ `menu-item ${getMenuItemActive("/locations-list", false)}` }
+          className={ `menu-item ${getMenuItemActive("/latest-alerts", false)}` }
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/locations-list">
+          <NavLink className="menu-link" to="/latest-alerts">
             <span className="svg-icon menu-icon">
               <SVG src="/media/a4g/marker1.svg" />
             </span>
-            <span className="menu-text">Alert Locations</span>
+            <span className="menu-text">Latest Alerts</span>
           </NavLink>
         </li>
         {/*end::1 Level*/ }
