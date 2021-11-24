@@ -5,7 +5,6 @@ import { selectUserCustid } from 'app/redux/userSlice';
 import { useSnackbar } from 'notistack';
 import { 
   useGetFriendsByCustidQuery,
-  useUpdateFriendMutation,
   useDeleteFriendMutation, 
   apiSlice,
 } from 'app/redux/apiSlice';
@@ -331,7 +330,7 @@ function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: '100%' }}>
+    <Box className={classes.container}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>
@@ -420,7 +419,6 @@ function EnhancedTable(props) {
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Condensed Display"
         />
-    
     </Box>
   );
 };

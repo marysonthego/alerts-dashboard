@@ -205,9 +205,7 @@ export const AddFriendForm = () => {
   }; // handleValidation
 
   return (
-<Box sx={{ width: '100%' }}>
-
-    <div >
+    <div className={classes.container}>
       <div className={ classes.row }>
         <TextField
           className={ classes.textfield }
@@ -290,6 +288,5 @@ export const AddFriendForm = () => {
       </div>
       <hr className={ classes.hr } />
     </div>
-    </Box>
   );
 };
