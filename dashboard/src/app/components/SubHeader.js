@@ -2,8 +2,9 @@
 import React, {useMemo, useLayoutEffect, useEffect} from "react";
 import objectPath from "object-path";
 import {useLocation} from "react-router-dom";
-import {QuickActions} from "app/components/QuickActions";
-import {BreadCrumbs} from "app/components/BreadCrumbs";
+//import {QuickActions} from "app/components/QuickActions";
+//import {BreadCrumbs} from "app/components/BreadCrumbs";
+import { Button } from '@material-ui/core';
 import {getBreadcrumbsAndTitle, useSubheader} from "app/components/layout/MetronicSubheader";
 import {useHtmlClassService} from "app/components/layout/MetronicLayout"
 
@@ -64,12 +65,11 @@ export function SubHeader() {
 
           {/* Toolbar */}
           <div className="d-flex align-items-center">
-            <a href="" className="btn btn-light btn-sm font-weight-bold" id="kt_dashboard_daterangepicker"
+            <Button className="btn btn-light btn-sm font-weight-bold" id="kt_dashboard_daterangepicker"
                data-toggle="tooltip" title="Select dashboard daterange" data-placement="left">
               <span className="text-muted font-weight-bold mr-2" id="kt_dashboard_daterangepicker_title">Today</span>
               <span className="text-primary font-weight-bold" id="kt_dashboard_daterangepicker_date">{new Date().toDateString()}</span>
-            </a>
-            <QuickActions/>
+            </Button>
           </div>
         </div>
     
