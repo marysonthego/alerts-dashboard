@@ -2,9 +2,9 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useSelector } from 'react-redux';
-import { useLocation } from "react-router";
+//import { useLocation } from "react-router";
 import { selectCurrentUser } from 'app/redux/userSlice';
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { checkIsActive } from "app/helpers/RouterHelpers";
 import SVG from "react-inlinesvg";
 
