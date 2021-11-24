@@ -3,7 +3,6 @@ import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { useHistory } from "react-router-dom";
-//import { useStickyState } from 'app/components/AuthInit';
 import { initUser } from 'app/helpers/Initializers';
 import { toAbsoluteUrl } from 'app/helpers/AssetHelpers';
 export function QuickUser() {

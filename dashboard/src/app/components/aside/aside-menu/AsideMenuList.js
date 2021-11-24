@@ -2,16 +2,19 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useSelector } from 'react-redux';
+import { useLocation } from "react-router";
 import { selectCurrentUser } from 'app/redux/userSlice';
 import { NavLink } from "react-router-dom";
+import { checkIsActive } from "app/helpers/RouterHelpers";
 import SVG from "react-inlinesvg";
 
 export function AsideMenuList ({ layoutProps }) {
   const user = useSelector(selectCurrentUser);
-
+  const location = useLocation();
   const getMenuItemActive = (url, hasSubmenu = false) => {
-    return `menu-item-open menu-item-not-hightlighted`;
-  };
+        return checkIsActive(location, url) ? "menu-item-active" : "";
+    //return `menu-item-open menu-item-not-hightlighted`;
+    };
 
   return (
     <>

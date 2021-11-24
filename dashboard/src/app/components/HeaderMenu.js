@@ -1,16 +1,14 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-//import { useLocation } from "react-router";
+import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
-import SVG from "react-inlinesvg";
-import { toAbsoluteUrl} from "app/helpers/AssetHelpers";
-//import { checkIsActive } from "app/helpers/RouterHelpers";
+import { checkIsActive } from "app/helpers/RouterHelpers";
 
 export function HeaderMenu({ layoutProps }) {
-    //const location = useLocation();
+    const location = useLocation();
     const getMenuItemActive = (url) => {
-      //  return checkIsActive(location, url) ? "menu-item-active" : "";
-      return "menu-item-active";
+        return checkIsActive(location, url) ? "menu-item-active" : "";
+      //return "menu-item-active";
     }
 
     return <div
@@ -44,19 +42,13 @@ export function HeaderMenu({ layoutProps }) {
 
             {/*begin::1 Level*/}
             <li
-                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/locations-list')}`}
                 data-menu-toggle={layoutProps.menuDesktopToggle}
                 aria-haspopup="true"
-            >
+                className={`menu-item menu-item-submenu menu-item-rel ${getMenuItemActive('/locations-list')}`}>
                 <NavLink className="menu-link menu-toggle" to="/locations-list">
                     <span className="menu-text">Alert Locations</span>
                     <i className="menu-arrow"></i>
                 </NavLink>
-                <div
-                    className="menu-submenu menu-submenu-fixed menu-submenu-left"
-                    style={{ width: "1000px" }}
-                >
-                </div>
             </li>
 
             {/*begin::1 Level*/}

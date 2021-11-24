@@ -7,6 +7,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { useSnackbar } from 'notistack';
+import Snackbar from 'app/helpers/Snackbar';
 import { CellNumberFormat } from 'app/helpers/Formatters';
 import SVG from 'react-inlinesvg';
 import { toAbsoluteUrl } from 'app/helpers/AssetHelpers';
@@ -165,6 +166,13 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
   };
 
   const SaveChanges = () => {
+    if(newUser.email === '' || newUser.cell === '' || newUser.firstname === '' || newUser.lastname === '') {
+      let snackType='missingRequiredField'
+      enqueueSnackbar(null, {
+        persist: false,
+        content: key => <Snackbar id={ key } message={ snackType } />
+      });
+    }
     updateCustomer(newUser).unwrap()
       .then((payload) => {
         //console.log(`updateCustomer fulfilled payload: `, payload)
@@ -176,8 +184,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         dispatch(updateErrorState({ cell: 'Duplicate cell' }));
         dispatch(updateErrorState({ email: 'Duplicate email' }));
 
-        enqueueSnackbar(`email-cell combination is in use`, {
-          variant: 'error',
+        let snackType='signUpError'
+        enqueueSnackbar(null, {
+          persist: false,
+          content: key => <Snackbar id={ key } message={ snackType } />
         });
       });
   }
