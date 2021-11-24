@@ -11,6 +11,7 @@ export function Header() {
 
   const layoutProps = useMemo(() => {
     return {
+      headerLogo: uiService.getStickyLogo(),
       headerClasses: uiService.getClasses("header", true),
       headerAttributes: uiService.getAttributes("header"),
       headerContainerClasses: uiService.getClasses("header_container", true),
