@@ -34,17 +34,7 @@ export function HeaderMenuWrapper() {
     return <>
         {/*begin::Header Menu Wrapper*/}
         <div className="header-menu-wrapper header-menu-wrapper-left" id="kt_header_menu_wrapper">
-            {layoutProps.disabledAsideSelfDisplay && (
-                <>
-                    {/*begin::Header Logo*/}
-                    <div className="header-logo">
-                        <Link to="/">
-                            <img alt="logo" src={getHeaderLogo()}/>
-                        </Link>
-                    </div>
-                    {/*end::Header Logo*/}
-                </>
-            )}
+  
             {/*begin::Header Menu*/}
             <HeaderMenu layoutProps={layoutProps} />
             {/*end::Header Menu*/}
