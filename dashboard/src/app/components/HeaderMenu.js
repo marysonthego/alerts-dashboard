@@ -91,10 +91,7 @@ export function HeaderMenu({ layoutProps }) {
 
         { user.usertype === 'admin' ? (
           <>
-            <li className="menu-section ">
-              <h4 className="menu-text">Admin</h4>
-              <i className="menu-icon flaticon-more-v2"></i>
-            </li>
+            
             <li
               className={ `menu-item menu-item-submenu ${getMenuItemActive("/list-customers",
                 true
