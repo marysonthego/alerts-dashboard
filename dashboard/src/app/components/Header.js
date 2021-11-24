@@ -28,9 +28,7 @@ export function Header() {
         id="kt_header"
         {...layoutProps.headerAttributes}
       >
-        <Link to="/">
-            <img alt="logo" src={layoutProps.headerLogo}/>
-          </Link>
+      
         <div className={` ${layoutProps.headerContainerClasses} d-flex align-items-stretch justify-content-between`}>
           <AnimateLoading />
           {layoutProps.menuHeaderDisplay && <HeaderMenuWrapper />}
