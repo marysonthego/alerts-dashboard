@@ -23,9 +23,7 @@ export function HeaderMobile() {
             id="kt_header_mobile"
             className={`header-mobile align-items-center ${layoutProps.headerMobileCssClasses}`}
             {...layoutProps.headerMobileAttributes}>
-          <Link to="/">
-            <img alt="logo" src={layoutProps.headerLogo}/>
-          </Link>
+          
           
           {layoutProps.headerMenuSelfDisplay && (
               <>
