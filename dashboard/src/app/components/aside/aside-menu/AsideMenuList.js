@@ -2,7 +2,6 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useSelector } from 'react-redux';
-//import { useLocation } from "react-router";
 import { selectCurrentUser } from 'app/redux/userSlice';
 import { NavLink, useLocation } from "react-router-dom";
 import { checkIsActive } from "app/helpers/RouterHelpers";
@@ -13,14 +12,11 @@ export function AsideMenuList ({ layoutProps }) {
   const location = useLocation();
   const getMenuItemActive = (url, hasSubmenu = false) => {
         return checkIsActive(location, url) ? "menu-item-active" : "";
-    //return `menu-item-open menu-item-not-hightlighted`;
     };
 
   return (
     <>
-      {/* begin::Menu Nav */ }
       <ul className={ `menu-nav ${layoutProps.ulClasses}` }>
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item ${getMenuItemActive("/dashboard", false)}` }
           aria-haspopup="true"
@@ -32,9 +28,6 @@ export function AsideMenuList ({ layoutProps }) {
             <span className="menu-text">Dashboard</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
-
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item ${getMenuItemActive("/latest-alerts", false)}` }
           aria-haspopup="true"
@@ -46,15 +39,10 @@ export function AsideMenuList ({ layoutProps }) {
             <span className="menu-text">Latest Alerts</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
-
-        {/* begin::section */ }
         <li className="menu-section ">
           <h4 className="menu-text">Profile</h4>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
-        {/* end:: section */ }
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive("/user-profile",
             true
@@ -70,8 +58,6 @@ export function AsideMenuList ({ layoutProps }) {
             <i className="menu-arrow" />
           </NavLink>
         </li>
-
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive("/password",
             true
@@ -87,10 +73,6 @@ export function AsideMenuList ({ layoutProps }) {
             <i className="menu-arrow" />
           </NavLink>
         </li>
-
-
-
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive(
             "/locations-list",
@@ -107,7 +89,6 @@ export function AsideMenuList ({ layoutProps }) {
             <i className="menu-arrow" />
           </NavLink>
         </li>
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }
           aria-haspopup="true"
@@ -121,8 +102,6 @@ export function AsideMenuList ({ layoutProps }) {
             <span className="menu-text">Friends</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
-        {/*begin::1 Level*/ }
         <li
           className={ `menu-item menu-item-submenu ${getMenuItemActive("/logout",
             true
@@ -138,7 +117,6 @@ export function AsideMenuList ({ layoutProps }) {
             <i className="menu-arrow" />
           </NavLink>
         </li>
-        {/*begin::1 Level*/ }
         { user.usertype === 'admin' ? (
           <>
             <li className="menu-section ">
@@ -163,7 +141,6 @@ export function AsideMenuList ({ layoutProps }) {
           </>
         ) : (null) }
       </ul>
-      {/* end::Menu Nav */ }
     </>
   );
 }

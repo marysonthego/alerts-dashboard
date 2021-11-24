@@ -1,6 +1,5 @@
 /* eslint-disable no-script-url,jsx-a11y/anchor-is-valid */
 import React from "react";
-//import { useLocation } from "react-router";
 import { NavLink, useLocation } from "react-router-dom";
 import { checkIsActive } from "app/helpers/RouterHelpers";
 import { useSelector } from 'react-redux';
@@ -12,22 +11,16 @@ export function HeaderMenu({ layoutProps }) {
     const user = useSelector(selectCurrentUser);
     const getMenuItemActive = (url) => {
         return checkIsActive(location, url) ? "menu-item-active" : "";
-      //return "menu-item-active";
     }
 
     return <div
         id="kt_header_menu"
         className={`header-menu header-menu-mobile ${layoutProps.ktMenuClasses}`}
-        {...layoutProps.headerMenuAttributes}
-    >
-      <>
-      {/* begin::Menu Nav */ }
+        {...layoutProps.headerMenuAttributes}>
+
       <ul className={ `menu-nav ${layoutProps.ulClasses}` }>
-        {/*begin::1 Level*/ }
         <li
-          className={ `menu-item ${getMenuItemActive("/dashboard", false)}` }
-          aria-haspopup="true"
-        >
+          className={ `menu-item menu-item-rel ${getMenuItemActive("/dashboard")}` }>
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
               <SVG src="/media/svg/icons/Devices/Display1.svg" />
@@ -35,13 +28,9 @@ export function HeaderMenu({ layoutProps }) {
             <span className="menu-text">Dashboard</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
 
-        {/*begin::1 Level*/ }
         <li
-          className={ `menu-item ${getMenuItemActive("/latest-alerts", false)}` }
-          aria-haspopup="true"
-        >
+          className={ `menu-item ${getMenuItemActive("/latest-alerts", false)}` }>
           <NavLink className="menu-link" to="/latest-alerts">
             <span className="svg-icon menu-icon">
               <SVG src="/media/a4g/marker1.svg" />
@@ -49,99 +38,57 @@ export function HeaderMenu({ layoutProps }) {
             <span className="menu-text">Latest Alerts</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
 
-        {/* begin::section */ }
-        <li className="menu-section ">
-          <h4 className="menu-text">Profile</h4>
-          <i className="menu-icon flaticon-more-v2"></i>
-        </li>
-        {/* end:: section */ }
-        {/*begin::1 Level*/ }
         <li
-          className={ `menu-item menu-item-submenu ${getMenuItemActive("/user-profile",
-            true
-          )}` }
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/user-profile">
+          className={ `menu-item ${getMenuItemActive("/user-profile", true)}` }>
+          <NavLink className="menu-link" to="/user-profile">
             <span className="svg-icon menu-icon">
               <SVG src="/media/svg/icons/Code/Commit.svg" />
             </span>
             <span className="menu-text">Edit Profile</span>
-            <i className="menu-arrow" />
           </NavLink>
         </li>
 
-        {/*begin::1 Level*/ }
         <li
-          className={ `menu-item menu-item-submenu ${getMenuItemActive("/password",
-            true
-          )}` }
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/password">
+          className={ `menu-item ${getMenuItemActive("/password", true)}` }>
+          <NavLink className="menu-link" to="/password">
             <span className="svg-icon menu-icon">
               <SVG src="/media/svg/icons/Code/Commit.svg" />
             </span>
             <span className="menu-text">Change Password</span>
-            <i className="menu-arrow" />
           </NavLink>
         </li>
 
-
-
-        {/*begin::1 Level*/ }
         <li
-          className={ `menu-item menu-item-submenu ${getMenuItemActive(
-            "/locations-list",
-            true
-          )}` }
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/locations-list">
+          className={ `menu-item ${getMenuItemActive("/locations-list", true)}` }>
+          <NavLink className="menu-link" to="/locations-list">
             <span className="svg-icon menu-icon">
               <SVG src="/media/a4g/marker1.svg" />
             </span>
             <span className="menu-text">Alert Locations</span>
-            <i className="menu-arrow" />
           </NavLink>
         </li>
-        {/*begin::1 Level*/ }
+
         <li
-          className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }
-          aria-haspopup="true"
-        >
+          className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }>
           <NavLink className="menu-link" to="/friends-list">
             <span className="svg-icon menu-icon">
-              <SVG
-                src="/media/svg/icons/General/Smile.svg"
-              />
+              <SVG src="/media/svg/icons/General/Smile.svg"/>
             </span>
             <span className="menu-text">Friends</span>
           </NavLink>
         </li>
-        {/*end::1 Level*/ }
-        {/*begin::1 Level*/ }
+
         <li
-          className={ `menu-item menu-item-submenu ${getMenuItemActive("/logout",
-            true
-          )}` }
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/logout">
+          className={ `menu-item ${getMenuItemActive("/logout", true)}` }>
+          <NavLink className="menu-link" to="/logout">
             <span className="svg-icon menu-icon">
               <SVG src="/media/svg/icons/Navigation/Sign-out.svg" />
             </span>
             <span className="menu-text">Logout</span>
-            <i className="menu-arrow" />
           </NavLink>
         </li>
-        {/*begin::1 Level*/ }
+
         { user.usertype === 'admin' ? (
           <>
             <li className="menu-section ">
@@ -151,22 +98,16 @@ export function HeaderMenu({ layoutProps }) {
             <li
               className={ `menu-item menu-item-submenu ${getMenuItemActive("/list-customers",
                 true
-              )}` }
-              aria-haspopup="true"
-              data-menu-toggle="hover"
-            >
-              <NavLink className="menu-link menu-toggle" to="/list-customers">
+              )}` }>
+              <NavLink className="menu-link" to="/list-customers">
                 <span className="svg-icon menu-icon">
                   <SVG src="/media/a4g/Clipboard.svg" />
                 </span>
                 <span className="menu-text">Customers</span>
-                <i className="menu-arrow" />
               </NavLink>
             </li>
           </>
         ) : (null) }
       </ul>
-      {/* end::Menu Nav */ }
-    </>
     </div>;
 }
