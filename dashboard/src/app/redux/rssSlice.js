@@ -1,17 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { 
-   rss: [],
+   rssState: [],
  };
 
 export const rssSlice = createSlice({
-  name: 'rss',
+  name: 'rssState',
   initialState,
   reducers: {
   
     updateRssState: (state, action) => {
       const {rssName, rssUrl, item} = action.payload;
-      const existingRss = state.rss;
+      const existingRss = state.rssState;
       if (existingRss) {
         if(rssName) existingRss.rssName = rssName;
         if(rssUrl) existingRss.rssUrl = rssUrl;
@@ -29,4 +29,4 @@ export const { updateRssState, resetRssState } = rssSlice.actions;
 
 export default rssSlice.reducer;
 
-export const selectRss = state => state.rss.rss;
+export const selectRss = state => state.rssState;
