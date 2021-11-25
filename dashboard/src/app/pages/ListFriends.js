@@ -61,7 +61,6 @@ const useStyles = makeStyles({
 
 export const ListFriends = () => {
   let custid = useSelector(selectUserCustid);
-
   const dispatch = useDispatch();
   //read Friends from db
     //console.log(`FetchData start`);
@@ -231,6 +230,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTable(props) {
   const { rows, custid } = props;
+  const classes = useStyles();
   let length = rows.length;
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
