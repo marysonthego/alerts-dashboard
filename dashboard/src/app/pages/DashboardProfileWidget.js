@@ -112,7 +112,7 @@ export function DashboardProfileWidget ({ className }) {
           
           {user.usertype === 'admin' ? (
           <div className="row mt-5">
-            <div className="col bg-warning px-6 py-8 rounded-xl mb-7">
+            <div className="col bg-default px-6 py-8 rounded-xl mb-7">
               <Link
                 to="/list-customers"
                 className="text-primary font-weight-bold font-size-h6 mt-2">
@@ -124,6 +124,21 @@ export function DashboardProfileWidget ({ className }) {
                       ) }></SVG>
                   </span>
                   Customer List
+                </div>
+              </Link>
+            </div>
+            <div className="col bg-default px-6 py-8 rounded-xl mb-7">
+              <Link
+                to="/rss-page"
+                className="text-primary font-weight-bold font-size-h6 mt-2">
+                <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
+                  <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
+                    <SVG
+                      src={ (
+                        '/media/a4g/Clipboard.svg'
+                      ) }></SVG>
+                  </span>
+                  Set RSS
                 </div>
               </Link>
             </div>

@@ -158,7 +158,6 @@ export const LocationsStep = ({
           </Card>
         )) }
       </Box>
-
       <LocationsHeader />
       <AddLocationForm />
       <ListLocations />

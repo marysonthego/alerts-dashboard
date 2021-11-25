@@ -11,6 +11,7 @@ import { UserProfilePage } from 'app/pages/UserProfilePage';
 import { LocationsStep } from 'app/pages/LocationsStep';
 import { FriendsStep } from 'app/pages/FriendsStep';
 import { ListCustomers } from 'app/pages/ListCustomers';
+import { RssPage } from 'app/pages/RssPage';
 import { selectCurrentUser } from 'app/redux/userSlice';
 
 export default function BasePage (props) {
@@ -29,7 +30,10 @@ export default function BasePage (props) {
           <ContentRoute exact path="/friends-list" component={FriendsStep}/>
           <ContentRoute exact path="/list-customers" component={ListCustomers}/>
           {currentUser.usertype === 'admin' ? (
+            <>
             <ContentRoute exact path="/list-customers" component={ListCustomers}/>
+            <ContentRoute exact path="/rss-page" component={RssPage}/>
+            </>
           ) : (<Redirect to="/dashboard"/>)}
           <Redirect from="/" to="/dashboard" />
         </Switch>
