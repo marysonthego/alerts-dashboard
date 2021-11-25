@@ -26,9 +26,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const RssPage = () => {
-  const rssState = useSelector(selectRss);
+  const rssfeed = useSelector(selectRss);
   const dispatch = useDispatch();
-  const [newRss, setNewRss] = useState(rssState);
+  const [newRss, setNewRss] = useState(rssfeed);
   const [items, setItems] = useState([]);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
