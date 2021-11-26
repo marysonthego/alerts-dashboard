@@ -41,13 +41,14 @@ export const RssPage = () => {
       rssid: 0,
       link: "",
       title: "",
-      author: ""
+      description: ""
     }
   ]);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
 
   const handleOnChange = e => {
+    e.preventDefault();
     let field = e.target.name;
     let value = e.target.value;
     setNewRss({
@@ -72,7 +73,7 @@ export const RssPage = () => {
     const feedItems = [...items].map((el) => ({
       link: el.querySelector("link").innerHTML,
       title: el.querySelector("title").innerHTML,
-      author: el.querySelector("author").innerHTML
+      description: el.querySelector("description").innerHTML
     }));
     setNewItems(feedItems);
     console.log(`feedItems: `, feedItems);
@@ -81,7 +82,7 @@ export const RssPage = () => {
     return (
       <div>
         <h1>{item.title}</h1>
-        <p>{item.author}</p>
+        <p>{item.description}</p>
         <a href={item.link}>{item.link}</a>
       </div>
     );
@@ -100,6 +101,7 @@ export const RssPage = () => {
               className={ `font-weight-bold font-size-lg  rounded text-dark px-2 py-1 ${classes.input}` }
               type="text"
               name="rssName"
+              focus
               required
               value={ newRss.rssName || '' }
               onChange={handleOnChange}

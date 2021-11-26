@@ -6,7 +6,7 @@ const initialState = {
     rssid: 0,
     link: "", 
     title: "",
-    author: "",
+    description: "",
    }],
  };
 
@@ -19,14 +19,14 @@ export const rssitemsSlice = createSlice({
       reducer (state, action) {
       state.rssitems.push(action.payload);
       },
-      prepare(rssid, link, title, author) {
+      prepare(rssid, link, title, description) {
         return {
           payload: {
             id: nanoid(),
             rssid,
             link,
             title,
-            author
+            description
           }
         }
       }
@@ -34,12 +34,12 @@ export const rssitemsSlice = createSlice({
   
     updateRssfeed: (state, action) => {
       if (state.rssitems) {
-        const {id, rssid, link, title, author} = action.payload;
+        const {id, rssid, link, title, description} = action.payload;
         const existingRssitem = state.rssitems.find(rssitem => rssitem.id === id);
         if (existingRssitem) {
           if(link) existingRssitem.link = link;
           if(title) existingRssitem.title = title;
-          if(author) existingRssitem.author = author;
+          if(description) existingRssitem.description = description;
         }
       }
     },
