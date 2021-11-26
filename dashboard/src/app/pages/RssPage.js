@@ -62,15 +62,20 @@ export const RssPage = () => {
       return;
     }
     const res = await fetch(`https://api.allorigins.win/get?url=${newRss.rssUrl}`);
+    console.log(`res: `, res);
     const { contents } = await res.json();
+    console.log(`contents: `, contents);
     const feed = new window.DOMParser().parseFromString(contents, "text/xml");
+    console.log(`feed: `, feed);
     const items = feed.querySelectorAll("item");
+    console.log(`items: `, items);
     const feedItems = [...items].map((el) => ({
       link: el.querySelector("link").innerHTML,
       title: el.querySelector("title").innerHTML,
       author: el.querySelector("author").innerHTML
     }));
     setNewItems(feedItems);
+    console.log(`feedItems: `, feedItems);
   
   {feedItems.map((item) => {
     return (

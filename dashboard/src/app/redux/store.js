@@ -6,7 +6,7 @@ import friendsReducer from 'app/redux/friendsSlice';
 import errorsReducer from 'app/redux/errorsSlice';
 import stepperReducer from 'app/redux/stepperSlice';
 import rssfeedsReducer from 'app/redux/rssSlice';
-import rssitemsReducer from 'app/redux/rssitemsSlice';
+import rssitemsReducer from 'app/redux/rssItemsSlice';
 import { apiSlice } from 'app/redux/apiSlice';
 
 export default configureStore({
