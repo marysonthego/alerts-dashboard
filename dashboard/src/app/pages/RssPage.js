@@ -80,13 +80,13 @@ export const RssPage = () => {
     console.log(`feedItems: `, feedItems);
     return (
       <>
-        { feedItems.map((item) => {
+        { feedItems.map((item) => (
           <div>
             <h1>{ item.title }Title</h1>
             <p>{ item.description }description</p>
             <a href={ item.link }>{ item.link }link</a>
           </div>
-        }) }
+        )) }
       </>
     );
   }

@@ -9,7 +9,7 @@ import {Aside} from "app/components/aside/Aside";
 import {Footer} from "app/components/Footer";
 import {LayoutInit} from "app/components/layout/LayoutInit";
 import {SubHeader} from "app/components/SubHeader";
-import {QuickPanel} from "app/components/QuickPanel";
+//import {QuickPanel} from "app/components/QuickPanel";
 import {QuickUser} from "app/components/QuickUser";
 import {ScrollTop} from "app/components/ScrollTop";
 
@@ -71,7 +71,7 @@ export function Layout({ children }) {
                 {/*end::Page*/}
             </div>
             <QuickUser/>
-            <QuickPanel/>
+          
             <ScrollTop/>
            
             {/*end::Main*/}
