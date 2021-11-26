@@ -57,9 +57,10 @@ export const RssPage = () => {
     });
   };
 
-  const getRssfeed = async () => {
+  const GetRssFeed = async () => {
     const urlRegex = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
-    if (!urlRegex.test(newRss.rssUrl)) {
+    if (!urlRegex.test(newRss.rssUrl))
+    {
       return;
     }
     const res = await fetch(`https://api.allorigins.win/get?url=${newRss.rssUrl}`);
@@ -77,20 +78,21 @@ export const RssPage = () => {
     }));
     setNewItems(feedItems);
     console.log(`feedItems: `, feedItems);
-  
-  {feedItems.map((item) => {
     return (
-      <div>
-        <h1>{item.title}</h1>
-        <p>{item.description}</p>
-        <a href={item.link}>{item.link}</a>
-      </div>
+      <>
+        { feedItems.map((item) => {
+          <div>
+            <h1>{ item.title }Title</h1>
+            <p>{ item.description }description</p>
+            <a href={ item.link }>{ item.link }link</a>
+          </div>
+        }) }
+      </>
     );
-  })}
   }
 
   return (
-    <div style={{width: '450px'}} className="d-flex flex-column align-items-center card-body pt-0" >
+    <div style={ { width: '450px' } } className="d-flex flex-column align-items-center card-body pt-0" >
       <div className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
           Rss Name*
@@ -104,7 +106,7 @@ export const RssPage = () => {
               focus
               required
               value={ newRss.rssName || '' }
-              onChange={handleOnChange}
+              onChange={ handleOnChange }
             />
           </span>
         </Form>
@@ -122,18 +124,18 @@ export const RssPage = () => {
               name="rssUrl"
               required
               value={ newRss.rssUrl || '' }
-              onChange={handleOnChange}
+              onChange={ handleOnChange }
             />
           </span>
         </Form>
       </div>
-    <div >
-      <Button
-        className="btn btn-primary font-weight-bolder font-size-sm"
-        onClick={ getRssfeed }>
-        Get Feed
-      </Button>
-    </div>
+      <div >
+        <Button
+          className="btn btn-primary font-weight-bolder font-size-sm"
+          onClick={ GetRssFeed }>
+          Get Feed
+        </Button>
+      </div>
     </div>
   );
 }
