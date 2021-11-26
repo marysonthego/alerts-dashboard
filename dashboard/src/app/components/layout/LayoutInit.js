@@ -29,7 +29,7 @@ export function LayoutInit() {
       // Init Header Menu
       KTLayoutHeaderMenu.init('kt_header_menu', 'kt_header_menu_wrapper');
       // Init Header Topbar For Mobile Mode
-      KTLayoutHeaderTopbar.init('kt_header_mobile_topbar_toggle');
+      //KTLayoutHeaderTopbar.init('kt_header_mobile_topbar_toggle');
       // Init Brand Panel For Logo
       KTLayoutBrand.init('kt_brand');
       // Init Aside
@@ -63,7 +63,7 @@ export function LayoutInit() {
       KTLayoutStretchedCard.init('kt_page_stretched_card');
 
       // Init Quick Offcanvas Panel
-      KTLayoutQuickPanel.init('kt_quick_panel');
+      //KTLayoutQuickPanel.init('kt_quick_panel');
 
       // Init Quick User Panel
       KTLayoutQuickUser.init('kt_quick_user');

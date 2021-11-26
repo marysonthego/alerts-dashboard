@@ -138,6 +138,21 @@ export function AsideMenuList ({ layoutProps }) {
                 <i className="menu-arrow" />
               </NavLink>
             </li>
+            <li
+              className={ `menu-item menu-item-submenu ${getMenuItemActive("/rss-page",
+                true
+              )}` }
+              aria-haspopup="true"
+              data-menu-toggle="hover"
+            >
+              <NavLink className="menu-link menu-toggle" to="/rss-page">
+                <span className="svg-icon menu-icon">
+                  <SVG src="/media/a4g/Clipboard.svg" />
+                </span>
+                <span className="menu-text">RSS</span>
+                <i className="menu-arrow" />
+              </NavLink>
+            </li>
           </>
         ) : (null) }
       </ul>
