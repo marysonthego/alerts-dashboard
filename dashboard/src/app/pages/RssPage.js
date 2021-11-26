@@ -13,9 +13,12 @@ import {
   useSelector
 } from 'react-redux';
 import {
-  updateRssState,
-  resetRssState,
-  selectRss,
+  addRssfeed,
+  updateRssfeed,
+  removeRssfeed,
+  resetRssfeeds,
+  selectRssfeed,
+  selectRssfeeds,
 } from 'app/redux/rssSlice';
 
 const useStyles = makeStyles(theme => ({
@@ -26,24 +29,34 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const RssPage = () => {
-  const rssfeed = useSelector(selectRss);
+  const rssfeeds = useSelector(selectRssfeeds);
   const dispatch = useDispatch();
-  const [newRss, setNewRss] = useState(rssfeed);
-  const [items, setItems] = useState([]);
+  const [newRss, setNewRss] = useState({
+    rssId: "",
+    rssName: "",
+    rssUrl: "",
+  });
+  const [newItems, setNewItems] = useState([
+    {
+      rssid: 0,
+      link: "",
+      title: "",
+      author: ""
+    }
+  ]);
   const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
 
-  const handleOnBlur = e => {
+  const handleOnChange = e => {
     let field = e.target.name;
     let value = e.target.value;
     setNewRss({
       ...newRss,
       [field]: value
     });
-    dispatch(updateRssState(newRss));
   };
 
-  const getRss = async () => {
+  const getRssfeed = async () => {
     const urlRegex = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
     if (!urlRegex.test(newRss.rssUrl)) {
       return;
@@ -57,9 +70,9 @@ export const RssPage = () => {
       title: el.querySelector("title").innerHTML,
       author: el.querySelector("author").innerHTML
     }));
-    setItems(feedItems);
+    setNewItems(feedItems);
   
-  {items.map((item) => {
+  {feedItems.map((item) => {
     return (
       <div>
         <h1>{item.title}</h1>
@@ -84,7 +97,7 @@ export const RssPage = () => {
               name="rssName"
               required
               value={ newRss.rssName || '' }
-              onBlur={ handleOnBlur }
+              onChange={handleOnChange}
             />
           </span>
         </Form>
@@ -102,18 +115,17 @@ export const RssPage = () => {
               name="rssUrl"
               required
               value={ newRss.rssUrl || '' }
-              onBlur={ handleOnBlur }
+              onChange={handleOnChange}
             />
           </span>
         </Form>
       </div>
-    
     <div >
-    <Button
-            className="btn btn-primary font-weight-bolder font-size-sm"
-            onClick={ getRss }>
-            Get Feed
-          </Button>
+      <Button
+        className="btn btn-primary font-weight-bolder font-size-sm"
+        onClick={ getRssfeed }>
+        Get Feed
+      </Button>
     </div>
     </div>
   );

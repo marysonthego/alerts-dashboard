@@ -12,8 +12,7 @@ import { UserProfileDropdown } from 'app/pages/UserProfileDropdown';
 export function DashboardProfileWidget ({ className }) {
   const user = useSelector(selectCurrentUser);
   console.log(`user: `, user);
-  if (user.custid === 0)
-  {
+  if (user.custid === 0) {
     return null;
   }
   return (

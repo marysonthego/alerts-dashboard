@@ -5,7 +5,8 @@ import locationsReducer from 'app/redux/locationsSlice';
 import friendsReducer from 'app/redux/friendsSlice';
 import errorsReducer from 'app/redux/errorsSlice';
 import stepperReducer from 'app/redux/stepperSlice';
-import rssReducer from 'app/redux/rssSlice';
+import rssfeedsReducer from 'app/redux/rssSlice';
+import rssitemsReducer from 'app/redux/rssitemsSlice';
 import { apiSlice } from 'app/redux/apiSlice';
 
 export default configureStore({
@@ -16,7 +17,8 @@ export default configureStore({
     errors: errorsReducer,
     stepper: stepperReducer,
     customers: customersReducer,
-    rssfeed: rssReducer,
+    rssfeeds: rssfeedsReducer,
+    rssitems: rssitemsReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
 

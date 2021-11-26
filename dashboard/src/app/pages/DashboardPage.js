@@ -8,7 +8,6 @@ export const DashboardPage = () => {
     <div>
       <Header />
       <DashboardProfileWidget />
-      
     </div>
   );
 };

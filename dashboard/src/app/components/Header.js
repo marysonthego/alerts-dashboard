@@ -1,11 +1,10 @@
-import React, {useMemo} from "react";
+import React, { useMemo } from "react";
 import objectPath from "object-path";
-import {Link} from "react-router-dom";
-import {useHtmlClassService} from "app/components/layout/MetronicLayout";
-import {HeaderMenuWrapper} from "app/components/layout/HeaderMenuWrapper";
+import { useHtmlClassService } from "app/components/layout/MetronicLayout";
+import { HeaderMenuWrapper } from "app/components/layout/HeaderMenuWrapper";
 import AnimateLoading from "app/helpers/AnimateLoading";
 
-export function Header() {
+export function Header () {
   const uiService = useHtmlClassService();
 
   const layoutProps = useMemo(() => {
@@ -22,19 +21,17 @@ export function Header() {
   }, [uiService]);
 
   return (
-    <>
-      <div
-        className={`header ${layoutProps.headerClasses}`}
-        id="kt_header"
-        {...layoutProps.headerAttributes}
-      >
-      
-        <div className={` ${layoutProps.headerContainerClasses} d-flex align-items-stretch justify-content-between`}>
-          <AnimateLoading />
-          {layoutProps.menuHeaderDisplay && <HeaderMenuWrapper />}
-          {!layoutProps.menuHeaderDisplay && <div />}
-        </div>
+    <div
+      className={ `header ${layoutProps.headerClasses}` }
+      id="kt_header"
+      { ...layoutProps.headerAttributes }
+    >
+
+      <div className={ ` ${layoutProps.headerContainerClasses} d-flex align-items-stretch justify-content-between` }>
+        <AnimateLoading />
+        { layoutProps.menuHeaderDisplay && <HeaderMenuWrapper /> }
+        { !layoutProps.menuHeaderDisplay && <div /> }
       </div>
-    </>
+    </div>
   );
 }

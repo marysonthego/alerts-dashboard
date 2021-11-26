@@ -11,7 +11,6 @@ export const locationsSlice = createSlice({
 
     addNewLocation: (state, action) => {
       if (state.locations) {
-        // const { id, custid, cell, city, st, zip, nickname, weatheralert, virusalert, airalert } = action.payload;
         const existingLocation = state.locations.find(location => location.id === action.payload.id);
         if(existingLocation){
           return;

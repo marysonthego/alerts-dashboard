@@ -61,9 +61,6 @@ export function UserProfileDropdown () {
                 <div className="text-dark m-0 flex-grow-1 mr-3 font-size-h5">
                   { user.firstname } {" "} { user.lastname }
                 </div>
-                <span className="label label-light-success label-lg font-weight-bold label-inline">
-                  3 messages
-                </span>
               </div>
               <div className="separator separator-solid"></div>
             </>
