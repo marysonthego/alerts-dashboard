@@ -126,7 +126,7 @@ export function DashboardProfileWidget ({ className }) {
                 </div>
               </Link>
             </div>
-            <div className="col bg-default px-6 py-8 rounded-xl mb-7">
+            {/* <div className="col bg-default px-6 py-8 rounded-xl mb-7">
               <Link
                 to="/rss-page"
                 className="text-primary font-weight-bold font-size-h6 mt-2">
@@ -140,7 +140,7 @@ export function DashboardProfileWidget ({ className }) {
                   Set RSS
                 </div>
               </Link>
-            </div>
+            </div> */}
           </div>
           ) : (null)}
         </div>

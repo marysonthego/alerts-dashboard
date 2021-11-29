@@ -138,7 +138,7 @@ export function AsideMenuList ({ layoutProps }) {
                 <i className="menu-arrow" />
               </NavLink>
             </li>
-            <li
+            {/* <li
               className={ `menu-item menu-item-submenu ${getMenuItemActive("/rss-page",
                 true
               )}` }
@@ -152,7 +152,7 @@ export function AsideMenuList ({ layoutProps }) {
                 <span className="menu-text">RSS</span>
                 <i className="menu-arrow" />
               </NavLink>
-            </li>
+            </li> */}
           </>
         ) : (null) }
       </ul>
