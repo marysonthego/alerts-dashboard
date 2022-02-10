@@ -16,6 +16,7 @@ dashboard/.env
 
 /src/XXX_metronic
 /amplify
+/utils
 
 # testing
 /coverage
