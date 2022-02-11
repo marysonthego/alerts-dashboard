@@ -3,11 +3,14 @@
 .env amazon
 .env.heroku
 .env.save
+.env.dreamhost
 .dotenv
 .dotenv old
 .zip
 dashboard/.env
 # /utils used by heroku
+utils
+
 # dependencies
 /~
 /node_modules

@@ -29,7 +29,7 @@ function App ({ basename }) {
   let location = useLocation();
 
   useEffect(() => {
-    //console.log(`location.pathname:`,location.pathname);
+    console.log(`location.pathname:`,location.pathname);
   }, [location]);
 
   return (

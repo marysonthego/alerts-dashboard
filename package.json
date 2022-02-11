@@ -1,16 +1,33 @@
 {
-  "name": "alerts-dashboard",
-  "version": "1.0.0",
-  "description": "Alerts for Good Server",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js",
-    "trace": "node --trace-warnings server.js",
-    "dev": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "dash.marysonthego.tech",
+  "version": "0.1.0",
+  "description": "Alerts Dashboard",
+  "homepage": "https://dash.marysonthego.tech",
+  "author": "Mary Clark <marysonthego@gmail.com> (https://marysonthego.tech)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marysonthego/alerts-dashboard.git"
   },
-  "author": "Mary Clark",
-  "license": "ISC",
+  "scripts": {
+    "startmysql": "nodemon app.mysql",
+    "startpostgres": "node app.postgres",
+    "server": "node app.mysql",
+    "client": "npm start --prefix dashboard",
+    "dev": "concurrently \"npm run startmysql\" \"npm run client\" --kill-others --kill-others-on-fail",
+    "build": "npm run build --prefix dashboard",
+    "public": "serve -s public"
+  },
+  "keywords": [
+    "dashboard",
+    "react",
+    "react js",
+    "react-native",
+    "client",
+    "server"
+  ],
+  "private": true,
+  "license": "MIT",
+  "main": "app.mysql.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
@@ -21,14 +38,14 @@
     "express": "^4.17.1",
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
-    "express-winston": "^4.1.0",
+    "mysql2": "^2.3.3",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pg": "^8.7.1",
-    "winston": "^3.3.3"
+    "pg": "^8.7.1"
   },
   "devDependencies": {
     "@types/pg": "^8.6.1",
+    "concurrently": "^7.0.0",
     "nodemon": "^2.0.7"
   }
 }

@@ -1,8 +1,13 @@
 {
-    "name": "alerts-dashboard",
-    "version": "7.2.6",
-    "private": true,
-    "homepage": ".",
+  "name": "dash.marysonthego.tech",
+  "version": "0.1.0",
+  "description": "Alerts Dashboard",
+  "homepage": "https://dash.marysonthego.tech",
+  "author": "Mary Clark <marysonthego@gmail.com> (https://marysonthego.tech)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/marysonthego/alerts-dashboard.git"
+  },
     "scripts": {
         "start": "react-scripts start -o",
         "build": "react-scripts build",
