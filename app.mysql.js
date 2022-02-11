@@ -3,7 +3,7 @@ require("dotenv").config();
 //const cors = require('cors');
 const express = require("express");
 const server = express();
-const { pool } = require("./dbConfig.mysql");
+const pool = require("./dbConfig.mysql");
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
@@ -234,8 +234,9 @@ router.post("/api/updatecustomer", async function (req, res) {
     {
       //update customer with existing password
       console.error(`\nUpdate with existing password. req.body: `, req.body);
+      console.error(`\nUpdate with existing password. custid: `, custid);
 
-      var sql = `UPDATE customer SET firstname = ${firstname}, lastname = ${lastname}, email = ${email}, cell = ${cell}, addr1 = ${addr1}, addr2 = ${addr2}, city = ${city}, st = ${st}, zip = ${zip}, usertype = ${usertype} WHERE customer.custid = ${custid}`;
+      var sql = `UPDATE customer SET firstname = "${firstname}", lastname = "${lastname}", email = "${email}", cell = "${cell}", addr1 = "${addr1}", addr2 = "${addr2}", city = "${city}", st = "${st}", zip = "${zip}", usertype = "${usertype}" WHERE customer.custid = "${custid}"`;
 
       await pool.execute(
         sql, (err, results) => {
@@ -266,10 +267,10 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
   {
     const response = await pool.execute(
       `SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE customer.custid = ${custid}`, );
-    if (response.length > 0)
+    if (response)
     {
       console.log(`\ngetcustomerbycustid response: `, response);
-      return res.status(200).json(response.rows[0]);
+      return res.status(200).json(response);
     }
   } catch (err)
   {
@@ -281,12 +282,12 @@ router.get("/api/listcustomers", async (req, res) => {
   try {
     var sql = `SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype,  createdate, lastupdate FROM customer`;
     
-      await pool.execute(sql, (error, results) => {
+      await (await pool.execute(sql, (error, results) => {
         if(error) {
           return console.error(error.message);
         }
         return res.status(200).send(results);
-      });
+      }));
   } catch(error) {
     console.log(`error: `, error.message);
     return (error);
@@ -303,7 +304,7 @@ router.delete("/api/deletecustomer/:custid", async function (req, res) {
 
     if (response) {
       console.log(`\n\ndeletecustomer response: `, response);
-      return res.status(200).send(response.rows);
+      return res.status(200).send(response);
     }
   } catch (err) {
     console.log(`\n\ndelete customer err: `, err);
@@ -317,7 +318,7 @@ router.post("/api/addsubscription", async (req, res) => {
   {
     const foundSubscription = await pool.execute(
       `SELECT * from subscriber WHERE subscriber.custid = ${req.body.custid} AND subscriber.zip = ${req.body.zip}`);
-    if (foundSubscription.length > 0)
+    if (foundSubscription)
     {
       return res.status(409).send('error: duplicate subscription found');
     } else
@@ -343,8 +344,8 @@ router.post("/api/addsubscription", async (req, res) => {
             //Insert succeeded
           } else
           {
-            console.error(`\n\naddsubscription INSERT success: `, results.rows);
-            return res.status(200).send(results.rows);
+            console.error(`\n\naddsubscription INSERT success: `, results);
+            return res.status(200).send(results);
           }
         }
     
@@ -372,7 +373,7 @@ router.post("/api/updatesubscription", async (req, res) => {
 
     const foundSubscription = await pool.execute(
       `SELECT * from subscriber WHERE subscriber.custid = ${custid} AND subscriber.id = ${id}`);
-    if (foundSubscription.length > 0)
+    if (foundSubscription)
     {
 
       await pool.execute(`UPDATE subscriber SET cell = ${cell}, zip = ${zip}, nickname = ${nickname}, weatheralert = ${weatheralert}, virusalert = ${virusalert}, airalert = ${airalert} WHERE subscriber.custid = ${custid} AND subscriber.id = ${id}`),
@@ -404,11 +405,11 @@ router.delete("/api/deletesubscription/:id", async function (req, res) {
     const response = await pool.execute(`DELETE FROM subscriber WHERE subscriber.id = ${id}`);
     if (response)
     {
-      console.log(`\n\ndeletesubscription response: `, response.rows);
-      return res.status(200).send(response.rows);
+      console.log(`\n\ndeletesubscription response: `, response);
+      return res.status(200).send(response);
     }
-    //console.log(`\n\ndeletesubscription response: `, response.rows);
-    //return res.status(404).send(response.rows);
+    //console.log(`\n\ndeletesubscription response: `, response);
+    //return res.status(404).send(response);
   } catch (err)
   {
     console.log(`\n\ndelete subscription err: `, err);
@@ -466,10 +467,10 @@ router.post("/api/listsubscriptions", async (req, res) => {
     } = req.body;
 
     const response = await pool.execute(`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ${custid}`);
-    if (response.length > 0) 
+    if (response) 
     {
       console.log(`\n\nresponse: `, response);
-      return res.status(200).json(response.rows);
+      return res.status(200).json(response);
     }
     console.log(`\n\nrowCount = 0 response: `, response);
     return res.status(404).json(`No subscriptions found for custid ${custid}`);
@@ -487,7 +488,7 @@ router.post("/api/addfriend", async (req, res) => {
     const foundFriend = await pool.execute(
       `SELECT * from friends WHERE friends.custid = ${req.body.custid} AND friends.cell = ${req.body.cell}`);
 
-    if (foundFriend.length > 0)
+    if (foundFriend)
     {
       return res.status(418).send('error: friend with duplicate cell found');
     } else
@@ -498,7 +499,7 @@ router.post("/api/addfriend", async (req, res) => {
         zip,
         cell,
       } = req.body;
-      pool.execute(`INSERT INTO friends (custid, firstname, zip, cell) VALUES (${custid}, ${firstname}, ${zip}, ${cell})`),
+      pool.execute(`INSERT INTO friends (custid, zip, cell, firstname) VALUES (${custid}, ${zip}, ${cell}, ${firstname})`),
         (err, results) => {
           //Insert failed
           if (err)
@@ -510,8 +511,8 @@ router.post("/api/addfriend", async (req, res) => {
             //Insert succeeded
           } else
           {
-            console.error(`\n\nFriend INSERT success: `, results.rows);
-            return res.status(200).send(results.rows);
+            console.error(`\n\nFriend INSERT success: `, results);
+            return res.status(200).send(results);
           }
         }
     };
@@ -535,7 +536,7 @@ router.post("/api/updatefriend", async function (req, res) {
 
     const foundFriend = await pool.execute(`SELECT * from friend WHERE friend.custid = ${custid} and friend.id = ${id}`);
 
-    if (foundFriend.length > 0)
+    if (foundFriend)
     {
       await pool.execute(`UPDATE friends SET firstname = ${firstname}, zip = ${zip}, cell = ${cell} WHERE friends.custid = ${custid} AND friends.id = ${id}`),
       
@@ -584,7 +585,7 @@ router.get("/api/getfriendsbycustid/:custid", async (req, res) => {
   try
   {
     const response = await pool.execute(`SELECT friends.id, friends.zip, cell, custid, firstname, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.custid = ${custid}`);
-    if (response.length > 0)
+    if (response)
     {
       console.log(`\n\ngetfriendsbycustid response: `, response);
       return res.status(200).send(response);
@@ -607,12 +608,12 @@ router.post("/api/listfriends", async function (req, res) {
 
   const friendcount = await pool.execute(`SELECT COUNT(*) as num FROM friends WHERE friends.custid = ${custid}`);
   console.log(`friendcount: `, friendcount);
-  if (friendcount.rows[0].num === '0')
+  if (friendcount.num === '0')
   {
     return res.status(204).json('No friends found');
   }
   let list;
-  if (friendcount.rows[0].num > 0)
+  if (friendcount.num > 0)
   {
     list = await pool.execute(`SELECT * from friends WHERE friends.custid = ${custid}`);
     return res.status(200).json({ list });
@@ -628,7 +629,7 @@ router.post("/api/verifyzip", async (req, res) => {
       zip,
     } = req.body;
     const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.zip = ${zip}`);
-    if (foundZip.length > 0)
+    if (foundZip)
     {
       return res.status(200).send(foundZip);
     }
@@ -647,13 +648,13 @@ router.post("/api/findzip", async (req, res) => {
       city,
       st,
     } = req.body;
-    const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.city = ${city} AND zipdata.stateid = ${st} ORDER BY zipdata.pop DESC LIMIT 1`);
-    if (foundZip.length > 0)
+    const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.city = "${city}" AND zipdata.stateid = "${st}" ORDER BY zipdata.pop DESC LIMIT 1`);
+    if (foundZip)
     {
-      console.log(`\nZip found `, foundZip.rows[0].zip, req.body.city, req.body.st);
-      return res.status(200).json(foundZip.rows[0].zip);
+      console.log(`\nZip found `, foundZip.zip, req.body.city, req.body.st);
+      return res.status(200).json(foundZip.zip);
     }
-    return res.status(404).json({ msg: `Zip not found for ${req.body.city}, ${req.body.st}` });
+    return res.status(404).json({ msg: `Zip not found for ${city}, ${st}` });
   } catch (err)
   {
     console.log(`\n\nerr: `, err);
@@ -668,9 +669,9 @@ router.get("/api/getzip", async (req, res) => {
     let city = req.params.city;
     let stateid = req.params.st;
 
-    const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.city = ${city} AND zipdata.stateid = ${stateid} ORDER BY zipdata.pop DESC LIMIT 1`);
-    console.log(`\n\nZip found `, foundZip.rows[0], city, stateid);
-    return res.status(200).json(foundZip.rows[0]);
+    const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.city = "${city}" AND zipdata.stateid = "${stateid}" ORDER BY zipdata.pop DESC LIMIT 1`);
+    console.log(`\n\nZip found `, foundZip, city, stateid);
+    return res.status(200).json(foundZip);
 
   } catch (err)
   {
@@ -685,7 +686,7 @@ router.get("/api/getcityst/:zip", async (req, res) => {
   try
   {
     const response = await pool.execute(`SELECT zipdata.city, zipdata.stateid FROM zipdata WHERE zipdata.zip = ${zip}`);
-    return res.status(200).json(response.rows[0]);
+    return res.status(200).json(response);
   } catch (err)
   {
     return res.status(err.status).json(err.message);
@@ -699,7 +700,7 @@ router.get("/api/checkemail", async (req, res) => {
   try
   {
     const foundEmail = await pool.execute(`SELECT customer.custid, customer.email FROM customer WHERE customer.email = ${email} AND customer.custid != ${custid}`);
-    if (foundEmail.rows.length > 0)
+    if (foundEmail)
     {
       return res.status(418).json(`Duplicate email found. `, foundEmail);
     }
@@ -735,9 +736,9 @@ router.post("/api/checkemail", async (req, res) => {
     } = req.body;
 
     const foundEmail = await pool.execute(`SELECT customer.custid, customer.email FROM customer WHERE customer.email = ${email} AND customer.custid != ${custid}`);
-    if (foundEmail.length > 0)
+    if (foundEmail)
     {
-      return res.status(418).json(`Duplicate email found. `, foundEmail.rows[0]);
+      return res.status(418).json(`Duplicate email found. `, foundEmail);
     }
     return res.status(200).json(`Email ${email} for custid ${custid} not a duplicate `);
   } catch (err)
@@ -756,9 +757,9 @@ router.post("/api/checkcell", async (req, res) => {
     } = req.body;
 
     const foundCell = await pool.execute(`SELECT customer.custid, customer.cell FROM customer WHERE customer.cell = ${cell} AND customer.custid != ${custid}`);
-    if (foundCell.length > 0)
+    if (foundCell)
     {
-      return res.status(418).json(`Duplicate cell found. `, foundCell.rows[0]);
+      return res.status(418).json(`Duplicate cell found. `, foundCell);
     }
     return res.status(200).json(`Cell ${cell} for custid ${custid} not a duplicate `);
   } catch (err)
@@ -776,7 +777,6 @@ function checkAuthenticated (req, res, next) {
   }
   res.status(401).json("not authenticated");
 };
-
 
 server.get('/*', (req, res) => {
   //res.sendFile(path.join(__dirname, 'build', 'index.html'));

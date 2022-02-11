@@ -846,14 +846,14 @@ router.get("/api/getfriendsbycustid/:custid", async (req, res) => {
 
   try
   {
-    const response = await pool.query(`SELECT friends.id, friends.zip, cell, custid, firstname, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.custid = $1`, [custid]);
-    if (response.rowCount > 0)
+    const response = await pool.query(`SELECT friends.id, friends.zip, cell, custid, firstname, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.custid = ${custid}`);
+    if (response)
     {
-      console.log(`\n\ngetfriendsbycustid response: `, response.rows);
-      return res.status(200).send(response.rows);
+      console.log(`\n\ngetfriendsbycustid response: `, response);
+      return res.status(200).send(response);
     }
     console.log(`\n\ngetfriendsbycustid 404 response: `, response);
-    return res.status(404).send(response.rows);
+    return res.status(404).send(response);
     //return res.status(404).send(`friends not found for custid ${custid}`);
   } catch (err)
   {

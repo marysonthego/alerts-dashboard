@@ -155,15 +155,16 @@ export function Login() {
                   &copy; 2021 Alerts for Good
                 </div>
                 <div className="d-flex">
-                  <Link to="https://alertsforgood.org/about" className="ml-10">
-                    About
-                  </Link>
-                  <Link to="https://alertsforgood/volunteer" className="ml-10">
+                
+                  <a href="https://alertsforgood.org/volunteer" rel="noopener noreferrer" className="ml-10">
                     Volunteer
-                  </Link>
-                  <Link to="https://alertsforgood/donate" className="ml-10">
+                  </a>
+                  <a href="https://alertsforgood.org/donate" rel="noopener noreferrer" className="ml-10">
                     Donate
-                  </Link>
+                  </a>
+                  <a href="https://alertsforgood.org/about" rel="noopener noreferrer" className="ml-10">
+                    About
+                  </a>    
                 </div>
               </div>
               {/* end:: Aside footer for desktop */}

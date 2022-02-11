@@ -9,6 +9,15 @@ const mysql = require('mysql2');
 //   database: `${process.env.MYdatabase}`
 // });
 
+// pool.connect (function (error) {
+//   if(error) throw error;
+//   console.log("CONNECTED");
+//   console.log(`pool: `, pool);
+//   console.log(`process.env.MYhost: `, process.env.MYhost);
+//   console.log(`process.env.MYuser: `, process.env.MYuser);
+//   console.log(`process.env.MYdatabase: `, process.env.MYdatabase);
+// });
+
 const pool = mysql.createPool({
   host: `${process.env.MYhost}`,
   user: `${process.env.MYuser}`,
@@ -18,15 +27,6 @@ const pool = mysql.createPool({
   connectionLimit: 5,
   queueLimit: 0
 });
-
-// pool.connect (function (error) {
-//   if(error) throw error;
-//   console.log("CONNECTED");
-//   console.log(`pool: `, pool);
-//   console.log(`process.env.MYhost: `, process.env.MYhost);
-//   console.log(`process.env.MYuser: `, process.env.MYuser);
-//   console.log(`process.env.MYdatabase: `, process.env.MYdatabase);
-// });
 
 pool.getConnection(function(err, connection) {
   if(err) throw err;

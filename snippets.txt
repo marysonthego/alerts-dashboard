@@ -1,0 +1,45 @@
+UPDATE
+{fieldCount: 0, affectedRows: 1, insertId: 0, info: "Rows matched: 1 Changed: 1 Warnings: 0",…}
+affectedRows: 1
+changedRows: 1
+fieldCount: 0
+info: "Rows matched: 1  Changed: 1  Warnings: 0"
+insertId: 0
+serverStatus: 2
+warningStatus: 0
+
+GET
+[{id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…},…]
+0: {id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…}
+1: {id: 100015, zip: "93722", cell: "4695253229", custid: 10000, nickname: "Fresno", weatheralert: 1,…}
+2: {id: 100017, zip: "98115", cell: "4695253229", custid: 10000, nickname: "Seattle", weatheralert: 1,…}
+3: {id: 100022, zip: "90011", cell: "4695253229", custid: 10000, nickname: "Lax", weatheralert: 1,…}
+4: {id: 100023, zip: "98058", cell: "4695253229", custid: 10000, nickname: "Renton", weatheralert: 1,…}
+5: {id: 100035, zip: "97402", cell: "4695253229", custid: 10000, nickname: "Eugene1", weatheralert: 1,…}
+
+{/^https?:\/\//.test(url)
+                  ? <a href="https://alertsforgood.org/about" className="ml-10">
+                    About
+                    </a>
+                  : <Link to={url} />
+                  }
+                  
+                  <div className="ml-10">About
+                    {window.location.assign("https://alertsforgood.org/about")}
+                  </div>      
+                  
+                  <div className="d-flex">
+                
+                  <a href="https://alertsforgood.org/volunteer" className="ml-10">
+                    Volunteer
+                  </a>
+                  <a href="https://alertsforgood.org/donate" className="ml-10">
+                    Donate
+                  </a>
+                  <a href="https://alertsforgood.org/about" className="ml-10">
+                    About
+                  </a>    
+                </div>
+                
+PgPwdMaster
+    
