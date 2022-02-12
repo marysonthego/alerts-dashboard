@@ -1,3 +1,26 @@
+MOVE TO SERVER
+winSCP local/dash.../server.zip server/dash...
+server/dash...
+rm package-lock.json
+cp ~/server/motg/.htaccess .
+cp app.mysql.js app.js
+package.json:
+  "homepage": "https://dash.marysonthego.tech"
+  "main": "app.js"
+
+edit /local/dashboard/public/baseUrl.js
+  export const baseUrl = "https://dash.marysonthego.tech:${PUBLIC_URL}";
+cd local/ npm run build
+cp local/dashboard/build/* local/public
+cd local/public
+select all, zip then rename to public.zip
+winSCP to server/dash/public
+unzip public.zip -d public
+cd ..
+node app
+
+
+
 UPDATE
 {fieldCount: 0, affectedRows: 1, insertId: 0, info: "Rows matched: 1 Changed: 1 Warnings: 0",…}
 affectedRows: 1
@@ -41,5 +64,5 @@ GET
                   </a>    
                 </div>
                 
-PgPwdMaster
+
     

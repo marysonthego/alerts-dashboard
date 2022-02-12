@@ -9,6 +9,7 @@
     "url": "https://github.com/marysonthego/alerts-dashboard.git"
   },
   "scripts": {
+    "start": "node app",
     "startmysql": "nodemon app.mysql",
     "startpostgres": "node app.postgres",
     "server": "node app.mysql",
