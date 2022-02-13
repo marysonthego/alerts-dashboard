@@ -54,7 +54,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ ('/media/svg/icons/Code/Settings4.svg') }>
+                      src={ ('/media/a4g/Settings4.svg') }>
                     </SVG>
                   </span>
                   Account
@@ -68,7 +68,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ ('/media/svg/icons/Communication/Group.svg') }>
+                      src={ ('/media/a4g/Group.svg') }>
                     </SVG>
                   </span>
                   Friends
@@ -85,7 +85,7 @@ export function DashboardProfileWidget ({ className }) {
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
                       src={ (
-                        '/media/svg/icons/Communication/Flag.svg'
+                        '/media/a4g/Flag.svg'
                       ) }></SVG>
                   </span>
                   Alert Locations
@@ -100,7 +100,7 @@ export function DashboardProfileWidget ({ className }) {
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
                       src={ (
-                        '/media/svg/icons/Electric/Highvoltage.svg'
+                        '/media/a4g/Highvoltage.svg'
                       ) }></SVG>
                   </span>
                   Latest Alerts

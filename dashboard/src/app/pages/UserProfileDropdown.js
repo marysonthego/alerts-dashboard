@@ -70,7 +70,7 @@ export function UserProfileDropdown () {
             <div
               className="d-flex align-items-center justify-content-between flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top"
               style={ {
-                backgroundImage: `url('/media/misc/invoice5bar.jpg')`,
+                backgroundImage: `url('/media/a4g/invoice5bar.jpg')`,
               } }>
               <div className="symbol bg-white-o-15 mr-3">
                 <span className="symbol-label text-success font-weight-bold font-size-h4">

@@ -23,7 +23,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Devices/Display1.svg" />
+              <SVG src="/media/a4g/Display1.svg" />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -52,7 +52,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/user-profile">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Code/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" />
             </span>
             <span className="menu-text">Edit Profile</span>
             <i className="menu-arrow" />
@@ -67,7 +67,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/password">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Code/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" />
             </span>
             <span className="menu-text">Change Password</span>
             <i className="menu-arrow" />
@@ -96,7 +96,7 @@ export function AsideMenuList ({ layoutProps }) {
           <NavLink className="menu-link" to="/friends-list">
             <span className="svg-icon menu-icon">
               <SVG
-                src="/media/svg/icons/General/Smile.svg"
+                src="/media/a4g/Smile.svg"
               />
             </span>
             <span className="menu-text">Friends</span>
@@ -111,7 +111,7 @@ export function AsideMenuList ({ layoutProps }) {
         >
           <NavLink className="menu-link menu-toggle" to="/logout">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Navigation/Sign-out.svg" />
+              <SVG src="/media/a4g/Sign-out.svg" />
             </span>
             <span className="menu-text">Logout</span>
             <i className="menu-arrow" />

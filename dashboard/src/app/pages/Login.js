@@ -156,13 +156,13 @@ export function Login() {
                 </div>
                 <div className="d-flex">
                 
-                  <a href="https://alertsforgood.org/volunteer" rel="noopener noreferrer" className="ml-10">
+                  <a href="https://alertsforgood.org/volunteer" target="_blank" rel="noopener noreferrer" className="ml-10">
                     Volunteer
                   </a>
-                  <a href="https://alertsforgood.org/donate" rel="noopener noreferrer" className="ml-10">
+                  <a href="https://alertsforgood.org/donate" target="_blank" rel="noopener noreferrer" className="ml-10">
                     Donate
                   </a>
-                  <a href="https://alertsforgood.org/about" rel="noopener noreferrer" className="ml-10">
+                  <a href="https://alertsforgood.org/about" target="_blank" rel="noopener noreferrer" className="ml-10">
                     About
                   </a>    
                 </div>

@@ -23,7 +23,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item menu-item-rel ${getMenuItemActive("/dashboard")}` }>
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Devices/Display1.svg" />
+              <SVG src="/media/a4g/Display1.svg" />
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -43,7 +43,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/user-profile", true)}` }>
           <NavLink className="menu-link" to="/user-profile">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Code/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" />
             </span>
             <span className="menu-text">Edit Profile</span>
           </NavLink>
@@ -53,7 +53,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/password", true)}` }>
           <NavLink className="menu-link" to="/password">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Code/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" />
             </span>
             <span className="menu-text">Change Password</span>
           </NavLink>
@@ -73,7 +73,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }>
           <NavLink className="menu-link" to="/friends-list">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/General/Smile.svg"/>
+              <SVG src="/media/a4g/Smile.svg"/>
             </span>
             <span className="menu-text">Friends</span>
           </NavLink>
@@ -83,7 +83,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/logout", true)}` }>
           <NavLink className="menu-link" to="/logout">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/svg/icons/Navigation/Sign-out.svg" />
+              <SVG src="/media/a4g/Sign-out.svg" />
             </span>
             <span className="menu-text">Logout</span>
           </NavLink>
