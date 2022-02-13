@@ -28,7 +28,7 @@
   ],
   "private": true,
   "license": "MIT",
-  "main": "app.mysql.js",
+  "main": "app.js",
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
