@@ -180,11 +180,13 @@ export function Login() {
                 id="kt_login_signin_form">
                 {/* begin::Head */}
                 <div className="text-center mb-10 mb-lg-20">
-                  <h3 className="font-size-h1">
+                  <h3 className="font-size-h1"style={{ color: '#65696e' }}>
                     Login
                   </h3>
                   <p className="text-muted font-weight-bold">
-                    Login with your email address and password
+                    Login with your email address and password<br/><br/>
+                    Use admin@admin.com  adminadmin<br/>
+                    Or click 'Sign Up' to create an account
                   </p>
                 </div>
                 {/* end::Head */}
