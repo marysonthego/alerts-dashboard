@@ -149,14 +149,13 @@ router.post("/api/addcustomer", async (req, res) => {
     let hashedpwd = await bcrypt.hash(pwd, saltRounds);
     usertype = "customer";
 
-    console.error(`\nPOST addcustomer req.body: `, req.body);
+    console.error(`POST addcustomer req.body: `, req.body);
     //insert new Customer
-    var sql = `INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype) VALUES ("${firstname}", "${lastname}", "${email}", "${cell}", "${addr1}", "${addr2}", "${city}", "${st}", "${zip}", "${hashedpwd}", "${usertype}")`;
+    var sql = 'INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
-    pool.execute(sql, function(err, result) {
-      if (err) throw err;
-      console.error(`addcustomer result: `, result);
-      res.status(200).send(result);
+    pool.execute(sql, [firstname, lastname, email, cell, addr1, addr2, city, st, zip, hashedpwd, usertype], (error, results) => {
+      if (error) throw err;
+      res.status(200).json(results);
     });
   } catch (err) {
       throw err;
@@ -174,15 +173,13 @@ router.post("/api/changepassword", async function (req, res) {
 
     const hashedPwd = await bcrypt.hash(pwd, saltRounds);
     
-    console.error(`\nUpdate existing Customer with new password. req.body: `, req.body);
+    console.error(`Update existing Customer with new password. req.body: `, req.body);
 
-    var sql = `UPDATE customer SET pwd=${hashedPwd} WHERE customer.custid = ${custid}`;
+    var sql = 'UPDATE customer SET pwd=? WHERE custid = ?';
 
-    pool.execute(sql, function(err, result) {
+    pool.execute(sql, [hashedPwd, custid], (error, results) => {
       if (error) throw error;
-      else {
-        return res.status(200).send(result);
-      }
+      return res.status(200).json(results);
     });
   } catch (error) {
     return error;
@@ -269,7 +266,7 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
   let custid = req.params.custid;
   try
   {
-    let sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE customer.custid = ?';
+    let sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE custid = ?';
     
     await pool.execute(sql, [custid], (error, results) => {
       if(error) {
@@ -287,13 +284,13 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
 
 router.get("/api/listcustomers", async (req, res) => {
   try {
-    var sql = `SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype,  createdate, lastupdate FROM customer`;
+    var sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype,  createdate, lastupdate FROM customer';
     
       await (await pool.execute(sql, (error, results) => {
         if(error) {
           return console.error(error.message);
         }
-        return res.status(200).send(results);
+        return res.status(200).json(results);
       }));
   } catch(error) {
     console.error(`error: `, error.message);
