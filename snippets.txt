@@ -31,6 +31,15 @@ insertId: 0
 serverStatus: 2
 warningStatus: 0
 
+ADDCUSTOMER
+{fieldCount: 0, affectedRows: 1, insertId: 10034, info: "", serverStatus: 2, warningStatus: 0}
+affectedRows: 1
+fieldCount: 0
+info: ""
+insertId: 10034
+serverStatus: 2
+warningStatus: 0
+
 GET
 [{id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…},…]
 0: {id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…}

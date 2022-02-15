@@ -154,7 +154,7 @@ router.post("/api/addcustomer", async (req, res) => {
     var sql = 'INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
     pool.execute(sql, [firstname, lastname, email, cell, addr1, addr2, city, st, zip, hashedpwd, usertype], (error, results) => {
-      if (error) throw err;
+      if (error) throw error;
       res.status(200).json(results);
     });
   } catch (err) {
@@ -373,14 +373,14 @@ router.post("/api/updatesubscription", async (req, res) => {
 
     let sql = 'SELECT * from subscriber WHERE subscriber.custid = ? AND subscriber.id = ?';
 
-    await pool.execute(sql, [custid, id], (error, results) => {
+    pool.execute(sql, [custid, id], (error, results) => {
       if(error) {
         return(error.message);
       }
       if(results.length > 0) {
         let sql2 = 'UPDATE subscriber SET cell = ?, zip = ?, nickname = ?, weatheralert = ?, virusalert = ?, airalert = ? WHERE subscriber.custid = ? AND subscriber.id = ?';
 
-        await pool.execute(sql, [cell, zip, nickname, weatheralert, virusalert, airalert, custid, id], (error, results) => {
+        pool.execute(sql2, [cell, zip, nickname, weatheralert, virusalert, airalert, custid, id], (error, results) => {
           if(error) {
             return(error.message);
           }
@@ -648,13 +648,15 @@ router.post("/api/findzip", async (req, res) => {
       st,
     } = req.body;
     let sql = 'SELECT zip FROM zipdata WHERE city = ? AND stateid = ? ORDER BY pop DESC LIMIT 1';
-
     
     await pool.execute(sql, [city, st], (error, results) => {
       if (error){
         return console.error(error.message);
       }
-      return res.status(200).json(results[0].zip);
+      if(results.length > 0) {
+        return res.status(200).json(results[0].zip);
+      } 
+      return res.status(404).json("Zip code not found");
     })
   } catch(error) {
     console.error(`error is: `, error.message);

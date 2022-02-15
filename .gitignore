@@ -10,6 +10,7 @@
 dashboard/.env
 # /utils used by heroku
 utils
+backupzips
 
 # dependencies
 /~

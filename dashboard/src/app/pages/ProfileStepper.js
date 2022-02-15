@@ -19,6 +19,7 @@ import {
 } from 'app/redux/stepperSlice';
 import {
   updateUserState,
+  updateCustidState,
   selectCurrentUser,
 } from 'app/redux/userSlice';
 import {
@@ -115,8 +116,9 @@ export const ProfileStepper = () => {
           }
           addCustomer(newUser).unwrap()
             .then((payload) => {
-              console.log(`addCustomer fulfilled payload: `, payload)
-              dispatch(updateUserState(payload));
+              console.log(`addCustomer fulfilled payload: `, payload, payload.insertId);
+              
+              dispatch(updateCustidState(payload));
               dispatch(updateNextEnabled(true));
               dispatch(updateBackEnabled(true));
               setNext(enableNext);

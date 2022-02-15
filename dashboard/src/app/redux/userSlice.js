@@ -31,6 +31,16 @@ export const userSlice = createSlice({
       }
     },
     
+    updateCustidState: (state, action) => {
+      const{affectedRows, fieldCount, info, insertId, serverStatus, warningStatus} = action.payload;
+      console.log(`action.payload: `,action.payload);
+      let custid = insertId; 
+      const existingUser = state.user;
+      if(existingUser) {
+        existingUser.custid = custid;
+      }
+    },
+
     updateIsLoggedInState: (state, action) => {
       const{isLoggedIn} = action.payload;
       const existingUser = state.user;
@@ -48,7 +58,7 @@ export const userSlice = createSlice({
 });
 
 // Action creators generated for each reducer function
-export const { addNewCustidState, updateUserState, updateIsLoggedInState, resetUserState } = userSlice.actions;
+export const { addNewCustidState, updateUserState, updateCustidState, updateIsLoggedInState, resetUserState } = userSlice.actions;
 
 export default userSlice.reducer;
 

@@ -231,7 +231,7 @@ export async function addUser(inObj) {
     }
     //console.log(`AuthCrud addUser response.status: `, response.status);
     let data = await response.json();
-    //console.log(`AuthCrud addUser returning data: `, data);
+    console.log(`AuthCrud addUser returning data: `, data);
     data.status = response.status;
     return data;
   } catch (error) {
@@ -258,7 +258,7 @@ export async function updateUser(inObj) {
     }
     let data = await response.json();
     data.status = response.status;
-    //console.log(`AuthCrud updateUser returning data: `, data);
+    console.log(`AuthCrud updateUser returning data: `, data);
     return data;
   } catch (error) {
     //console.log(`Error: `, error.message);
