@@ -110,7 +110,7 @@ export const AddFriendForm = () => {
       });
     } catch (err)
     {
-      const message = JSON.stringify(err.data.msg) + ` Did you spell it correctly?`;
+      const message = JSON.stringify(err.msg) + ` Did you spell it correctly?`;
       enqueueSnackbar(message, {
         variant: 'info',
         autoHideDuration: 5000,
