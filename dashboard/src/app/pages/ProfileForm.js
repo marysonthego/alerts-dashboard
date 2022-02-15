@@ -10,7 +10,6 @@ import { useSnackbar } from 'notistack';
 import Snackbar from 'app/helpers/Snackbar';
 import { CellNumberFormat } from 'app/helpers/Formatters';
 import SVG from 'react-inlinesvg';
-import { toAbsoluteUrl } from 'app/helpers/AssetHelpers';
 import { initUserErrors } from 'app/helpers/Initializers';
 import {
   FormValidation,
@@ -195,10 +194,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
   return (
     
     <div className="d-flex flex-column align-items-center card-body pt-0" >
-      <div style={{width: '400px'}} className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
+      <div style={{width: '400px'}} className="d-flex align-items-center mb-2 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Font.svg') }
+            src='/media/a4g/Font.svg'
             title="First Name Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -221,10 +220,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Font.svg') }
+            src='/media/a4g/Font.svg'
             title="Last Name Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -247,12 +246,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl(
-              '/media/a4g/Urgent-mail.svg'
-            ) }
+            src='/media/a4g/Urgent-mail.svg'
             title="Email Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -275,10 +272,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/iPhone-X.svg') }
+            src='/media/a4g/iPhone-X.svg'
             title="Cell Phone Required"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -304,10 +301,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Other2.svg') }
+            src='/media/a4g/Other2.svg'
             title="Address 1"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark text-hover-primary font-size-lg">
@@ -329,10 +326,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center mb-9 bg-light-warning rounded p-5">
+      <div style={{width: '400px'}} className="d-flex align-items-center mb-2 bg-light-warning rounded p-5">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Other2.svg') }
+            src='/media/a4g/Other2.svg'
             title="Address 2"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg">
@@ -354,10 +351,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Flower3.svg') }
+            src='/media/a4g/Flower3.svg'
             title="City"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg ">
@@ -379,10 +376,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Flag.svg') }
+            src='/media/a4g/Flag.svg'
             title="State"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -404,10 +401,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </Form>
       </div>
 
-      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+      <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
         <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
           <SVG
-            src={ toAbsoluteUrl('/media/a4g/Mailbox.svg') }
+            src='/media/a4g/Mailbox.svg'
             title="Zip Code"></SVG>
         </span>
         <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -431,10 +428,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
 
       { form === 'RegisterStep' && newUser.custid === 0 ?
         <>
-          <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+          <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
             <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
               <SVG
-                src={ toAbsoluteUrl('/media/a4g/Thumbtack.svg') }
+                src='/media/a4g/Thumbtack.svg'
                 title="Password Required"></SVG>
             </span>
             <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -457,10 +454,10 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               </span>
             </Form>
           </div>
-          <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-9">
+          <div style={{width: '400px'}} className="d-flex align-items-center bg-light-warning rounded p-5 mb-2">
             <span className="svg-icon svg-icon-dark mr-5 svg-icon-lg">
               <SVG
-                src={ toAbsoluteUrl('/media/a4g/Thumbtack.svg') }
+                src='/media/a4g/Thumbtack.svg'
                 title="Password Required"></SVG>
             </span>
             <div className="d-flex flex-column flex-grow-1 mr-2 font-weight-bold text-dark font-size-lg mb-1">
@@ -497,7 +494,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               <span>Change Password</span>
             </button>
           </div>
-          <div className={ clsx(classes.row, classes.navButtons) }>
+          <div className={ clsx(classes.row, classes.navButtons)} >
             <button
               type="button"
               onClick={ SaveChanges }
@@ -510,6 +507,5 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
         </div>
       }
     </div>
-  
   );
 };

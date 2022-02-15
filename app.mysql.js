@@ -269,16 +269,19 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
   let custid = req.params.custid;
   try
   {
-    const response = await pool.execute(
-      `SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE customer.custid = ${custid}`, );
-    if (response)
-    {
-      console.error(`\ngetcustomerbycustid response: `, response);
-      return res.status(200).json(response);
-    }
-  } catch (err)
-  {
-    return res.status(404).json(err.message);
+    let sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE customer.custid = ?';
+    
+    await pool.execute(sql, [custid], (error, results) => {
+      if(error) {
+        return(error);
+      }
+      if(results.length > 0) {
+        return res.status(200).json(results);
+      }
+      return res.status(404).json(error);
+    })
+  } catch (err) {
+    return res.status(500).json(err.message);
   }
 });
 
@@ -320,13 +323,15 @@ router.delete("/api/deletecustomer/:custid", async function (req, res) {
 router.post("/api/addsubscription", async (req, res) => {
   try
   {
-    const foundSubscription = await pool.execute(
-      `SELECT * from subscriber WHERE subscriber.custid = ${req.body.custid} AND subscriber.zip = ${req.body.zip}`);
-    if (foundSubscription)
-    {
-      return res.status(409).send('error: duplicate subscription found');
-    } else
-    {
+    let sql = 'SELECT * from subscriber WHERE subscriber.custid = ? AND subscriber.zip = ?';
+    
+    await pool.execute(sql, [req.body.custid, req.body.zip], (error, results) => {
+      if(error) {
+        return (error);
+      }
+      if (results.length > 0) {
+        return res.status(409).send('error: duplicate subscription found');
+      }
       const {
         custid,
         cell,
@@ -336,30 +341,24 @@ router.post("/api/addsubscription", async (req, res) => {
         virusalert,
         airalert,
       } = req.body;
-      pool.execute(`INSERT INTO subscriber (custid, cell, zip, nickname, weatheralert, virusalert, airalert) VALUES (${custid}, ${cell}, ${zip}, ${nickname}, ${weatheralert}, ${virusalert}, ${airalert})`),
-        (err, results) => {
-          //Insert failed
-          if (err)
-          {
-            console.error(`\naddsubscription INSERT failed. error: `, err.message);
-            let msg = err.message;
-            return res.status(409).send(msg);
 
-            //Insert succeeded
-          } else
-          {
-            console.error(`\n\naddsubscription INSERT success: `, results);
-            return res.status(200).send(results);
-          }
+      let sql2 = 'INSERT INTO subscriber (custid, cell, zip, nickname, weatheralert, virusalert, airalert) VALUES (?,?,?,?,?,?,?)';
+
+      pool.execute(sql2, [custid, cell, zip, nickname, weatheralert, virusalert, airalert], (error, rresults) => {
+        if(error) {
+          return(error.message);
         }
-    
-    };
-  } catch (err)
-  {
-    return (err);
+        if(results.length > 0) {
+          return res.status(200).json(results);
+        }
+      });
+    })
+  } catch(error) {
+    console.error(error.message);
+    return(error);
   }
 });
-
+  
 // update existing subscription for custid & zip
 router.post("/api/updatesubscription", async (req, res) => {
   try
@@ -375,29 +374,28 @@ router.post("/api/updatesubscription", async (req, res) => {
       airalert,
     } = req.body;
 
-    const foundSubscription = await pool.execute(
-      `SELECT * from subscriber WHERE subscriber.custid = ${custid} AND subscriber.id = ${id}`);
-    if (foundSubscription)
-    {
+    let sql = 'SELECT * from subscriber WHERE subscriber.custid = ? AND subscriber.id = ?';
 
-      await pool.execute(`UPDATE subscriber SET cell = ${cell}, zip = ${zip}, nickname = ${nickname}, weatheralert = ${weatheralert}, virusalert = ${virusalert}, airalert = ${airalert} WHERE subscriber.custid = ${custid} AND subscriber.id = ${id}`),
-        (err, results) => {
-          if (results)
-          {
-            console.error(`\n\nupdatesubscription success results: `, results)
-            return res.status(200).send(results);
+    await pool.execute(sql, [custid, id], (error, results) => {
+      if(error) {
+        return(error.message);
+      }
+      if(results.length > 0) {
+        let sql2 = 'UPDATE subscriber SET cell = ?, zip = ?, nickname = ?, weatheralert = ?, virusalert = ?, airalert = ? WHERE subscriber.custid = ? AND subscriber.id = ?';
+
+        await pool.execute(sql, [cell, zip, nickname, weatheralert, virusalert, airalert, custid, id], (error, results) => {
+          if(error) {
+            return(error.message);
           }
-          return res.status(404).send(err);
-        }
-    }
-    return res;
-  } catch (err)
-  {
-    console.error(`\n\nupdatesubscription error: `, err.name, err.message);
-    return (err)
+          return res.status(200).json(results);
+        })
+      }
+    })
+  } catch(error) {
+    console.error(`error: `,error.message);
+    return(error);
   }
-});
-
+});  
 
 // delete subscription by subscriber.id
 router.delete("/api/deletesubscription/:id", async function (req, res) {
@@ -406,18 +404,17 @@ router.delete("/api/deletesubscription/:id", async function (req, res) {
     let id = req.params.id;
     console.error(`\n\ndeletesubscription id: `, id);
 
-    const response = await pool.execute(`DELETE FROM subscriber WHERE subscriber.id = ${id}`);
-    if (response)
-    {
-      console.error(`\n\ndeletesubscription response: `, response);
-      return res.status(200).send(response);
-    }
-    //console.error(`\n\ndeletesubscription response: `, response);
-    //return res.status(404).send(response);
-  } catch (err)
-  {
-    console.error(`\n\ndelete subscription err: `, err);
-    return res.status(404).send(err);
+    let sql = 'DELETE FROM subscriber WHERE subscriber.id = ?';
+    await pool.execute(sql, [id], (error, results) => {
+      if(error) {
+        return error.message;
+      }
+      return res.status(200).json(results);
+    });
+    
+  } catch (err) {
+    console.error(`delete subscription err: `, err);
+    return res.status(500).json(err);
   }
 });
 
@@ -427,13 +424,16 @@ router.get("/api/getlocationsbycustid/:custid", async (req, res) => {
 
   try
   {
-    let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ${custid}`;
+    let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ?`;
 
-    await pool.execute(sql, (error, results) => {
+    await pool.execute(sql, [custid], (error, results) => {
       if(error) {
         return console.error(error.message);
       }
-      return res.status(200).send(results);
+      if(results.length > 0) {
+        return res.status(200).send(results);
+      }
+      return res.status(404).send('No records found');
     })
   } catch(error) {
     console.error(`error: `, error.message);
@@ -447,9 +447,9 @@ router.get("/api/getlocationbyid/:id", async (req, res) => {
 
   try
   {
-    let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.id = ${id}`;
+    let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.id = ?`;
 
-    await pool.execute(sql, (error, results) => {
+    await pool.execute(sql, [id], (error, results) => {
       if(error) {
         return console.error(error.message);
       }
@@ -470,20 +470,23 @@ router.post("/api/listsubscriptions", async (req, res) => {
       custid
     } = req.body;
 
-    const response = await pool.execute(`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ${custid}`);
-    if (response) 
-    {
-      console.error(`\n\nresponse: `, response);
-      return res.status(200).json(response);
-    }
-    console.error(`\n\nrowCount = 0 response: `, response);
-    return res.status(404).json(`No subscriptions found for custid ${custid}`);
-  } catch (err)
-  {
-    console.error(`\n\nerr: `, err);
-    return (err);
-  }
+    let sql = 'SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ?';
+    
+    await pool.execute(sql, [custid], (error, results) => {
+      if(error) {
+        return console.error(error.message);
+      }
+      if(results.length > 0) {
+        return res.status(200).send(results);
+      }
+      return res.status(404).send('No records found');
+    })
+  } catch(error) {
+    console.error(`error: `, error.message);
+    return (error);
+  }  
 });
+  
 
 // add new friend for custid
 router.post("/api/addfriend", async (req, res) => {
