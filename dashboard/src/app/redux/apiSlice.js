@@ -93,6 +93,15 @@ export const apiSlice = createApi({
       //invalidatesTags: (result, error, custid) => [{type: 'Locations', custid: custid}]
     }),
 
+    findDuplicateLocation: builder.mutation({
+      query: newLocation => ({
+        url: '/findduplicatesubscription',
+        method: 'POST',
+        body: newLocation
+      }),
+      invalidatesTags: ['Locations']
+    }),
+
     updateLocation: builder.mutation({
       query: newLocation => ({
         url: '/updatesubscription',
@@ -201,6 +210,7 @@ export const {
   useGetLocationsByCustidQuery,
   useGetLocationByIdQuery,
   useAddLocationMutation, 
+  useFindDuplicateLocationMutation,
   useUpdateLocationMutation,
   useDeleteLocationMutation,
 

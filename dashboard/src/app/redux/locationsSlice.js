@@ -21,6 +21,17 @@ export const locationsSlice = createSlice({
         };
       };
     },
+
+    updateLocationIdState: (state, action) => {
+      const{affectedRows, fieldCount, info, insertId, serverStatus, warningStatus} = action.payload;
+      console.log(`action.payload: `,action.payload);
+      let id = insertId; 
+      const existingLocation = state.locations.find
+      (location => location.id === 0);
+      if(existingLocation) {
+        existingLocation.id = id;
+      }
+    },
   
     editLocation: (state, action) => {
       if (state.locations) {
@@ -62,7 +73,7 @@ export const locationsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addNewLocation, editLocation, removeLocation, resetLocations } = locationsSlice.actions;
+export const { addNewLocation, updateLocationIdState, editLocation, removeLocation, resetLocations } = locationsSlice.actions;
 
 export default locationsSlice.reducer;
 

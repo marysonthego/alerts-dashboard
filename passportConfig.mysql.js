@@ -64,7 +64,7 @@ function initialize(passport) {
       if (err) {
         throw err;
       }
-      console.error(`deserializeUser: `, results);
+      //console.error(`deserializeUser: `, results);
       return done(null, results);
     });
   });

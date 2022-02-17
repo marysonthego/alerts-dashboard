@@ -21,7 +21,7 @@ node app
 
 
 
-UPDATE
+UPDATE returns object
 {fieldCount: 0, affectedRows: 1, insertId: 0, info: "Rows matched: 1 Changed: 1 Warnings: 0",…}
 affectedRows: 1
 changedRows: 1
@@ -31,7 +31,7 @@ insertId: 0
 serverStatus: 2
 warningStatus: 0
 
-ADDCUSTOMER
+ADD returns object
 {fieldCount: 0, affectedRows: 1, insertId: 10034, info: "", serverStatus: 2, warningStatus: 0}
 affectedRows: 1
 fieldCount: 0
@@ -40,7 +40,7 @@ insertId: 10034
 serverStatus: 2
 warningStatus: 0
 
-GET
+GET returns array of objects
 [{id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…},…]
 0: {id: 100011, zip: "92154", cell: "4695253229", custid: 10000, nickname: "", weatheralert: 0,…}
 1: {id: 100015, zip: "93722", cell: "4695253229", custid: 10000, nickname: "Fresno", weatheralert: 1,…}

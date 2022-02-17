@@ -2,5 +2,5 @@
   "compilerOptions": {
     "baseUrl": "src"
   },
-  "exclude": ["node_modules", "XXX_metronic", "dist", "amplify", "public", "build"]
+  "exclude": ["node_modules", "assets", "dist", "amplify", "public", "build"]
 }

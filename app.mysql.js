@@ -57,7 +57,13 @@ var router = express.Router({mergeParams: true});
 
 server.use(router);
 
-router.use(express.static(path.join(__dirname, '/public')));
+console.log(`process.env.NODE_ENV: `,process.env.NODE_ENV);
+
+if(process.env.NODE_ENV === 'prod') {
+  router.use(express.static(path.join(__dirname, '/public')));
+} else {
+  router.use(express.static(path.join(__dirname, '/dashboard/build')));
+}
 
 server.get("/api", (req, res) => {
   return res.status;
@@ -316,43 +322,49 @@ router.delete("/api/deletecustomer/:custid", async function (req, res) {
   }
 });
 
-// add new subscription for custid and zip
-router.post("/api/addsubscription", async (req, res) => {
+// look for a duplicate subscription
+router.post("/api/findduplicatesubscription", async (req, res) => {
   try
   {
-    let sql = 'SELECT * from subscriber WHERE subscriber.custid = ? AND subscriber.zip = ?';
+    const {custid, cell, nickname, weatheralert, virusalert, airalert, zip} = req.body;
+
+    let sql = 'SELECT * from subscriber WHERE custid = ? AND zip = ?';
     
-    await pool.execute(sql, [req.body.custid, req.body.zip], (error, results) => {
-      if(error) {
-        return (error);
-      }
+    pool.execute(sql, [custid, zip], (error, results) => {
+      if (error) throw error;
+      console.log(`lookup results:`, results);
       if (results.length > 0) {
-        return res.status(409).send('error: duplicate subscription found');
+        return res.status(409).send(results);
       }
-      const {
-        custid,
-        cell,
-        zip,
-        nickname,
-        weatheralert,
-        virusalert,
-        airalert,
-      } = req.body;
-
-      let sql2 = 'INSERT INTO subscriber (custid, cell, zip, nickname, weatheralert, virusalert, airalert) VALUES (?,?,?,?,?,?,?)';
-
-      pool.execute(sql2, [custid, cell, zip, nickname, weatheralert, virusalert, airalert], (error, rresults) => {
-        if(error) {
-          return(error.message);
-        }
-        if(results.length > 0) {
-          return res.status(200).json(results);
-        }
-      });
-    })
+      return res.status(404).send('not found');
+    });
   } catch(error) {
-    console.error(error.message);
-    return(error);
+    console.error(`lookup subscription error: `, error.name, error.message);
+    return res.status(500).json(error.name, error.message);
+  }
+})
+
+// add new subscription for custid and zip
+router.post("/api/addsubscription", async (req, res) => {
+  try {
+    const {
+      custid, cell, nickname, weatheralert, virusalert, airalert, zip
+    } = req.body;
+
+    let sql = 'INSERT INTO subscriber (custid, cell, zip, nickname, weatheralert, virusalert, airalert) VALUES (?,?,?,?,?,?,?)';
+
+    pool.execute(sql, [custid, cell, zip, nickname, weatheralert, virusalert, airalert], (error, results) => {
+      if (error)
+        throw error;
+      console.log(`insert results:`, results);
+      if (results.insertId > 0)
+      {
+        return res.status(200).send(results);
+      }
+    });
+  } catch (error) {
+    console.error(`failed to add subscription: `, error.name, error.message);
+    return res.status(500).json({name: error.name, message: error.message});
   }
 });
   
@@ -649,18 +661,16 @@ router.post("/api/findzip", async (req, res) => {
     } = req.body;
     let sql = 'SELECT zip FROM zipdata WHERE city = ? AND stateid = ? ORDER BY pop DESC LIMIT 1';
     
-    await pool.execute(sql, [city, st], (error, results) => {
-      if (error){
-        return console.error(error.message);
-      }
-      if(results.length > 0) {
+    pool.execute(sql, [city, st], (error, results) => {
+      if (error) throw error;
+      if (results.length > 0) {
         return res.status(200).json(results[0].zip);
-      } 
+      }
       return res.status(404).json("Zip code not found");
     })
   } catch(error) {
     console.error(`error is: `, error.message);
-    return (error);
+    return res.status(500).json(error);
   }
 });
       
@@ -671,14 +681,17 @@ router.get("/api/getzip", async (req, res) => {
     let city = req.params.city;
     let stateid = req.params.st;
 
-    const foundZip = await pool.execute(`SELECT zipdata.zip FROM zipdata WHERE zipdata.city = ${city} AND zipdata.stateid = ${stateid} ORDER BY zipdata.pop DESC LIMIT 1`);
-    console.error(`\n\nZip found `, foundZip, city, stateid);
-    return res.status(200).json(foundZip);
-
-  } catch (err)
-  {
-    console.error(`\n\nerr: `, err);
-    return (err);
+    let sql = 'SELECT zip FROM zipdata WHERE city = ? AND stateid = ? ORDER BY pop DESC LIMIT 1';
+    await pool.execute(sql, [city, stateid], (error, results) => {
+      if(error) throw error;
+      if(results.length > 0) {
+        return res.status(200).json(results);
+      }
+      return res.status(404);
+    })
+  } catch (err) {
+    console.error(`getzip err: `, err.name, err.message);
+    return res.status(500).json(err);
   }
 });
 
@@ -781,13 +794,16 @@ function checkAuthenticated (req, res, next) {
 };
 
 server.get('/*', (req, res) => {
-  //res.sendFile(path.join(__dirname, 'build', 'index.html'));
-  res.sendFile(path.join(__dirname, '/public', 'index.html'));
+  if(process.env.NODE_ENV === 'prod') {
+    res.sendFile(path.join(__dirname, '/public', 'index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '/dashboard/build', 'index.html'));
+  }
+  
 });
 
 server.listen(PORT, () => {
   //console.error(`CORS enabled Server with whitelist is running on port ${PORT}\n`);
-  console.error(`CORS disabled. Running mySQL on port ${PORT}
-  \n`);
+  console.error(`CORS disabled. Running mySQL on port ${PORT} NODE_ENV = ${process.env.NODE_ENV}\n`);
 });
 
