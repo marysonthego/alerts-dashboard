@@ -10,7 +10,7 @@ export const customersSlice = createSlice({
   reducers: {
     addNewCustomer: (state, action) => {
       if (state.customers) {
-        const existingCustomer = state.customers.find(customer => customer.id === action.payload.id);
+        const existingCustomer = state.customers.find(customer => customer.custid === action.payload.custid);
         if(existingCustomer){
           return;
         }
@@ -24,7 +24,7 @@ export const customersSlice = createSlice({
     editCustomer: (state, action) => {
       if (state.customers) {
       const { id, custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype } = action.payload;
-      const existingCustomer = state.customers.find(customer => customer.id === id);
+      const existingCustomer = state.customers.find(customer => customer.custid === custid);
       
         if(existingCustomer) {
           if (custid) existingCustomer.custid = custid;
@@ -44,7 +44,7 @@ export const customersSlice = createSlice({
 
     removeCustomer: (state, action) => {
       if(state.customers) {
-        state.customers.splice(state.customers.findIndex((customer) => customer.id === action.payload), 1);
+        state.customers.splice(state.customers.findIndex((customer) => customer.custid === action.payload), 1);
       }
     },
 

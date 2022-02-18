@@ -68,7 +68,7 @@ export const ListCustomers = () => {
 
   const dispatch = useDispatch();
 
-    console.log(`List Customers FetchData start`);
+  console.log(`List Customers FetchData start`);
     const { 
       data: list = [],
       isLoading,
@@ -284,36 +284,37 @@ function EnhancedTable(props) {
     // has the same effect as `refetch` for the associated query
     dispatch(
       apiSlice.endpoints.listCustomers.initiate(
-        {subscribe: false, forceRefetch: true }
+        {subscribe: true, forceRefetch: true }
       )
     );
   };
 
-  const handleChange = (e, row) => {
-    e.preventDefault();
-    let field = e.target.name;
-    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    //console.log(`row: `, row.id, row);
-    let cust = Object.assign({}, row);
-    cust = {...cust, [field]: value};
+  // const handleChange = (e, row) => {
+  //   e.preventDefault();
+  //   let field = e.target.name;
+  //   let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+  //   //console.log(`row: `, row.id, row);
+  //   let cust = Object.assign({}, row);
+  //   cust = {...cust, [field]: value};
     
-    try {
-      updateCustomer(cust).unwrap();
-      } catch(error) {
-        console.log(`rejected error: `, error);
-      };
-      dispatch(editCustomer(cust));
-    };
-    handleCustomersRefetch();
-    //console.log(`HandleChange field: value `, field, value);
-  
+  //   try {
+  //     updateCustomer(cust).unwrap();
+  //     } catch(error) {
+  //       console.log(`rejected error: `, error);
+  //     };
+  //     dispatch(editCustomer(cust));
+    
+  //   handleCustomersRefetch();
+  //   //console.log(`HandleChange field: value `, field, value);
+  // };
+
   function HandleDelete (e) {
     if(selected.length > 0) {
       selected.forEach(custid => {
         try {
           console.log(`delete custid: `, custid);
           deleteCustomer(custid).unwrap();
-          
+                    
           } catch (err) {
             console.log(`delete err: `, err);
             const message = 'Delete customer failed.';

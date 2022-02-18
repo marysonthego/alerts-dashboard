@@ -310,7 +310,7 @@ export const AddLocationForm = () => {
             onClick={OnSaveLocationClicked}
           >
             <SVG
-              src="/media/a4g/marker1.svg"
+              src="/media/a4g/marker1.svg" title="Save Location"
               className="max-h-70px svg-icon-lg svg-icon-white"
             />
             &nbsp;&nbsp;Save Location

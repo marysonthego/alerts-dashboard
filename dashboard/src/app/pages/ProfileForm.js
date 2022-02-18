@@ -501,7 +501,7 @@ export const ProfileForm = ({ form, handlePassword, isADuplicate }) => {
               disabled={ !isValid }
               id="kt-profile"
               className={ `btn btn-warning font-weight-bold px-9 py-4 my-3` }>
-              <span>Save Changes</span>
+              <span>&nbsp;&nbsp;&nbsp;&nbsp;Save Changes&nbsp;&nbsp;&nbsp;&nbsp;</span>
             </button>
           </div>
         </div>

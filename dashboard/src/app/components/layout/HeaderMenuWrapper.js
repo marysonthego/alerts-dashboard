@@ -1,6 +1,5 @@
 import React, {useMemo} from "react";
 import objectPath from "object-path";
-import {Link} from "react-router-dom";
 import {toAbsoluteUrl} from "app/helpers/AssetHelpers";
 import {useHtmlClassService} from "app/components/layout/MetronicLayout";
 import {HeaderMenu} from "app/components/HeaderMenu";

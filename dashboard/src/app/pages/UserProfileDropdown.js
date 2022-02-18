@@ -40,7 +40,7 @@ export function UserProfileDropdown () {
               <div
                 className="symbol mt-1"
                 style={{ width: '48px', height: '48px' }}>
-                <SVG src="/media/a4g/hotairballoon.svg" />
+                <SVG src="/media/a4g/hotairballoon.svg" title="Profile"/>
               </div>
             </span>
           </span>

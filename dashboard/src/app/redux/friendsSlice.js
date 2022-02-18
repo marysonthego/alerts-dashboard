@@ -23,6 +23,17 @@ export const friendsSlice = createSlice({
       };
     },
   
+    updateFriendIdState: (state, action) => {
+      const{affectedRows, fieldCount, info, insertId, serverStatus, warningStatus} = action.payload;
+      console.log(`action.payload: `,action.payload);
+      let id = insertId; 
+      const existingFriend = state.friends.find
+      (friend => friend.id === 0);
+      if(existingFriend) {
+        existingFriend.id = id;
+      }
+    },
+  
     editFriend: (state, action) => {
       if (state.friends) {
       const { id, custid, firstname, cell, city, st, zip, weatheralert, virusalert, airalert } = action.payload;
@@ -63,7 +74,7 @@ export const friendsSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { addNewFriend, editFriend, removeFriend, resetFriends } = friendsSlice.actions;
+export const { addNewFriend, updateFriendIdState, editFriend, removeFriend, resetFriends } = friendsSlice.actions;
 
 export default friendsSlice.reducer;
 

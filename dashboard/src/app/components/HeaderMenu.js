@@ -23,7 +23,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item menu-item-rel ${getMenuItemActive("/dashboard")}` }>
           <NavLink className="menu-link" to="/dashboard">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/Display1.svg" />
+              <SVG src="/media/a4g/Display1.svg" title="Dashboard"/>
             </span>
             <span className="menu-text">Dashboard</span>
           </NavLink>
@@ -33,7 +33,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/latest-alerts", false)}` }>
           <NavLink className="menu-link" to="/latest-alerts">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/marker1.svg" />
+              <SVG src="/media/a4g/marker1.svg" title="Latest Alerts"/>
             </span>
             <span className="menu-text">Latest Alerts</span>
           </NavLink>
@@ -43,7 +43,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/user-profile", true)}` }>
           <NavLink className="menu-link" to="/user-profile">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" title="Edit Profile"/>
             </span>
             <span className="menu-text">Edit Profile</span>
           </NavLink>
@@ -53,7 +53,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/password", true)}` }>
           <NavLink className="menu-link" to="/password">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/Commit.svg" />
+              <SVG src="/media/a4g/Commit.svg" title="Change Password"/>
             </span>
             <span className="menu-text">Change Password</span>
           </NavLink>
@@ -63,7 +63,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/locations-list", true)}` }>
           <NavLink className="menu-link" to="/locations-list">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/marker1.svg" />
+              <SVG src="/media/a4g/marker1.svg" title="Alert Locations"/>
             </span>
             <span className="menu-text">Alert Locations</span>
           </NavLink>
@@ -73,7 +73,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/friends-list", false)}` }>
           <NavLink className="menu-link" to="/friends-list">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/Smile.svg"/>
+              <SVG src="/media/a4g/Smile.svg" title="Friends"/>
             </span>
             <span className="menu-text">Friends</span>
           </NavLink>
@@ -83,7 +83,7 @@ export function HeaderMenu({ layoutProps }) {
           className={ `menu-item ${getMenuItemActive("/logout", true)}` }>
           <NavLink className="menu-link" to="/logout">
             <span className="svg-icon menu-icon">
-              <SVG src="/media/a4g/Sign-out.svg" />
+              <SVG src="/media/a4g/Sign-out.svg" title="Logout"/>
             </span>
             <span className="menu-text">Logout</span>
           </NavLink>
@@ -97,7 +97,7 @@ export function HeaderMenu({ layoutProps }) {
               )}` }>
               <NavLink className="menu-link" to="/list-customers">
                 <span className="svg-icon menu-icon">
-                  <SVG src="/media/a4g/Clipboard.svg" />
+                  <SVG src="/media/a4g/Clipboard.svg" title="Customers"/>
                 </span>
                 <span className="menu-text">Customers</span>
               </NavLink>

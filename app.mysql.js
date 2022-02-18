@@ -59,10 +59,10 @@ server.use(router);
 
 console.log(`process.env.NODE_ENV: `,process.env.NODE_ENV);
 
-if(process.env.NODE_ENV === 'prod') {
-  router.use(express.static(path.join(__dirname, '/public')));
-} else {
+if(process.env.NODE_ENV === 'dev') {
   router.use(express.static(path.join(__dirname, '/dashboard/build')));
+} else {
+  router.use(express.static(path.join(__dirname, '/public')));
 }
 
 server.get("/api", (req, res) => {
@@ -155,23 +155,21 @@ router.post("/api/addcustomer", async (req, res) => {
     let hashedpwd = await bcrypt.hash(pwd, saltRounds);
     usertype = "customer";
 
-    console.error(`POST addcustomer req.body: `, req.body);
     //insert new Customer
-    var sql = 'INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
+    let sql = 'INSERT INTO customer (firstname, lastname, email, cell, addr1, addr2, city, st, zip, pwd, usertype) VALUES (?,?,?,?,?,?,?,?,?,?,?)';
 
     pool.execute(sql, [firstname, lastname, email, cell, addr1, addr2, city, st, zip, hashedpwd, usertype], (error, results) => {
       if (error) throw error;
       res.status(200).json(results);
     });
-  } catch (err) {
-      throw err;
+  } catch (error) {
+      return (error);
     }
   });
 
 // change password
 router.post("/api/changepassword", async function (req, res) {
   try {
-    console.error(`POST /changepassword req.body: `, req.body);
     const {
       custid,
       pwd,
@@ -179,9 +177,7 @@ router.post("/api/changepassword", async function (req, res) {
 
     const hashedPwd = await bcrypt.hash(pwd, saltRounds);
     
-    console.error(`Update existing Customer with new password. req.body: `, req.body);
-
-    var sql = 'UPDATE customer SET pwd=? WHERE custid = ?';
+    let sql = 'UPDATE customer SET pwd=? WHERE custid = ?';
 
     pool.execute(sql, [hashedPwd, custid], (error, results) => {
       if (error) throw error;
@@ -195,7 +191,6 @@ router.post("/api/changepassword", async function (req, res) {
 // update customer
 router.post("/api/updatecustomer", async function (req, res) {
   try {
-    console.error(`\nPOST /updatecustomer req.body: `, req.body);
     const {
       custid,
       firstname,
@@ -211,60 +206,51 @@ router.post("/api/updatecustomer", async function (req, res) {
       usertype,
     } = req.body;
 
-    if (pwd)
-    {
+    if (pwd) {
       const hashedPwd = await bcrypt.hash(pwd, saltRounds);
       //update existing Customer with NEW password
       console.error(`\nUpdate with new password. req.body: `, req.body);
 
-      var sql = `UPDATE customer SET firstname = ${firstname}, lastname = ${lastname}, email = ${email}, cell = ${cell}, addr1 = ${addr1}, addr2 = ${addr2}, city = ${city}, st = ${st}, zip = ${zip}, usertype = ${usertype}, pwd = ${hashedPwd} WHERE customer.custid = ${custid}`;
+      let sql = 'UPDATE customer SET firstname = ?, lastname = ?, email = ?, cell = ?, addr1 = ?, addr2 = ?, city = ?, st = ?, zip = ?, usertype = ?, pwd = ? WHERE custid = ?';
 
-      await pool.execute(
-        sql, (err, results) => {
-          //Update failed
-          if (err)
-          {
-            console.error(`\nupdatecustomer failed. error: `, err.message);
-            let msg = err.message;
-            return res.status(409).send({ msg });
-
-            //Update succeeded
-          } else
-          {
-            console.error(`\nupdatecustomer success: `, results);
-            let msg = results;
-            return res.status(200).send({ msg });
-          }
-        }
-      );
-    } else
-    {
+      pool.execute(sql, [firstname,
+      lastname,
+      email,
+      cell,
+      addr1,
+      addr2,
+      city,
+      st,
+      zip,
+      usertype,
+      hashedPwd,
+      custid], (error, results) => {
+        if (error) throw error;
+        return res.status(200).json(results);
+      })
+    } else {
       //update customer with existing password
-      console.error(`\nUpdate with existing password. req.body: `, req.body);
-      console.error(`\nUpdate with existing password. custid: `, custid);
 
-      var sql = `UPDATE customer SET firstname = "${firstname}", lastname = "${lastname}", email = "${email}", cell = "${cell}", addr1 = "${addr1}", addr2 = "${addr2}", city = "${city}", st = "${st}", zip = "${zip}", usertype = "${usertype}" WHERE customer.custid = "${custid}"`;
+      let sql = 'UPDATE customer SET firstname = ?, lastname = ?, email = ?, cell = ?, addr1 = ?, addr2 = ?, city = ?, st = ?, zip = ?, usertype = ? WHERE custid = ?';
 
-      await pool.execute(
-        sql, (err, results) => {
-          //Update failed
-          if (err)
-          {
-            console.error(`\nUpdate failed. error: `, err.message);
-            let msg = err.message;
-            return res.status(409).send(msg);
-
-            //Update succeeded
-          } else
-          {
-            console.error(`\nUpdate success: `, results);
-            let msg = results;
-            return res.status(200).send(msg);
-          }
-        }
-      );
+      pool.execute(sql, [firstname,
+        lastname,
+        email,
+        cell,
+        addr1,
+        addr2,
+        city,
+        st,
+        zip,
+        usertype,
+        custid], (error, results) => {
+          if (error) throw error;
+          return res.status(200).json(results);
+        })
     };
-  } catch(err) { throw(err)};
+  } catch(error) {
+    return res.status(500).json(error);
+  };
 });
 
 // get customer by custid
@@ -274,10 +260,8 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
   {
     let sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, username, createdate FROM customer WHERE custid = ?';
     
-    await pool.execute(sql, [custid], (error, results) => {
-      if(error) {
-        return(error);
-      }
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
       if(results.length > 0) {
         return res.status(200).json(results);
       }
@@ -290,35 +274,34 @@ router.get("/api/getcustomerbycustid/:custid", async (req, res) => {
 
 router.get("/api/listcustomers", async (req, res) => {
   try {
-    var sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype,  createdate, lastupdate FROM customer';
+    let sql = 'SELECT custid, firstname, lastname, email, cell, addr1, addr2, city, st, zip, usertype, createdate, lastupdate FROM customer';
     
-      await (await pool.execute(sql, (error, results) => {
-        if(error) {
-          return console.error(error.message);
-        }
+      pool.execute(sql, (error, results) => {
+        if(error) throw error;
         return res.status(200).json(results);
-      }));
+      });
   } catch(error) {
-    console.error(`error: `, error.message);
+    console.error(`error: `, error.name, error.message);
     return (error);
   }  
 });
 
 // delete customer by custid
 router.delete("/api/deletecustomer/:custid", async function (req, res) {
-  try {
-  let custid = req.params.custid;
-  
-  const response = await pool.execute(
-    `DELETE from customer WHERE customer.custid = ${custid}`);
+  try
+  {
+    let custid = req.params.custid;
+    
+    let sql = 'DELETE FROM customer WHERE custid = ?';
 
-    if (response) {
-      console.error(`\n\ndeletecustomer response: `, response);
-      return res.status(200).send(response);
-    }
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
+      return res.status(200).json(results);
+    });
+    
   } catch (err) {
-    console.error(`\n\ndelete customer err: `, err);
-    return res.status(404).send(err);
+    console.error(`delete customer err: `, err);
+    return res.status(500).json(err);
   }
 });
 
@@ -356,9 +339,8 @@ router.post("/api/addsubscription", async (req, res) => {
     pool.execute(sql, [custid, cell, zip, nickname, weatheralert, virusalert, airalert], (error, results) => {
       if (error)
         throw error;
-      console.log(`insert results:`, results);
-      if (results.insertId > 0)
-      {
+      
+      if (results.insertId > 0) {
         return res.status(200).send(results);
       }
     });
@@ -411,13 +393,11 @@ router.delete("/api/deletesubscription/:id", async function (req, res) {
   try
   {
     let id = req.params.id;
-    console.error(`\n\ndeletesubscription id: `, id);
-
+    
     let sql = 'DELETE FROM subscriber WHERE subscriber.id = ?';
-    await pool.execute(sql, [id], (error, results) => {
-      if(error) {
-        return error.message;
-      }
+
+    pool.execute(sql, [id], (error, results) => {
+      if(error) throw error;
       return res.status(200).json(results);
     });
     
@@ -435,10 +415,8 @@ router.get("/api/getlocationsbycustid/:custid", async (req, res) => {
   {
     let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ?`;
 
-    await pool.execute(sql, [custid], (error, results) => {
-      if(error) {
-        return console.error(error.message);
-      }
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
       if(results.length > 0) {
         return res.status(200).send(results);
       }
@@ -458,11 +436,12 @@ router.get("/api/getlocationbyid/:id", async (req, res) => {
   {
     let sql =`SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.id = ?`;
 
-    await pool.execute(sql, [id], (error, results) => {
-      if(error) {
-        return console.error(error.message);
+    pool.execute(sql, [id], (error, results) => {
+      if(error) throw error;
+      if(results.length > 0) {
+        return res.status(200).send(results);
       }
-      return res.status(200).send(results);
+      return res.status(404).send('No records found');
     })
   } catch(error) {
     console.error(`error: `, error.message);
@@ -475,16 +454,13 @@ router.get("/api/getlocationbyid/:id", async (req, res) => {
 router.post("/api/listsubscriptions", async (req, res) => {
   try
   {
-    const {
-      custid
-    } = req.body;
+    const {custid} = req.body;
 
     let sql = 'SELECT subscriber.id, subscriber.zip, cell, custid, nickname, weatheralert, virusalert, airalert, stateid, city FROM subscriber INNER JOIN zipdata ON zipdata.zip = subscriber.zip WHERE subscriber.custid = ?';
     
-    await pool.execute(sql, [custid], (error, results) => {
-      if(error) {
-        return console.error(error.message);
-      }
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
+
       if(results.length > 0) {
         return res.status(200).send(results);
       }
@@ -496,41 +472,46 @@ router.post("/api/listsubscriptions", async (req, res) => {
   }  
 });
   
+// look for a duplicate friend
+router.post("/api/findduplicatefriend", async (req, res) => {
+  try
+  {
+    const {custid, firstname, zip, cell } = req.body;
+
+    let sql = 'SELECT * from friends WHERE custid = ? AND cell = ?';
+    
+    pool.execute(sql, [custid, cell], (error, results) => {
+      if (error) throw error;
+      console.log(`lookup friend results:`, results);
+      if (results.length > 0) {
+        return res.status(409).send(results);
+      }
+      return res.status(404).send('not found');
+    });
+  } catch(error) {
+    console.error(`lookup friend error: `, error.name, error.message);
+    return res.status(500).json(error.name, error.message);
+  }
+})
 
 // add new friend for custid
 router.post("/api/addfriend", async (req, res) => {
-  try
-  {
-    const {
-      custid,
-      firstname,
-      zip,
-      cell
-    } = req.body;
-    let sql = 'SELECT * from friends WHERE friends.custid = ? AND friends.cell = ? ';
+  try {
+    const {custid, firstname, zip, cell } = req.body;
 
-    await pool.execute(sql, [custid, cell], (error, results) => {
-      if (error) {
-        return res.status(500).json(error.message);
+    let sql = 'INSERT INTO friends (custid, firstname, zip, cell, active) VALUES (?,?,?,?,?)';
+
+    pool.execute(sql, [custid, firstname, zip, cell, "1"], (error, results) => {
+      if (error) throw error;
+
+      if(results.insertId > 0) {
+        return res.status(200).send(results);;
       }
-      if(results.length > 0) {
-        return res.status(418).json('error: friend with duplicate cell found');
-      }
-    })
-    let moresql = 'INSERT INTO friends (custid, zip, cell, active, firstname) VALUES (?,?,?,?,?)';
-    pool.execute(sql, [custid, zip, cell, 1, firstname], (err, results) => {
-      if (err) {
-        console.error(`Friend INSERT failed. error: `, err.message);
-        let msg = err.message;
-        return res.status(409).json( msg );
-      } else {
-        console.error(`Friend INSERT success: `, results);
-        return res.status(200).json(results);
-      }
-    })
-  } catch (err) {
-    return (err);
-  };
+    });
+  } catch (error) {
+    console.error(`failed to add friend: `, error.name, error.message);
+    return res.status(500).json({name: error.name, message: error.message});
+  }
 });
 
 // update existing friend for custid & id
@@ -545,29 +526,28 @@ router.post("/api/updatefriend", async function (req, res) {
       id,
     } = req.body;
 
-    const foundFriend = await pool.execute(`SELECT * from friend WHERE friend.custid = ${custid} and friend.id = ${id}`);
+    let sql = 'SELECT * from friends WHERE custid = ? AND id = ?';
+    
+    pool.execute(sql, [custid, id], (error, results) => {
+      if(error) {
+        return(error.message);
+      }
+      if(results.length > 0) {
+        let sql2 = 'UPDATE friends SET cell = ?, zip = ?, firstname = ? WHERE custid = ? AND id = ?';
 
-    if (foundFriend)
-    {
-      await pool.execute(`UPDATE friends SET firstname = ${firstname}, zip = ${zip}, cell = ${cell} WHERE friends.custid = ${custid} AND friends.id = ${id}`),
-      
-        (err, results) => {
-          if (results)
-          {
-            console.error(`\n\nupdatefriend success results: `, results)
-            return res.status(200).send(results);
+        pool.execute(sql2, [cell, zip, firstname, custid, id], (error, results) => {
+          if(error) {
+            return(error.message);
           }
-          return res.status(404).send(err);
-        }
-      
-    };
-    return res;
-  } catch (err)
-  {
-    console.error(`\n\nupdatefriend error: `, err.name, err.message);
-    return (err)
+          return res.status(200).json(results);
+        })
+      }
+    })
+  } catch(error) {
+    console.error(`error: `,error.message);
+    return(error);
   }
-});
+});  
 
 
 // delete friend 
@@ -575,31 +555,53 @@ router.delete("/api/deletefriend/:id", async function (req, res) {
   try
   {
     let id = req.params.id;
-    const response = await pool.execute(
-      `DELETE from friends WHERE friends.id = ${id}`);
-    if (response)
-    {
-      console.error(`\n\ndeletefriend response: `, response);
-      return res.status(200).send(response);
-    }
-  } catch (err)
-  {
-    console.error(`\n\ndelete friend err: `, err);
-    return res.status(404).send(err);
+
+    let sql = 'DELETE FROM friends WHERE id = ?';
+
+    pool.execute(sql, [id], (error, results) => {
+      if(error) {
+        return error.message;
+      }
+      return res.status(200).json(results);
+    });
+    
+  } catch (err) {
+    console.error(`delete friends err: `, err);
+    return res.status(500).json(err);
   }
 });
 
-//getfriendsbycustid
+// getFriendsByCustid
 router.get("/api/getfriendsbycustid/:custid", async (req, res) => {
   let custid = req.params.custid;
 
   try
   {
     let sql = 'SELECT friends.id, friends.zip, cell, custid, firstname, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.custid = ?';
-    await pool.execute(sql, [custid], (error, results) => {
-      if(error) {
-        return console.error(error.message);
+
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
+      if(results.length > 0) {
+        return res.status(200).send(results);
       }
+      return res.status(404).send('No records found');
+    })
+  } catch(error) {
+    console.error(`error: `, error.message);
+    return (error);
+  }  
+});
+
+//getfriendbyid
+router.get("/api/getfriendbyid/:id", async (req, res) => {
+  let id = req.params.id;
+
+  try
+  {
+    let sql = 'SELECT friends.id, friends.zip, cell, custid, firstname, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.id = ?';
+    
+    pool.execute(sql, [id], (error, results) => {
+      if(error) throw error;
       if(results.length > 0) {
         return res.status(200).send(results);
       }
@@ -613,23 +615,24 @@ router.get("/api/getfriendsbycustid/:custid", async (req, res) => {
 
 // get list of friends for custid
 router.post("/api/listfriends", async function (req, res) {
-  let {
-    custid
-  } = req.body;
+  try
+  {
+    const {custid} = req.body;
 
-  const friendcount = await pool.execute(`SELECT COUNT(*) as num FROM friends WHERE friends.custid = ${custid}`);
-  console.error(`friendcount: `, friendcount);
-  if (friendcount.num === '0')
-  {
-    return res.status(204).json('No friends found');
-  }
-  let list;
-  if (friendcount.num > 0)
-  {
-    list = await pool.execute(`SELECT * from friends WHERE friends.custid = ${custid}`);
-    return res.status(200).json({ list });
-  }
-  return res.status(200).json({ list });
+    let sql = 'SELECT friends.id, friends.zip, cell, custid, stateid, city FROM friends INNER JOIN zipdata ON zipdata.zip = friends.zip WHERE friends.custid = ?';
+    
+    pool.execute(sql, [custid], (error, results) => {
+      if(error) throw error;
+      
+      if(results.length > 0) {
+        return res.status(200).send(results);
+      }
+      return res.status(404).send('No records found');
+    })
+  } catch(error) {
+    console.error(`error: `, error.message);
+    return (error);
+  }  
 });
 
 // verify zip
@@ -794,10 +797,10 @@ function checkAuthenticated (req, res, next) {
 };
 
 server.get('/*', (req, res) => {
-  if(process.env.NODE_ENV === 'prod') {
-    res.sendFile(path.join(__dirname, '/public', 'index.html'));
-  } else {
+  if(process.env.NODE_ENV === 'dev') {
     res.sendFile(path.join(__dirname, '/dashboard/build', 'index.html'));
+  } else {
+    res.sendFile(path.join(__dirname, '/public', 'index.html'));
   }
   
 });

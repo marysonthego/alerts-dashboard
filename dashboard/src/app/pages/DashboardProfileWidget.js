@@ -28,17 +28,7 @@ export function DashboardProfileWidget ({ className }) {
         </div>
 
         <div className="card-toolbar">
-          <Dropdown className="dropdown-inline" drop="down" alignRight>
-            <Dropdown.Toggle
-              className="btn btn-transparent-dark btn-sm font-weight-bolder dropdown-toggle px-5"
-              variant="transparent"
-              id="dropdown-toggle-top">
-              Export
-            </Dropdown.Toggle>
-            <Dropdown.Menu className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
-              <DropdownMenu2 />
-            </Dropdown.Menu>
-          </Dropdown>
+          
         </div>
       </div>
       {/* Body */ }
@@ -54,7 +44,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ ('/media/a4g/Settings4.svg') }>
+                      src='/media/a4g/Settings4.svg' title="Your Account">
                     </SVG>
                   </span>
                   Account
@@ -68,7 +58,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ ('/media/a4g/Group.svg') }>
+                      src='/media/a4g/Group.svg' title="Friends List">
                     </SVG>
                   </span>
                   Friends
@@ -84,9 +74,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7 mb-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ (
-                        '/media/a4g/Flag.svg'
-                      ) }></SVG>
+                      src='/media/a4g/Flag.svg' title="Alert Locations"></SVG>
                   </span>
                   Alert Locations
                 </div>
@@ -99,9 +87,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ (
-                        '/media/a4g/Highvoltage.svg'
-                      ) }></SVG>
+                      src='/media/a4g/Highvoltage.svg' title="Latest Alerts"></SVG>
                   </span>
                   Latest Alerts
                 </div>
@@ -118,9 +104,7 @@ export function DashboardProfileWidget ({ className }) {
                 <div className="col bg-gray-100 px-6 py-8 rounded-xl mr-7">
                   <span className="svg-icon svg-icon-3x svg-icon-warning d-block my-2">
                     <SVG
-                      src={ (
-                        '/media/a4g/Clipboard.svg'
-                      ) }></SVG>
+                      src='/media/a4g/Clipboard.svg' title="Customers"></SVG>
                   </span>
                   Customer List
                 </div>

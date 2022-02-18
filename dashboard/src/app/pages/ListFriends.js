@@ -17,7 +17,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
   Box,
   Button,
-  makeStyles,
   Checkbox,
   FormControlLabel,
   Table,
@@ -32,32 +31,6 @@ import {
   Paper,
   Switch,
 } from '@material-ui/core';
-
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    marginBottom: '2em',
-    flexDirection: 'column',
-    justifyContent: 'flexStart',
-  },
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexShrink: '1',
-    '@media (max-width: 560px)': {
-      flexDirection: 'column',
-      justifyContent: 'flexStart',
-    },
-  },
-  text: {
-    marginLeft: '1vw',
-    marginRight: '1vw',
-  },
-  textfield: {
-    marginRight: '1rem',
-  },
-});
 
 export const ListFriends = () => {
   let custid = useSelector(selectUserCustid);
@@ -230,7 +203,7 @@ EnhancedTableHead.propTypes = {
 
 function EnhancedTable(props) {
   const { rows, custid } = props;
-  const classes = useStyles();
+  //const classes = useStyles();
   let length = rows.length;
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
@@ -330,7 +303,7 @@ function EnhancedTable(props) {
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box className={classes.container}>
+    <Box sx={{ width: '100%' }}>
       <Paper sx={{ width: '100%', mb: 2 }}>
         {/* <EnhancedTableToolbar numSelected={selected.length} /> */}
         <TableContainer>

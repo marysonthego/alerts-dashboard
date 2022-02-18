@@ -73,5 +73,15 @@ GET returns array of objects
                   </a>    
                 </div>
                 
-
+<Dropdown className="dropdown-inline" drop="down" alignRight>
+            <Dropdown.Toggle
+              className="btn btn-transparent-dark btn-sm font-weight-bolder dropdown-toggle px-5"
+              variant="transparent"
+              id="dropdown-toggle-top">
+              Export
+            </Dropdown.Toggle>
+            <Dropdown.Menu className="dropdown-menu dropdown-menu-sm dropdown-menu-right">
+              <DropdownMenu2 />
+            </Dropdown.Menu>
+          </Dropdown>
     

@@ -37,7 +37,7 @@ export function Brand() {
             {/* begin::Toggle */}
             <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
               <span className="svg-icon svg-icon-xl">
-                  <SVG src="/media/a4g/Angle-double-left.svg"/>
+                  <SVG src="/media/a4g/Angle-double-left.svg" title="Hide Sidebar"/>
               </span>
             </button>
             {/* end::Toolbar */}

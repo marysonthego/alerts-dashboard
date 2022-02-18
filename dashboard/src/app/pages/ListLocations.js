@@ -18,7 +18,6 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import {
   Box,
   Button,
-  makeStyles,
   Checkbox,
   FormControlLabel,
   Table,
@@ -33,31 +32,6 @@ import {
   Paper,
   Switch,
 } from '@material-ui/core';
-const useStyles = makeStyles({
-  container: {
-    display: 'flex',
-    marginBottom: '2em',
-    flexDirection: 'column',
-    justifyContent: 'flexStart',
-  },
-  row: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexShrink: '1',
-    '@media (max-width: 760px)': {
-      flexDirection: 'column',
-      justifyContent: 'flexStart',
-    },
-  },
-  text: {
-    marginLeft: '1vw',
-    marginRight: '1vw',
-  },
-  textfield: {
-    marginRight: '1rem',
-  },
-});
 
 export const ListLocations = () => {
   let custid = useSelector(selectUserCustid);

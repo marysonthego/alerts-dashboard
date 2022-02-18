@@ -60,7 +60,7 @@ export const apiSlice = createApi({
         //Origin: Origin,
         body: newUser
       }),
-      //invalidatesTags: ['User']
+      invalidatesTags: ['User', 'Customers']
     }),
 
     updateCustomer: builder.mutation({
@@ -70,7 +70,7 @@ export const apiSlice = createApi({
         //Origin: Origin,
         body: initialUser
       }),
-      invalidatesTags: ['User']
+      invalidatesTags: ['User', 'Customers']
     }),
 
     deleteCustomer: builder.mutation({
@@ -142,6 +142,15 @@ export const apiSlice = createApi({
         url: '/addfriend',
         method: 'POST',
         //Origin: Origin,
+        body: newFriend
+      }),
+      invalidatesTags: ['Friends']
+    }),
+
+    findDuplicateFriend: builder.mutation({
+      query: newFriend => ({
+        url: '/findduplicatefriend',
+        method: 'POST',
         body: newFriend
       }),
       invalidatesTags: ['Friends']
@@ -219,6 +228,7 @@ export const {
 
   useGetFriendsByCustidQuery,
   useAddFriendMutation, 
+  useFindDuplicateFriendMutation,
   useUpdateFriendMutation,
   useDeleteFriendMutation,
 } = apiSlice;

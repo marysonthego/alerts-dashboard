@@ -1,7 +1,12 @@
 import React, { useState } from 'react'
-import { apiSlice, useAddFriendMutation, useFindZipMutation } from 'app/redux/apiSlice';
+import { apiSlice, 
+  useAddFriendMutation, 
+  useFindDuplicateFriendMutation,
+  useFindZipMutation 
+} from 'app/redux/apiSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectUserCustid } from 'app/redux/userSlice';
+import { addNewFriend, updateFriendIdState } from "app/redux/friendsSlice";
 import { CellNumberFormat } from 'app/helpers/Formatters';
 import { initFriend, initFriendErrors } from 'app/helpers/Initializers';
 import { FormValidation, fieldsValidation } from 'app/helpers/FormValidation';
@@ -51,6 +56,7 @@ export const AddFriendForm = () => {
   const [canSave, setCanSave] = useState(false);
   const [friend, setFriend] = useState(initFriend);
   const [friendErrors, setFriendErrors] = useState(initFriendErrors);
+  const [findDuplicateFriend] = useFindDuplicateFriendMutation();
   const { enqueueSnackbar } = useSnackbar();
   const [addFriend] = useAddFriendMutation();
   const [findZip] = useFindZipMutation();
@@ -95,59 +101,70 @@ export const AddFriendForm = () => {
       weatheralert: friend.weatheralert,
       virusalert: friend.virusalert,
       airalert: friend.airalert,
+      zip: "",
     }
     let zip;
     let zipResponse = 200;
-    try
-    {
+    try {
       await findZip(fr).unwrap()
         .then((payload) => {
           zip = payload;
           fr = { ...fr, zip: zip };
-        })
-      setFriend(prev => {
-        return { ...prev, fr };
-      });
-    } catch (err)
-    {
-      const message = JSON.stringify(err.msg) + ` Did you spell it correctly?`;
+          setFriend({...friend, fr });
+        });
+    } catch (error) {
+      console.error(error.name, error.message);
+      const message = JSON.stringify(error.data.msg) + ` Did you spell it correctly?`;
       enqueueSnackbar(message, {
         variant: 'info',
         autoHideDuration: 5000,
       });
-      setFriendErrors(prev => (
-        prev = { ...prev, city: 'City not found for State', st: "State" }
+      setFriendErrors(
+        (prev) => 
+          (prev = { ...prev, city: 'City not found for State', st: "State" }
       ));
       zipResponse = 404;
     };
-    if (zipResponse === 200)
-    {
-      try
-      {
-        await addFriend(fr).unwrap()
+    if (zipResponse === 200) {
+      try {
+        await findDuplicateFriend(fr)
+          .unwrap()
           .then((payload) => {
-            console.log(`addfriend payload: `, payload);
-            dispatch(updateNextEnabled(true));
-            dispatch(updateBackEnabled(true));
-            //dispatch(addNewFriend(fr));
-            setFriend(initFriend);
+            console.log(`payload:`, payload);
+            const message =
+              "Friend is already in your list. \nAdd another friend!";
+
+            enqueueSnackbar(message, {
+              variant: "info",
+              autoHideDuration: 5000,
+            });
+            setFriendErrors((prev) => ({ ...prev, friend: "Duplicate Friend" }));
           });
-      } catch (err)
-      {
-        const message = 'Friend is already in your list. \nAdd another friend!';
-        enqueueSnackbar(message, {
-          variant: 'info',
-          autoHideDuration: 5000,
-        });
-        setFriendErrors(prev => (
-          { ...prev, city: 'Duplicate City' }
-        ))
-      };
-      handleFriendsRefetch({ custid: custid });
-      console.log(`AddfriendForm onSavefriendClicked fr: `, fr);
-      return;
-    };
-  }
+      } catch (error) {
+        setCanSave(true);
+        console.error(error.name, error.message);
+      }
+
+      if (canSave) {
+        try {
+          await addFriend(fr)
+            .unwrap()
+            .then((payload) => {
+              console.log(`addFriend payload: `, payload);
+              dispatch(addNewFriend(fr));
+              dispatch(updateFriendIdState(payload));
+              dispatch(updateNextEnabled(true));
+              dispatch(updateBackEnabled(true));
+              setFriend(initFriend);
+              handleFriendsRefetch({ custid: custid });
+            });
+        } catch (error) {
+          console.error(error.name, error.message);
+        }
+      }
+    }
+  };
+
   const HandleOnBlur = async (e) => {
     let field = e.target.name;
     let value = e.target.value;
@@ -279,7 +296,7 @@ export const AddFriendForm = () => {
             style={ { background: '#f9aa33' } }
             onClick={ onSaveFriendClicked }>
             <SVG
-              src="/media/a4g/marker1.svg"
+              src="/media/a4g/marker1.svg" title="Save Friend"
               className="max-h-70px svg-icon-lg svg-icon-white"
             />
             &nbsp;&nbsp;Save friend
