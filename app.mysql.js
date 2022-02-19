@@ -1,6 +1,5 @@
 const path = require('path');
 require("dotenv").config();
-//const cors = require('cors');
 const express = require("express");
 const server = express();
 const pool = require("./dbConfig.mysql");
@@ -14,25 +13,6 @@ const saltRounds = 10;
 const PORT = process.env.PORT || 4000;
 
 server.set("view engine", "ejs");
-
-// var whitelist = [
-//   'http://localhost:3002', 
-//   'http://localhost:3000']; //white list consumers
-// var corsOptions = {
-//   origin: function (origin, callback) {
-//     if (whitelist.indexOf(origin) !== -1) {
-//       callback(null, true);
-//     } else {
-//       callback(null, false);
-//     }
-//   },
-//   methods: ['GET', 'PUT', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
-//   optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-//   credentials: true, //Credentials are cookies, authorization headers or TLS client certificates.
-//   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'device-remember-token', 'Access-Control-Allow-Origin', 'Origin', 'Accept']
-// };
-
-// server.use(cors(corsOptions)); //add cors middleware to express with above configuration
 
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json());
@@ -806,7 +786,6 @@ server.get('/*', (req, res) => {
 });
 
 server.listen(PORT, () => {
-  //console.error(`CORS enabled Server with whitelist is running on port ${PORT}\n`);
   console.error(`CORS disabled. Running mySQL on port ${PORT} NODE_ENV = ${process.env.NODE_ENV}\n`);
 });
 
