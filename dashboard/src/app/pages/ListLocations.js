@@ -10,7 +10,6 @@ import {
   apiSlice,
 } from 'app/redux/apiSlice';
 import { 
-  addNewLocation, 
   editLocation, 
   removeLocation,  
 } from 'app/redux/locationsSlice';
@@ -44,19 +43,25 @@ export const ListLocations = () => {
       isSuccess,
       isError,
       error, 
-    } = useGetLocationsByCustidQuery(custid);
+      refetch,
+    } = useGetLocationsByCustidQuery(custid, {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+      skip: false,
+      pollingInterval: 0,
+
+    });
     let success = false;
     let content;
     let rows = [];
 
     if (isLoading) {
       content = <CircularProgress />
-      //console.log(`isLoading`);
       return null;
 
     } else if (isFetching) {
       content = <CircularProgress />
-      //console.log(`isFetching`);
       return null;
       
     } else if (isError) {
@@ -68,11 +73,9 @@ export const ListLocations = () => {
       success=true;
       let locs = list.map((loc) => {
         loc = {...loc, st: loc.stateid};
-        dispatch(addNewLocation(loc));
         console.log(`isSuccess loc: `, loc);
         return loc;
       });
-    
       rows = locs.map((row) => {
         row = {...row, st: row.stateid};
         return row;
@@ -169,7 +172,6 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
@@ -213,6 +215,18 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+  
+function HandleLocationsRefetch({custid}) {
+  const dispatch = useDispatch();
+  console.log(`handleLocationsRefetch custid`, custid);
+  // has the same effect as `refetch` for the associated query
+  dispatch(
+    apiSlice.endpoints.getLocationsByCustid.initiate(custid,
+      {subscribe: false, forceRefetch: true }
+    )
+  );
+};
+
 function EnhancedTable(props) {
   const { rows, custid } = props;
 
@@ -229,36 +243,22 @@ function EnhancedTable(props) {
   const [ updateLocation ] = useUpdateLocationMutation();  
   const { enqueueSnackbar } = useSnackbar();
 
-  function handleLoctionsRefetch({custid}) {
-    // has the same effect as `refetch` for the associated query
-    dispatch(
-      apiSlice.endpoints.getLocationsByCustid.initiate(custid,
-        {subscribe: false, forceRefetch: true }
-      )
-    );
-  };
-  
-  const handleChange = (e, row) => {
+  const HandleChange = (e, row) => {
     e.preventDefault();
     let field = e.target.name;
     let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-    //console.log(`row: `, row.id, row);
     let loc = Object.assign({}, row);
     loc = {...loc, [field]: value};
-    
     if(e.target.type === 'checkbox') {
     try {
       updateLocation(loc).unwrap();
-    
       } catch(error) {
         console.log(`rejected error: `, error);
-        // enqueueSnackbar(`Failed to update location`, {
-        //   variant: 'info',
-        // });
       };
       dispatch(editLocation(loc));
     };
-    handleLoctionsRefetch({custid: custid});
+    let timeout = setTimeout(HandleLocationsRefetch, 3000, {custid: custid});
+    clearTimeout(timeout);
     console.log(`HandleChange field: value `, field, value);
   };
   
@@ -266,9 +266,7 @@ function EnhancedTable(props) {
     if(selected.length > 0) {
       selected.forEach(id => {
         try {
-          //console.log(`id: `, id);
           deleteLocation(id).unwrap();
-          
           } catch (err) {
             console.log(`delete err: `, err);
             const message = 'Delete location failed.';
@@ -278,10 +276,12 @@ function EnhancedTable(props) {
             });
           };
           dispatch(removeLocation(id));
-          handleLoctionsRefetch({custid: custid});
+          console.log(`HandleDelete location id`, id);
       });
-      handleLoctionsRefetch({custid: custid});
     };
+    let timeout = setTimeout(HandleLocationsRefetch, 3000, {custid: custid});
+    clearTimeout(timeout);
+    console.log(`HandleDelete custid`, custid);
   };
 
   const handleRequestSort = (event, property) => {
@@ -294,7 +294,6 @@ function EnhancedTable(props) {
     if (event.target.checked) {
       const newSelecteds = rows.map((n) => n.id);
       setSelected(newSelecteds);
-      //console.log(`selected: `, selected, `newSelecteds: `, newSelecteds);
       return;
     }
     setSelected([]);
@@ -317,7 +316,6 @@ function EnhancedTable(props) {
       );
     }
     setSelected(newSelected);
-    //console.log(`selected: `, selected, `newSelected: `, newSelected);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -397,7 +395,7 @@ function EnhancedTable(props) {
                           color="primary"
                           defaultChecked={row.weatheralert}
                           name='weatheralert'
-                          onChange={e => handleChange(e, row)}
+                          onChange={e => HandleChange(e, row)}
                           inputProps={{
                             'aria-labelledby': labelId,
                           }}
@@ -408,7 +406,7 @@ function EnhancedTable(props) {
                           color="primary"
                           defaultChecked={row.virusalert}
                           name='virusalert'
-                          onChange={e => handleChange(e, row)}
+                          onChange={e => HandleChange(e, row)}
                           inputProps={{
                             'aria-labelledby': labelId,
                           }}
@@ -419,7 +417,7 @@ function EnhancedTable(props) {
                           color="primary"
                           defaultChecked={row.airalert}
                           name='airalert'
-                          onChange={e => handleChange(e, row)}
+                          onChange={e => HandleChange(e, row)}
                           inputProps={{
                             'aria-labelledby': labelId,
                           }}

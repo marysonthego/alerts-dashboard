@@ -35,8 +35,6 @@ import {
 export const ListFriends = () => {
   let custid = useSelector(selectUserCustid);
   const dispatch = useDispatch();
-  //read Friends from db
-    //console.log(`FetchData start`);
     const { 
       data: list = [],
       isLoading,
@@ -44,7 +42,14 @@ export const ListFriends = () => {
       isSuccess,
       isError,
       error, 
-    } = useGetFriendsByCustidQuery(custid);
+      refetch,
+    } = useGetFriendsByCustidQuery(custid, {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+      skip: false,
+      pollingInterval: 0,
+    });
     let success = false;
     let content;
     let rows = [];
@@ -201,9 +206,17 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+function HandleFriendsRefetch({custid}) {
+  const dispatch = useDispatch();
+  // has the same effect as `refetch` for the associated query
+  dispatch(
+    apiSlice.endpoints.getFriendsByCustid.initiate(custid,
+      {subscribe: false, forceRefetch: true }
+    )
+  );
+};
 function EnhancedTable(props) {
   const { rows, custid } = props;
-  //const classes = useStyles();
   let length = rows.length;
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('');
@@ -216,15 +229,6 @@ function EnhancedTable(props) {
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
 
-  function handleFriendsRefetch({custid}) {
-    // has the same effect as `refetch` for the associated query
-    dispatch(
-      apiSlice.endpoints.getFriendsByCustid.initiate(custid,
-        {subscribe: false, forceRefetch: true }
-      )
-    );
-  };
-  
   function HandleDelete (e) {
     if(selected.length > 0) {
       selected.forEach(id => {
@@ -241,9 +245,10 @@ function EnhancedTable(props) {
             });
           };
           dispatch(removeFriend(id));
-          handleFriendsRefetch({custid: custid});
       });
-      handleFriendsRefetch({custid: custid});
+      let timeout = setTimeout(HandleFriendsRefetch, 3000, {custid: custid});
+    clearTimeout(timeout);
+    console.log(`HandleDelete custid`, custid);
     };
   };
 

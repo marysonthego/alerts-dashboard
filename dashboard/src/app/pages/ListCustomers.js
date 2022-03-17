@@ -17,6 +17,7 @@ import {
   selectCustomers,
   selectCustomerByCustid
 } from 'app/redux/customersSlice';
+//import {useTimeout} from 'app/helpers/UseTimeout';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 //import Stack from '@material-ui/Stack'; - not until MUI v5 :(
 import {
@@ -76,7 +77,14 @@ export const ListCustomers = () => {
       isSuccess,
       isError,
       error, 
-    } = useListCustomersQuery();
+      refetch,
+    } = useListCustomersQuery({
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+      skip: false,
+      pollingInterval: 0,
+    });
     let success = false;
     let content;
     let rows = [];
@@ -265,6 +273,16 @@ EnhancedTableHead.propTypes = {
   rowCount: PropTypes.number.isRequired,
 };
 
+function HandleCustomersRefetch() {
+  const dispatch = useDispatch();
+  // has the same effect as `refetch` for the associated query
+  dispatch(
+    apiSlice.endpoints.listCustomers.initiate(
+      {subscribe: false, forceRefetch: true }
+    )
+  );
+};
+
 function EnhancedTable(props) {
   const { rows } = props;
   let length = rows.length;
@@ -279,42 +297,29 @@ function EnhancedTable(props) {
   const [ updateCustomer ] = useUpdateCustomerMutation();
   const dispatch = useDispatch();
   const { enqueueSnackbar } = useSnackbar();
-
-  function handleCustomersRefetch() {
-    // has the same effect as `refetch` for the associated query
-    dispatch(
-      apiSlice.endpoints.listCustomers.initiate(
-        {subscribe: true, forceRefetch: true }
-      )
-    );
+  
+  const HandleChange = (e, row) => {
+    e.preventDefault();
+    let field = e.target.name;
+    let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+    let cust = Object.assign({}, row);
+    cust = {...cust, [field]: value};
+    try {
+      updateCustomer(cust).unwrap();
+      } catch(error) {
+        console.log(`rejected error: `, error);
+      };
+      dispatch(editCustomer(cust));
+      let timeout = setTimeout(HandleCustomersRefetch, 3000);
+      clearTimeout(timeout);
   };
-
-  // const handleChange = (e, row) => {
-  //   e.preventDefault();
-  //   let field = e.target.name;
-  //   let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
-  //   //console.log(`row: `, row.id, row);
-  //   let cust = Object.assign({}, row);
-  //   cust = {...cust, [field]: value};
-    
-  //   try {
-  //     updateCustomer(cust).unwrap();
-  //     } catch(error) {
-  //       console.log(`rejected error: `, error);
-  //     };
-  //     dispatch(editCustomer(cust));
-    
-  //   handleCustomersRefetch();
-  //   //console.log(`HandleChange field: value `, field, value);
-  // };
-
-  function HandleDelete (e) {
+  
+  function HandleDelete (e, selected) {
     if(selected.length > 0) {
       selected.forEach(custid => {
         try {
           console.log(`delete custid: `, custid);
           deleteCustomer(custid).unwrap();
-                    
           } catch (err) {
             console.log(`delete err: `, err);
             const message = 'Delete customer failed.';
@@ -324,12 +329,12 @@ function EnhancedTable(props) {
             });
           };
           dispatch(removeCustomer(custid));
-          handleCustomersRefetch();
       });
-      handleCustomersRefetch();
     };
+      let timeout = setTimeout(HandleCustomersRefetch, 3000);
+      clearTimeout(timeout);
   };
-
+  
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
     setOrder(isAsc ? 'desc' : 'asc');
@@ -473,7 +478,7 @@ function EnhancedTable(props) {
         className="btn btn-error font-weight-bold mr-20" 
         startIcon={<DeleteForeverIcon />}
         disabled={selected.length > 0 ? false : true}
-        onClick={HandleDelete}>
+        onClick={(e) => HandleDelete(e, selected)}>
         Delete
         </Button>    
         <FormControlLabel
