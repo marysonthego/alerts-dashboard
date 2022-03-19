@@ -311,7 +311,6 @@ function EnhancedTable(props) {
       };
       dispatch(editCustomer(cust));
       let timeout = setTimeout(HandleCustomersRefetch, 3000);
-      clearTimeout(timeout);
   };
   
   function HandleDelete (e, selected) {
@@ -332,7 +331,6 @@ function EnhancedTable(props) {
       });
     };
       let timeout = setTimeout(HandleCustomersRefetch, 3000);
-      clearTimeout(timeout);
   };
   
   const handleRequestSort = (event, property) => {

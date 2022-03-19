@@ -218,7 +218,6 @@ EnhancedTableHead.propTypes = {
   
 function HandleLocationsRefetch({custid}) {
   const dispatch = useDispatch();
-  console.log(`handleLocationsRefetch custid`, custid);
   // has the same effect as `refetch` for the associated query
   dispatch(
     apiSlice.endpoints.getLocationsByCustid.initiate(custid,
@@ -258,7 +257,6 @@ function EnhancedTable(props) {
       dispatch(editLocation(loc));
     };
     let timeout = setTimeout(HandleLocationsRefetch, 3000, {custid: custid});
-    clearTimeout(timeout);
     console.log(`HandleChange field: value `, field, value);
   };
   
@@ -280,7 +278,6 @@ function EnhancedTable(props) {
       });
     };
     let timeout = setTimeout(HandleLocationsRefetch, 3000, {custid: custid});
-    clearTimeout(timeout);
     console.log(`HandleDelete custid`, custid);
   };
 

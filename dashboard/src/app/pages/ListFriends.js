@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectUserCustid } from 'app/redux/userSlice';
-import { useSnackbar } from 'notistack';
+import {useSelector, useDispatch} from 'react-redux';
+import {selectUserCustid} from 'app/redux/userSlice';
+import {useArgsTimeout} from 'app/helpers/UseTimeout';
+import {useSnackbar} from 'notistack';
 import { 
   useGetFriendsByCustidQuery,
   useDeleteFriendMutation, 
@@ -13,7 +14,7 @@ import {
   removeFriend,  
 } from 'app/redux/friendsSlice';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-//import Stack from '@material-ui/Stack'; - not until MUI v5 :(
+//import Stack from '@material-ui/Stack'; - not until MUI v5
 import {
   Box,
   Button,
@@ -215,6 +216,8 @@ function HandleFriendsRefetch({custid}) {
     )
   );
 };
+
+
 function EnhancedTable(props) {
   const { rows, custid } = props;
   let length = rows.length;
@@ -225,17 +228,14 @@ function EnhancedTable(props) {
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
   
-  const [ deleteFriend ] = useDeleteFriendMutation();
-  const dispatch = useDispatch();
-  const { enqueueSnackbar } = useSnackbar();
-
   function HandleDelete (e) {
+    const [deleteFriend] = useDeleteFriendMutation();
+    const dispatch = useDispatch();
+    const { enqueueSnackbar } = useSnackbar();
     if(selected.length > 0) {
       selected.forEach(id => {
         try {
-          console.log(`id: `, id);
           deleteFriend(id).unwrap();
-          
           } catch (err) {
             console.log(`delete err: `, err);
             const message = 'Delete friend failed.';
@@ -246,11 +246,12 @@ function EnhancedTable(props) {
           };
           dispatch(removeFriend(id));
       });
-      let timeout = setTimeout(HandleFriendsRefetch, 3000, {custid: custid});
-    clearTimeout(timeout);
-    console.log(`HandleDelete custid`, custid);
     };
+    useArgsTimeout(HandleFriendsRefetch, {custid: custid}, null);
   };
+  
+
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -373,7 +374,7 @@ function EnhancedTable(props) {
                 </TableRow>
               )}
             </TableBody>
-          </Table>
+          </Table> 
         </TableContainer>
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react'; 
 
 export function useTimeout(callback, delay) {
   const savedCallback = useRef();
@@ -6,7 +6,6 @@ export function useTimeout(callback, delay) {
   // Remember the latest callback.
   useEffect(() => {
     savedCallback.current = callback;
-    console.log(`callback`, callback);
   }, [callback]);
 
   // Set up the timeout.
@@ -25,36 +24,21 @@ export function useTimeout(callback, delay) {
 //   handleLoctionsRefetch({custid: custid});
 // }, 2000);
 
-// function useTimeout(callback, delay, arg1, arg2) {
-//   const savedCallback = useRef();
-//   const savedArg1 = useRef();
-//   const savedArg2 = useRef();
+//let timeout = setTimeout(HandleFriendsRefetch, 3000, {custid: custid});
 
-//   // Remember the latest callback.
-//   useEffect(() => {
-//     savedCallback.current = callback;
-//     savedArg1.current = arg1;
-//     savedArg2.current = arg2;
-//   }, [callback, arg1, arg2]);
-
-//   // Set up the timeout.
-//   useEffect(() => {
-//     function tick() {
-//       if(savedArg1.current !== null) {
-//         let arg1 = savedArg1.current;
-//         if(savedArg2.current !== null) {
-//           let arg2 = savedArg2.current;
-//           savedCallback.current(arg1, arg2);
-//         } else {
-//           savedCallback.current(arg1);
-//           };
-//       } else {
-//         savedCallback.current();
-//       };
-//     };
-//     if (delay !== null) {
-//       let id = setTimeout(tick, delay);
-//       return () => clearTimeout(id);
-//     }
-//   }, [delay]);
-// }
+export function useArgsTimeout(callback, arg1, arg2) {
+  const savedCallback = useRef();
+  const savedArg1 = useRef();
+  const savedArg2 = useRef();
+  // Remember the latest callback.
+  useEffect(() => {
+    savedCallback.current = callback;
+    savedArg1.current = arg1;
+    savedArg2.current = arg2;
+    function tick() {
+      savedCallback.current();
+    };
+    let id = setTimeout(() => tick(savedArg1.current, savedArg2.current), 3000);
+      return () => clearTimeout(id);
+  }, [callback, arg1, arg2]);
+}
