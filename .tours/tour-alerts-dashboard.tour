@@ -1,0 +1,151 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Tour-Alerts-Dashboard",
+  "steps": [
+    {
+      "file": "dashboard/src/index.js",
+      "description": "Initiate"
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "Show/hide opening splash screen",
+      "line": 39
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "Dev mode DebugRouter",
+      "line": 10,
+      "selection": {
+        "start": {
+          "line": 10,
+          "character": 1
+        },
+        "end": {
+          "line": 26,
+          "character": 3
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "React Router V5",
+      "line": 40
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "Redirect user based on logged in state",
+      "line": 44
+    },
+    {
+      "file": "dashboard/src/app/Routes.js",
+      "description": "Get currentUser from redux userSlice",
+      "line": 16
+    },
+    {
+      "file": "dashboard/src/app/Routes.js",
+      "description": "Redirect user to AuthPage (login) if not loggedIn",
+      "line": 24
+    },
+    {
+      "file": "dashboard/src/app/Routes.js",
+      "description": "Otherwise, redirect to basepage \"/\"",
+      "line": 28
+    },
+    {
+      "file": "dashboard/src/app/Routes.js",
+      "description": "If logged-in, do the Layout. Layout is mostly Metronic boilerplate. You can treat it as a black box.",
+      "line": 38
+    },
+    {
+      "file": "dashboard/src/app/Routes.js",
+      "description": "then show the BasePage",
+      "line": 39
+    },
+    {
+      "file": "dashboard/src/app/BasePage.js",
+      "description": "These are V5 nested routes. \r\n\r\nRouter V5 encouraged nested routes. V6 does not. \r\n\r\nIf the user is logged in, routes to functional pages are defined. If the user is also an admin, they also get the list-customers route. \r\n\r\nOtherwise, user can only navigate to the login page.",
+      "line": 24
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardPage.js",
+      "description": "Start the /dashboard route",
+      "line": 5
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardPage.js",
+      "description": "Show the Header",
+      "line": 9
+    },
+    {
+      "file": "dashboard/src/app/components/Header.js",
+      "description": "Metronic Header calls HeaderMenuWrapper.\r\n\r\nHeader is more Metronic boilerplate.",
+      "line": 7
+    },
+    {
+      "file": "dashboard/src/app/components/Header.js",
+      "description": "Call HeaderMenuWrapper to build menu contents",
+      "line": 32
+    },
+    {
+      "file": "dashboard/src/app/components/layout/HeaderMenuWrapper.js",
+      "description": "HeaderMenuWrapper builds a responsive left toggle menu drawer container",
+      "line": 7
+    },
+    {
+      "file": "dashboard/src/app/components/layout/HeaderMenuWrapper.js",
+      "description": "and puts the HeaderMenu in it.",
+      "line": 38
+    },
+    {
+      "file": "dashboard/src/app/components/HeaderMenu.js",
+      "description": "HeaderMenu is where the menu items and links are defined. \r\n\r\nThis is where you would change the items on the menu.",
+      "line": 9
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardPage.js",
+      "description": "DashboardProfileWidget contains the dashboard landing page ",
+      "line": 10
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "The dashboard landing page. Users can use the menus (top and drawer) or click on cards to choose a function",
+      "line": 12
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "Page level header",
+      "line": 23
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "UserProfileDropdown contains a menu of account-type user actions",
+      "line": 27
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "Link to User Profile - edit profile, change password",
+      "line": 41
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "View and edit your list of Friends",
+      "line": 55
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "View and edit your Locations list",
+      "line": 71
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "View a list of your latest alerts (disabled in demo)",
+      "line": 84
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "For Admin users only, list Customers",
+      "line": 101
+    }
+  ],
+  "ref": "19f3613b69957dc200c61a7210f2c94d9ff5f462"
+}

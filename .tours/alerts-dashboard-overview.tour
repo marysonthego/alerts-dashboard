@@ -1,0 +1,126 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "Alerts Dashboard Overview",
+  "steps": [
+    {
+      "title": "What is Alerts Dashboard?",
+      "description": "# Dashboard for Alerts for Good\r\n\r\nThis is the user dashboard for the *Alerts for Good* non-profit startup.\r\n\r\n**The Alerts for Good service sends text messages to users when weather, corona virus, or air quality alerts are issued for the selected zip codes.**\r\n\r\n\r\nOn the dashboard, users can:\r\n## Profile\r\n- Edit profile info\r\n- Change password\r\n- Update the cell phone number to receive alerts\r\n\r\n## Locations\r\n- add, change, or delete alert locations\r\n- have any number of locations within the US\r\n- specify which types of alerts to get for each location.\r\n- keep a location in the list and temporarily disable alerts for it.\r\n- Give locations nicknames (Mom's house, Office, etc.)\r\n\r\n## Friends\r\n- Create a list of friends to also send alerts to.\r\n- Specify one location for the friend to get alerts from.\r\n- Specify what type of alerts to send for the location.\r\n- Add, update, and delete friends from the list.\r\n- Friends get an opt-in text they must respond to before any alerts are sent.\r\n- Friends are invited to join Alerts for Good to be able to specify more than one location, change alert types, and enable/disable alerts as needed.\r\n\r\n## Donations\r\n- Alerts for Good is a free service\r\n- Donations are accepted through the *GiveLively* API on the Donations page."
+    },
+    {
+      "file": "dashboard/src/index.js",
+      "description": "# index.js\r\n- ## the entry point to the app\r\n- ## Uses the Metronic Theme\r\n- ## React Router V5\r\n- ## Redux Tookkit Query aka (RTK Query)",
+      "line": 48
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "# App.js\r\n\r\n- ## *DebugRouter* is enabled automatically only in Development mode.\r\n\r\n- ## It console logs location state to help debug routing problems.",
+      "line": 10
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "# App.js \r\n- ## *AuthInit* shows/hides the opening splashscreen",
+      "line": 39
+    },
+    {
+      "file": "dashboard/src/app/App.js",
+      "description": "# App.js\r\n- ## *Routes* redirects based on whether or not the user is logged in.",
+      "line": 44
+    },
+    {
+      "file": "dashboard/src/app/BasePage.js",
+      "description": "# BasePage.js\r\n\r\n- ## *Routes* redirects to *BasePage* when the user is logged in.\r\n- ## *BasePage* sets the *currentUser* from the *userSlice* in the RTK Query store.",
+      "line": 18
+    },
+    {
+      "file": "dashboard/src/app/BasePage.js",
+      "description": "# BasePage.js\r\n\r\n- ## If the user is an admin, */list-customers* is added to their possible routes.",
+      "line": 32
+    },
+    {
+      "file": "dashboard/src/app/BasePage.js",
+      "description": "Redirect to `/dashboard`",
+      "line": 38
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardPage.js",
+      "description": "# DashboardPage.js\r\n- ## calls *Header* to create the overall site header, then *DashboardProfileWidget* - the dashboard landing page.",
+      "line": 5
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "# DashboardProfileWidget.js\r\n- ## A page of links that mirrors the links in the slider and top menus.",
+      "line": 12
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "# DashboardProfileWidget.js\r\n\r\n- ## *UserProfileDropdown* is where users can logout, make a donation, or recurring donation by linking to the *GiveLively* API",
+      "line": 27
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "# DashboardProfileWidget.js\r\n- ## Admin users also see a *List Customers* link on the dashboard and on the menus.",
+      "line": 98
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "# DashboardProfileWidget.js\r\n\r\n- ## The *Account* link opens *UserProfilePage*, a wrapper to the components that let users update their account profile and change their password.",
+      "line": 41
+    },
+    {
+      "file": "dashboard/src/app/pages/DashboardProfileWidget.js",
+      "description": "# DashboardProfileWidget.js\r\n\r\n- ## The links to */friends-list* and */locations-list* work the same.\r\n\r\n- ### Locations goes to *LocationsStep*. Friends goes to *FriendsStep*. \r\n\r\n### These components are also used by the sign-up stepper *ProfileStepper*",
+      "line": 71
+    },
+    {
+      "file": "dashboard/src/app/pages/LocationsStep.js",
+      "description": "# LocationsStep.js\r\n- ## *LocationsStep* has an explanatory heading \r\n\r\n- ## *AddLocationForm* is where users can add new locations to monitor. \r\n\r\n- ## *ListLocations* is a responsive bootstrap table that lists all the locations.\r\n### In the table users can:\r\n- Delete locations.\r\n- Change the type of alerts to get for a location.\r\n- Change the nickname of a location.",
+      "line": 64,
+      "selection": {
+        "start": {
+          "line": 162,
+          "character": 8
+        },
+        "end": {
+          "line": 162,
+          "character": 23
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/pages/UserProfilePage.js",
+      "description": "# UserProfilePage.js\r\n\r\n- ## *UserProfilePage* is the dashboard presentation wrapper for *ProfileForm*. \r\n\r\n- ## The *ProfileForm* is also used by the *ProfileStepper*.\r\n\r\n- ## The *ProfileStepper* is a stepper series for new users to sign-up.",
+      "line": 19
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "The **ProfileForm** component is basically a controlled form which collects and displays user profile info.\r\n\r\n- Validates input through event handlers\r\n  - `handleOnChange`\r\n  - `handleCellChange` (only saves cell number - no formatting)\r\n  - `handleOnBlur` does most of the work \r\n    - Fixes capitalization of first/last name, city, and state\r\n    - If `fieldsValidation` is defined for the field, calls `FormValidation` helper. \r\n    - displays validation errors \r\n    - dispatches user object to `updateCustomer` in store\r\n    - sets error messages in local state \r\n\r\n- Passwords are validated but not stored in user store",
+      "line": 39,
+      "selection": {
+        "start": {
+          "line": 84,
+          "character": 9
+        },
+        "end": {
+          "line": 84,
+          "character": 21
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "Cell number is a special case. It is formatted with the helper `CellNumberFormat` which gets it by using `InputProps` to intercept the cell number and return it properly formatted.",
+      "line": 287,
+      "selection": {
+        "start": {
+          "line": 286,
+          "character": 13
+        },
+        "end": {
+          "line": 299,
+          "character": 15
+        }
+      }
+    }
+  ],
+  "isPrimary": true
+}

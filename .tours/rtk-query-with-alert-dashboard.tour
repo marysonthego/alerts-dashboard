@@ -1,0 +1,140 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "RTK Query with Alert-Dashboard",
+  "steps": [
+    {
+      "title": "How I use RTK Query",
+      "description": "# RTK Query\r\n- ### Fetches data from the server\r\n- ### Caches data Client-side in Redux store \r\n- ### API endpoints include how to generate query parameters from arguments and transform responses for caching\r\n- ### Generates react hooks that encapsulate fetching and manage the lifetime of cached data as components mount and unmount\r\n- ### Allows streaming cache updates via websocket messages after fetching initial data (not implemented here)\r\n\r\n## createApi()\r\n- ### You need one per app. One API slice per base URL.\r\n- ### Defines sets of database endpoints.\r\n- ### Describes how to retrieve data from an endpoint series.\r\n- ### Configures how to fetch and transform data.\r\n\r\n## fetchBaseQuery()\r\n- ### A small `fetch` wrapper that simplifies requests.\r\n\r\n"
+    },
+    {
+      "file": "dashboard/src/app/redux/apiSlice.js",
+      "description": "## Create file: apiSlice.js\r\n- ### import createApi and fetchBaseQuery\r\n\r\n```\r\nimport { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';\r\n```",
+      "line": 1,
+      "selection": {
+        "start": {
+          "line": 1,
+          "character": 1
+        },
+        "end": {
+          "line": 1,
+          "character": 74
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/redux/apiSlice.js",
+      "description": "# apiSlice.js\r\n## createApi  \r\n- ### auto-generates a Redux slice reducer (named apiSlice)\r\n- ### creates a custom middleware to manage subscription lifetimes (named apiSlice)",
+      "line": 6
+    },
+    {
+      "file": "dashboard/src/app/redux/store.js",
+      "description": "# store.js\r\n## create the Store in store.js\r\n- ### Add the generated apiSlice reducer as a top-level slice:\r\n\r\n```\r\n[apiSlice.reducerPath]: apiSlice.reducer,\r\n```\r\n\r\n\r\n- ### Add the apiSlice middleware. It enables caching, invalidation, polling, etc.\r\n\r\n```\r\nmiddleware: getDefaultMiddleware =>\r\n    getDefaultMiddleware().concat(apiSlice.middleware)\r\n```\r\n\r\n- ### Optionally, add **setupListeners**. It's needed if you want to **refetchOnFocus** or **refetchOnReconnect**.  \r\n\r\n```\r\nsetupListeners(store.dispatch)\r\n```\r\n\r\n",
+      "line": 28,
+      "selection": {
+        "start": {
+          "line": 25,
+          "character": 3
+        },
+        "end": {
+          "line": 26,
+          "character": 55
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/redux/apiSlice.js",
+      "description": "# apiSlice.js\r\n\r\n- ## In **apiSlice.js** build endpoints for every query to the **baseUrl**",
+      "line": 33
+    },
+    {
+      "file": "dashboard/src/index.js",
+      "description": "# index.js\r\n\r\n- ### In **index.js** wrap the entire app in a Redux provider.",
+      "line": 7
+    },
+    {
+      "file": "dashboard/src/index.js",
+      "description": "# index.js\r\n```\r\n<Provider store={ store }>\r\n```\r\n",
+      "line": 54
+    },
+    {
+      "file": "dashboard/src/app/redux/apiSlice.js",
+      "description": "# apiSlice.js\r\n\r\n- ### In **apiSlice.js** export the auto-generated hooks that were created for each endpoint. \r\n\r\n- ### They always start with \"use\"endpoint_name\"Query/Mutation\"\r\n",
+      "line": 234
+    },
+    {
+      "file": "dashboard/src/app/redux/userSlice.js",
+      "description": "# userSlice.js\r\n\r\n- ### Create a separate 'slice' file for each object you want to store in Redux. This defines the shape of your Redux store and defines how to read from and write to your store.",
+      "line": 10
+    },
+    {
+      "file": "dashboard/src/app/redux/userSlice.js",
+      "description": "# userSlice.js\r\n- ## Export the action creators generated for each mutation function (change of state).\r\n- ## Export the slice reducer",
+      "line": 63
+    },
+    {
+      "file": "dashboard/src/app/redux/userSlice.js",
+      "description": "# userSlice.js\r\n- ## Export the 'select' functions you'll use to query the Store.",
+      "line": 68
+    },
+    {
+      "file": "dashboard/src/app/pages/Login.js",
+      "description": "# Login.js\r\n## Example of using Redux Toolkit to log a user in and store their data in Redux state. \r\n\r\n## Login, Logout, Change Password, Forgot Password don't use the apiSlice to query the database. \r\n\r\n## These security actions are handled through Passport redirects in Express.\r\n\r\n- ### import useDispatch and useSelector\r\n- ### import the actions and queries you need to use to login and update **userSlice**\r\n",
+      "line": 15
+    },
+    {
+      "file": "dashboard/src/app/pages/Login.js",
+      "description": "# Login.js\r\n- ## Read *currentUser* from *userSlice*. It will be empty if they aren't logged in already.",
+      "line": 22
+    },
+    {
+      "file": "dashboard/src/app/pages/Login.js",
+      "description": "# Login.js\r\n- ## Passport will create a cookie if the user is logged in.",
+      "line": 32
+    },
+    {
+      "file": "dashboard/src/app/pages/Login.js",
+      "description": "# Login.js\r\n- ## Call hand-written *DoLogin* function from *AuthCrud.js* to handle login and bypass RTK Query.",
+      "line": 82
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "# ProfileForm.js\r\n- ## Example from *ProfileForm.js* using both the Redux *userSlice* to keep state updated, and the RTK Query *apiSlice* to update the database.\r\n\r\n- ## *userSlice:* updateUserState and selectCurrentUser \r\n- ## *apiSlice:* useUpdateCustomerMutation ",
+      "line": 29
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "# ProfileForm.js\r\n- ## Update user in Redux userSlice with *dispatch*",
+      "line": 148
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "# ProfileForm.js\r\n- ## Define *updateCustomer* as a call to *useUpdateCustomerMutation* in our apiSlice.",
+      "line": 40,
+      "selection": {
+        "start": {
+          "line": 40,
+          "character": 10
+        },
+        "end": {
+          "line": 40,
+          "character": 24
+        }
+      }
+    },
+    {
+      "file": "dashboard/src/app/pages/ProfileForm.js",
+      "description": "# ProfileForm.js\r\n- ## *updateCustomer* with *newUser* object. This is a database call through *apiSlice*.\r\n- ## *.unwrap()* gives you immediate access to the error or success payload after a mutation.\r\n- ## *payload* is the response from *apiSlice* not the response from *fetch*.\r\n- ## Now, update the *userSlice* in Redux with the *payload* we got from *apiSlice*.",
+      "line": 180,
+      "selection": {
+        "start": {
+          "line": 175,
+          "character": 5
+        },
+        "end": {
+          "line": 175,
+          "character": 19
+        }
+      }
+    }
+  ]
+}
