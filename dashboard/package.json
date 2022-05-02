@@ -52,7 +52,7 @@
         "@reduxjs/toolkit": "^1.6.2",
         "@tanem/svg-injector": "8.0.50",
         "@types/react-router-dom": "^5.3.0",
-        "apexcharts": "3.19.2",
+        "apexcharts": "3.24.0",
         "aws-amplify": "^4.2.3",
         "axios": ">=0.21.1",
         "axios-mock-adapter": "1.18.1",
